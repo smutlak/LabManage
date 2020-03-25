@@ -14,6 +14,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.xml.ws.WebServiceRef;
 
 /**
@@ -26,6 +28,7 @@ public class Main {
 
 //    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_9081/PPOService/PPO.wsdl")
     private PPO_Service service;
+    
 
     private String signupEmail;
     private String signupPass;
@@ -44,9 +47,16 @@ public class Main {
     }
     
     private PPO_Service getPPPService(){
+        String wsdlURL = "";
+        try {
+            wsdlURL = (String)(new InitialContext().lookup("java:comp/env/com.accumed.labManage.PPO.WSDL.URL"));
+        } catch (NumberFormatException | NamingException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE,
+                    "exception caught", ex);
+        }
         if(service == null){
             try {
-                service = new PPO_Service(new java.net.URL("http://localhost:9081/PPOService/PPO?WSDL"));
+                service = new PPO_Service(new java.net.URL(wsdlURL));
             } catch (MalformedURLException ex) {
                 Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
             }
