@@ -7,6 +7,7 @@ package com.accumed.labmanage.mb;
 
 import com.accumed.pposervice.ws.PPO_Service;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
@@ -39,7 +40,18 @@ public class Main {
      * Creates a new instance of Main
      */
     public Main() {
-        service = new PPO_Service();
+        
+    }
+    
+    private PPO_Service getPPPService(){
+        if(service == null){
+            try {
+                service = new PPO_Service(new java.net.URL("http://localhost:9081/PPOService/PPO?WSDL"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return service;
     }
 
     public String getSignupEmail() {
@@ -92,7 +104,7 @@ public class Main {
 
     public String signup() {
         try { // Call Web Service Operation
-            com.accumed.pposervice.ws.PPO port = service.getPPOPort();
+            com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
             java.lang.String result = port.signUp(this.signupEmail, this.signupPass,
                     this.signRegualtor, this.signupFacilityLicense, this.signupRegUsr,
                     this.signupRegPass);
@@ -113,7 +125,7 @@ public class Main {
     public void testRegConnection() {
         
         try { // Call Web Service Operation
-            com.accumed.pposervice.ws.PPO port = service.getPPOPort();
+            com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
             java.lang.String result = port.testRegConnection(
                     this.signupFacilityLicense, this.signupRegUsr, 
                     this.signupRegPass);
