@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>ACCUMED LAB MANAGEMENT TOOL::Login</title>
+    </h:head>
+    <h:body>
+        <h2>ACCUMED LAB MANAGEMENT TOOL</h2>
+
+        <h:form id="loginForm">
+            <h3>REGISTRATION DETAILS</h3>
+            <h:panelGrid columns="2">
+                <h:outputLabel for="signupEmail" value="E-Mail Id (Enter your personal or facility e-mail Id)"></h:outputLabel>
+                <h:outputLabel for="signupPass" value="Password"></h:outputLabel>
+                <h:inputText id="signupEmail" value="#{main.signupEmail}"></h:inputText>
+                <h:inputText id ="signupPass" value="#{main.signupPass}"></h:inputText>
+            </h:panelGrid>
+            <h3>REGULARITY DETAILS</h3>
+            <p>Please provide your respective regulatory (Shafafiya/DHPO) credentials, then click on 'Test Connection' button to verify the details</p>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Regulator"></h:outputLabel>
+                <h:outputLabel value="Facility License Number"></h:outputLabel>
+                <h:inputText id="signRegualtor" value="#{main.signRegualtor}"></h:inputText>
+                <h:inputText id="signupFacilityLicense" value="#{main.signupFacilityLicense}"></h:inputText>
+                <h:outputLabel for="signupRegUsr" value="Regulator Username"></h:outputLabel>
+                <h:outputLabel for="signupRegPass" value="Regulator Password"></h:outputLabel>
+                <h:inputText id="signupRegUsr" value="#{main.signupRegUsr}" ></h:inputText>
+                <h:inputText id="signupRegPass" value="#{main.signupRegPass}"></h:inputText>
+            </h:panelGrid>
+            <p:commandButton value="Test Connection" actionListener="#{main.testRegConnection()}" update="status" />
+            <p:commandButton value="Register" actionListener="#{main.signup()}" update="status"/>
+            <p:commandButton value="Login" action="login?faces-redirect=true"/>
+            <br/>
+            <p:outputLabel id="status" style="color: red;" value="#{main.status}"></p:outputLabel>
+        </h:form>
+    </h:body>
+</html>
+
