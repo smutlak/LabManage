@@ -5,12 +5,14 @@
  */
 package com.accumed.labmanage.mb;
 
-
 import com.accumed.pposervice.ws.PPO_Service;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.xml.ws.WebServiceRef;
 
 /**
@@ -32,7 +34,6 @@ public class Main {
     private String signupRegPass;
     private Boolean PPOConnectionTest;
     private String status;
-                 
 
     /**
      * Creates a new instance of Main
@@ -88,21 +89,29 @@ public class Main {
     public void setSignupRegPass(String signupRegPass) {
         this.signupRegPass = signupRegPass;
     }
-    
-    public void signup(){
+
+    public String signup() {
         try { // Call Web Service Operation
             com.accumed.pposervice.ws.PPO port = service.getPPOPort();
-            java.lang.String result = port.signUp(this.signupEmail, this.signupPass, 
-                    this.signRegualtor, this.signupFacilityLicense, this.signupRegUsr, 
+            java.lang.String result = port.signUp(this.signupEmail, this.signupPass,
+                    this.signRegualtor, this.signupFacilityLicense, this.signupRegUsr,
                     this.signupRegPass);
-            System.out.println("Result = "+result);
-        } catch (Exception ex) {
-            // TODO handle custom exceptions here
+            System.out.println("Result = " + result);
+
+            if (Integer.parseInt(result) == 1) {
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.getExternalContext().redirect(context.getExternalContext().getRequestContextPath()
+                        +"/dashboard.xhtml");
+                return "";
+            }
+        } catch (IOException | NumberFormatException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, "Exception caught", ex);
         }
+        return "";
     }
-    
-    public void testRegConnection(){
-        
+
+    public void testRegConnection() {
+
         /*
         java.util.Date currDate = new java.util.Date();
         java.util.Calendar cal = java.util.Calendar.getInstance();
@@ -171,6 +180,5 @@ public class Main {
     public void setStatus(String status) {
         this.status = status;
     }
-    
-    
+
 }
