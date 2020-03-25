@@ -111,7 +111,25 @@ public class Main {
     }
 
     public void testRegConnection() {
-
+        
+        try { // Call Web Service Operation
+            com.accumed.pposervice.ws.PPO port = service.getPPOPort();
+            java.lang.String result = port.testRegConnection(
+                    this.signupFacilityLicense, this.signupRegUsr, 
+                    this.signupRegPass);
+            System.out.println("Result = "+result);
+            if(result!=null && result.isEmpty()){
+                this.status = "Regulator connection test completed successfully.";
+                this.PPOConnectionTest = true;
+            }else{
+                this.status = result;
+                this.PPOConnectionTest = false;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, "Exception caught", ex);
+            this.status = ex.getMessage();
+            this.PPOConnectionTest = false;
+        }
         /*
         java.util.Date currDate = new java.util.Date();
         java.util.Calendar cal = java.util.Calendar.getInstance();
