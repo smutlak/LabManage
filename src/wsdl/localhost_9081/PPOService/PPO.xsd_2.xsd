@@ -1,0 +1,335 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Metro/2.3 (tags/2.3-7528; 2013-04-29T19:34:10+0000) JAXWS-RI/2.2.8 JAXWS/2.2 svn-revision#unknown. --><xs:schema xmlns:tns="http://ws.pposervice.accumed.com/" xmlns:ns1="http://www.haad.ae/DataDictionary/CommonTypes" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://ws.pposervice.accumed.com/">
+
+<xs:import namespace="http://www.haad.ae/DataDictionary/CommonTypes" schemaLocation="http://localhost:9081/PPOService/PPO?xsd=1"/>
+
+<xs:element name="Claim.Submission">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Header">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="SenderID" type="xs:string"/>
+<xs:element name="ReceiverID" type="xs:string"/>
+<xs:element name="TransactionDate" type="xs:string"/>
+<xs:element name="RecordCount" type="xs:nonNegativeInteger"/>
+<xs:element name="DispositionFlag" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="Claim" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="ID" type="xs:string"/>
+<xs:element name="IDPayer" type="xs:string" minOccurs="0"/>
+<xs:element name="MemberID" type="xs:string" minOccurs="0"/>
+<xs:element name="PayerID" type="xs:string"/>
+<xs:element name="ProviderID" type="xs:string"/>
+<xs:element name="EmiratesIDNumber" type="xs:string"/>
+<xs:element name="Gross" type="xs:float"/>
+<xs:element name="PatientShare" type="xs:float"/>
+<xs:element name="Net" type="xs:float"/>
+<xs:element name="VAT" type="xs:float" minOccurs="0"/>
+<xs:element name="Encounter" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="FacilityID" type="xs:string"/>
+<xs:element name="Type" type="xs:integer"/>
+<xs:element name="PatientID" type="xs:string"/>
+<xs:element name="EligibilityIDPayer" type="xs:string" minOccurs="0"/>
+<xs:element name="Start" type="xs:string"/>
+<xs:element name="End" type="xs:string" minOccurs="0"/>
+<xs:element name="StartType" type="xs:integer" minOccurs="0"/>
+<xs:element name="EndType" type="xs:integer" minOccurs="0"/>
+<xs:element name="TransferSource" type="xs:string" minOccurs="0"/>
+<xs:element name="TransferDestination" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="Diagnosis" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Type" type="xs:string"/>
+<xs:element name="Code" type="xs:string"/>
+<xs:element name="DxInfo" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Type" type="xs:string"/>
+<xs:element name="Code" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="Activity" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="ID" type="xs:string" minOccurs="0"/>
+<xs:element name="Start" type="xs:string"/>
+<xs:element name="Type" type="xs:integer"/>
+<xs:element name="Code" type="xs:string"/>
+<xs:element name="Quantity" type="xs:float"/>
+<xs:element name="Net" type="xs:float"/>
+<xs:element name="OrderingClinician" type="xs:string" minOccurs="0"/>
+<xs:element name="Clinician" type="xs:string" minOccurs="0"/>
+<xs:element name="PriorAuthorizationID" type="xs:string" minOccurs="0"/>
+<xs:element name="VAT" type="xs:float" minOccurs="0"/>
+<xs:element name="VATPercent" type="xs:float" minOccurs="0"/>
+<xs:element name="Observation" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Type" type="xs:string"/>
+<xs:element name="Code" type="xs:string"/>
+<xs:element name="Value" type="xs:string" minOccurs="0"/>
+<xs:element name="ValueType" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="Resubmission" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Type" type="xs:string"/>
+<xs:element name="Comment" type="xs:string"/>
+<xs:element name="Attachment" type="xs:base64Binary" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="Contract" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="PackageName" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+
+<xs:element name="ProcessPendingTransactions" type="tns:ProcessPendingTransactions"/>
+
+<xs:element name="ProcessPendingTransactionsResponse" type="tns:ProcessPendingTransactionsResponse"/>
+
+<xs:element name="Regulator">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Id" type="xs:long" minOccurs="0"/>
+<xs:element name="Name" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+
+<xs:element name="getRegulators" type="tns:getRegulators"/>
+
+<xs:element name="getRegulatorsResponse" type="tns:getRegulatorsResponse"/>
+
+<xs:element name="readClaimSubmission" type="tns:readClaimSubmission"/>
+
+<xs:element name="readClaimSubmissionResponse" type="tns:readClaimSubmissionResponse"/>
+
+<xs:element name="saveClaimSubmission" type="tns:saveClaimSubmission"/>
+
+<xs:element name="saveClaimSubmissionResponse" type="tns:saveClaimSubmissionResponse"/>
+
+<xs:element name="signUp" type="tns:signUp"/>
+
+<xs:element name="signUpResponse" type="tns:signUpResponse"/>
+
+<xs:element name="testRegConnection" type="tns:testRegConnection"/>
+
+<xs:element name="testRegConnectionResponse" type="tns:testRegConnectionResponse"/>
+
+<xs:complexType name="getRegulators">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getRegulatorsResponse">
+<xs:sequence>
+<xs:element name="return" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Id" type="xs:long" minOccurs="0"/>
+<xs:element name="Name" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="saveClaimSubmission">
+<xs:sequence>
+<xs:element name="fileName" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="saveClaimSubmissionResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="readClaimSubmission">
+<xs:sequence>
+<xs:element name="fileName" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="readClaimSubmissionResponse">
+<xs:sequence>
+<xs:element name="return" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Header">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="SenderID" type="xs:string"/>
+<xs:element name="ReceiverID" type="xs:string"/>
+<xs:element name="TransactionDate" type="xs:string"/>
+<xs:element name="RecordCount" type="xs:nonNegativeInteger"/>
+<xs:element name="DispositionFlag" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="Claim" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="ID" type="xs:string"/>
+<xs:element name="IDPayer" type="xs:string" minOccurs="0"/>
+<xs:element name="MemberID" type="xs:string" minOccurs="0"/>
+<xs:element name="PayerID" type="xs:string"/>
+<xs:element name="ProviderID" type="xs:string"/>
+<xs:element name="EmiratesIDNumber" type="xs:string"/>
+<xs:element name="Gross" type="xs:float"/>
+<xs:element name="PatientShare" type="xs:float"/>
+<xs:element name="Net" type="xs:float"/>
+<xs:element name="VAT" type="xs:float" minOccurs="0"/>
+<xs:element name="Encounter" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="FacilityID" type="xs:string"/>
+<xs:element name="Type" type="xs:integer"/>
+<xs:element name="PatientID" type="xs:string"/>
+<xs:element name="EligibilityIDPayer" type="xs:string" minOccurs="0"/>
+<xs:element name="Start" type="xs:string"/>
+<xs:element name="End" type="xs:string" minOccurs="0"/>
+<xs:element name="StartType" type="xs:integer" minOccurs="0"/>
+<xs:element name="EndType" type="xs:integer" minOccurs="0"/>
+<xs:element name="TransferSource" type="xs:string" minOccurs="0"/>
+<xs:element name="TransferDestination" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="Diagnosis" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Type" type="xs:string"/>
+<xs:element name="Code" type="xs:string"/>
+<xs:element name="DxInfo" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Type" type="xs:string"/>
+<xs:element name="Code" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="Activity" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="ID" type="xs:string" minOccurs="0"/>
+<xs:element name="Start" type="xs:string"/>
+<xs:element name="Type" type="xs:integer"/>
+<xs:element name="Code" type="xs:string"/>
+<xs:element name="Quantity" type="xs:float"/>
+<xs:element name="Net" type="xs:float"/>
+<xs:element name="OrderingClinician" type="xs:string" minOccurs="0"/>
+<xs:element name="Clinician" type="xs:string" minOccurs="0"/>
+<xs:element name="PriorAuthorizationID" type="xs:string" minOccurs="0"/>
+<xs:element name="VAT" type="xs:float" minOccurs="0"/>
+<xs:element name="VATPercent" type="xs:float" minOccurs="0"/>
+<xs:element name="Observation" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Type" type="xs:string"/>
+<xs:element name="Code" type="xs:string"/>
+<xs:element name="Value" type="xs:string" minOccurs="0"/>
+<xs:element name="ValueType" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="Resubmission" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Type" type="xs:string"/>
+<xs:element name="Comment" type="xs:string"/>
+<xs:element name="Attachment" type="xs:base64Binary" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="Contract" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="PackageName" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="testRegConnection">
+<xs:sequence>
+<xs:element name="facilityLicense" type="xs:string" minOccurs="0"/>
+<xs:element name="regUsr" type="xs:string" minOccurs="0"/>
+<xs:element name="regPass" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="testRegConnectionResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ProcessPendingTransactions">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="ProcessPendingTransactionsResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="signUp">
+<xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+<xs:element name="pass" type="xs:string" minOccurs="0"/>
+<xs:element name="regualtorID" type="xs:string" minOccurs="0"/>
+<xs:element name="facilityLicense" type="xs:string" minOccurs="0"/>
+<xs:element name="regUsr" type="xs:string" minOccurs="0"/>
+<xs:element name="regPass" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="signUpResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

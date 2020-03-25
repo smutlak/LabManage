@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
-    <system systemId="https://shafafiya.doh.gov.ae/v2/webservices.asmx?wsdl" uri="wsdl/shafafiya.doh.gov.ae/v2/webservices.asmx.wsdl"/>
-    <system systemId="https://shafafiya.doh.gov.ae/v3/webservices.asmx?wsdl" uri="wsdl/shafafiya.doh.gov.ae/v3/webservices.asmx.wsdl"/>
+    <system systemId="http://localhost:9081/PPOService/PPO?WSDL" uri="wsdl/localhost_9081/PPOService/PPO.wsdl"/>
+    <system systemId="http://localhost:9081/PPOService/PPO?xsd=1" uri="wsdl/localhost_9081/PPOService/PPO.xsd_1.xsd"/>
+    <system systemId="http://localhost:9081/PPOService/PPO?xsd=2" uri="wsdl/localhost_9081/PPOService/PPO.xsd_2.xsd"/>
 </catalog>

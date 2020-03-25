@@ -1,4 +1,3 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/PPOService">
-  <ResourceLink global="jdbc/PPODS" name="jdbc/PPODS"/>
+<Context antiJARLocking="true" path="/LabManage">
 </Context>

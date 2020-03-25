@@ -13,9 +13,6 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
-    <listener>
-        <listener-class>com.accumed.pposervice.BackgroundTaskManager</listener-class>
-    </listener>
     <welcome-file-list>
         <welcome-file>faces/login.xhtml</welcome-file>
     </welcome-file-list>

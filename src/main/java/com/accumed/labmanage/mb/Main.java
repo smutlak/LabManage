@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.accumed.pposervice.mb;
+package com.accumed.labmanage.mb;
 
 
+import com.accumed.pposervice.ws.PPO_Service;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.xml.ws.WebServiceRef;
 
 /**
  *
@@ -18,6 +20,9 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean
 @SessionScoped
 public class Main {
+
+//    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_9081/PPOService/PPO.wsdl")
+    private PPO_Service service;
 
     private String signupEmail;
     private String signupPass;
@@ -33,6 +38,7 @@ public class Main {
      * Creates a new instance of Main
      */
     public Main() {
+        service = new PPO_Service();
     }
 
     public String getSignupEmail() {
@@ -84,10 +90,19 @@ public class Main {
     }
     
     public void signup(){
-        
+        try { // Call Web Service Operation
+            com.accumed.pposervice.ws.PPO port = service.getPPOPort();
+            java.lang.String result = port.signUp(this.signupEmail, this.signupPass, 
+                    this.signRegualtor, this.signupFacilityLicense, this.signupRegUsr, 
+                    this.signupRegPass);
+            System.out.println("Result = "+result);
+        } catch (Exception ex) {
+            // TODO handle custom exceptions here
+        }
     }
     
     public void testRegConnection(){
+        
         /*
         java.util.Date currDate = new java.util.Date();
         java.util.Calendar cal = java.util.Calendar.getInstance();
