@@ -123,7 +123,7 @@ public class Main {
             if (Integer.parseInt(result) == 1) {
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.getExternalContext().redirect(context.getExternalContext().getRequestContextPath()
-                        +"/dashboard.xhtml");
+                        +"/initAcount.xhtml");
                 return "";
             }
         } catch (IOException | NumberFormatException ex) {
