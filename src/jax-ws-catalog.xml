@@ -3,4 +3,7 @@
     <system systemId="http://localhost:9081/PPOService/PPO?WSDL" uri="wsdl/localhost_9081/PPOService/PPO.wsdl"/>
     <system systemId="http://localhost:9081/PPOService/PPO?xsd=1" uri="wsdl/localhost_9081/PPOService/PPO.xsd_1.xsd"/>
     <system systemId="http://localhost:9081/PPOService/PPO?xsd=2" uri="wsdl/localhost_9081/PPOService/PPO.xsd_2.xsd"/>
+    <system systemId="http://localhost:8080/PPOService/PPO?WSDL" uri="wsdl/localhost_8080/PPOService/PPO.wsdl"/>
+    <system systemId="http://localhost:8080/PPOService/PPO?xsd=1" uri="wsdl/localhost_8080/PPOService/PPO.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/PPOService/PPO?xsd=2" uri="wsdl/localhost_8080/PPOService/PPO.xsd_2.xsd"/>
 </catalog>

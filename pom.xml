@@ -225,7 +225,7 @@
                         </goals>
                         <configuration>
                             <wsdlFiles>
-                                <wsdlFile>localhost_9081/PPOService/PPO.wsdl</wsdlFile>
+                                <wsdlFile>localhost_8080/PPOService/PPO.wsdl</wsdlFile>
                             </wsdlFiles>
                             <packageName></packageName>
                             <vmArgs>

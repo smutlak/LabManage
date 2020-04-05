@@ -115,12 +115,12 @@ public class Main {
     public String signup() {
         try { // Call Web Service Operation
             com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
-            java.lang.String result = port.signUp(this.signupEmail, this.signupPass,
+            Long result = port.signUp(this.signupEmail, this.signupPass,
                     this.signRegualtor, this.signupFacilityLicense, this.signupRegUsr,
                     this.signupRegPass);
             System.out.println("Result = " + result);
 
-            if (Integer.parseInt(result) == 1) {
+            if (result> 0) {
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.getExternalContext().redirect(context.getExternalContext().getRequestContextPath()
                         +"/initAcount.xhtml");
