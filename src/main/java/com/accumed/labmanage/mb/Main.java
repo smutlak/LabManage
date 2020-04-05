@@ -10,13 +10,11 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.xml.ws.WebServiceRef;
 
 /**
  *
@@ -38,6 +36,7 @@ public class Main {
     private String signupRegPass;
     private Boolean PPOConnectionTest;
     private String status;
+    private Long accountid;
 
     /**
      * Creates a new instance of Main
@@ -121,6 +120,7 @@ public class Main {
             System.out.println("Result = " + result);
 
             if (result> 0) {
+                this.setAccountid(result);
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.getExternalContext().redirect(context.getExternalContext().getRequestContextPath()
                         +"/initAcount.xhtml");
@@ -221,4 +221,13 @@ public class Main {
         this.status = status;
     }
 
+    public Long getAccountid() {
+        return accountid;
+    }
+
+    public void setAccountid(Long accountid) {
+        this.accountid = accountid;
+    }
+
+    
 }
