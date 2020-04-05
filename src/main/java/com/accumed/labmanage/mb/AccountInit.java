@@ -5,8 +5,10 @@ package com.accumed.labmanage.mb;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import com.accumed.pposervice.ws.GetFacilityMonthTransactionResponse;
 import com.accumed.pposervice.ws.PPO_Service;
 import java.net.MalformedURLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.el.ELException;
@@ -26,6 +28,7 @@ public class AccountInit {
 
     //@WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_9081/PPOService/PPO.wsdl")
     private PPO_Service service;
+    java.util.List<com.accumed.pposervice.ws.GetFacilityMonthTransactionResponse.Return> trans = null;
 
     /**
      * Creates a new instance of AccountInit
@@ -51,23 +54,28 @@ public class AccountInit {
         return service;
     }
 
-    public void getTransctions() {
+    public List<GetFacilityMonthTransactionResponse.Return> getTrans() {
+        if (trans == null) {
+            try { // Call Web Service Operation
+                com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
+                // TODO initialize WS operation arguments here
+                FacesContext context = FacesContext.getCurrentInstance();
+                Main mainBean = context.getApplication().evaluateExpressionGet(context, "#{main}", Main.class);
+                java.lang.Long accountId = mainBean.getAccountid();
 
-        try { // Call Web Service Operation
-            com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
-            // TODO initialize WS operation arguments here
-            FacesContext context = FacesContext.getCurrentInstance();
-            Main mainBean = context.getApplication().evaluateExpressionGet(context, "#{main}", Main.class);
-            java.lang.Long accountId = mainBean.getAccountid();
-             
-            // TODO process result here
-            java.util.List<com.accumed.pposervice.ws.GetFacilityMonthTransactionResponse.Return> result = port.getFacilityMonthTransaction(accountId);
-            System.out.println("Result = " + result);
-        } catch (Exception ex) {
-            Logger.getLogger(AccountInit.class.getName()).log(Level.SEVERE,
-                    "exception caught", ex);
+                // TODO process result here
+                trans = port.getFacilityMonthTransaction(accountId);
+                System.out.println("Result = " + trans);
+            } catch (Exception ex) {
+                Logger.getLogger(AccountInit.class.getName()).log(Level.SEVERE,
+                        "exception caught", ex);
+            }
         }
+        return trans;
+    }
 
+    public void setTrans(List<GetFacilityMonthTransactionResponse.Return> trans) {
+        this.trans = trans;
     }
 
 }
