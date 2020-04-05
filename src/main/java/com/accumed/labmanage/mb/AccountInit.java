@@ -29,7 +29,7 @@ public class AccountInit {
     //@WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_9081/PPOService/PPO.wsdl")
     private PPO_Service service;
     java.util.List<com.accumed.pposervice.ws.GetFacilityMonthTransactionResponse.Return> trans = null;
-
+    private String progressText;
     /**
      * Creates a new instance of AccountInit
      */
@@ -78,4 +78,21 @@ public class AccountInit {
         this.trans = trans;
     }
 
+    public String getProgressText() {
+        return progressText;
+    }
+
+    public void setProgressText(String progressText) {
+        this.progressText = progressText;
+    }
+
+//    public void processTran() {
+//        if(trans != null){
+//            for(com.accumed.pposervice.ws.GetFacilityMonthTransactionResponse.Return t: trans){
+//                if(!t.isPersist()){
+//                    
+//                }
+//            }
+//        }
+//    }
 }

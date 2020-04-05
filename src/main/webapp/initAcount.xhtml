@@ -12,7 +12,12 @@
     <h:body>
         <h2>ACCUMED LAB MANAGEMENT TOOL ACCOUNT INITIALIZATION</h2>
         <h:form>
+            <p:outputLabel id="progressText" value="#{accountInit.progressText}"></p:outputLabel>
+            <p:poll interval="3" listener="#{accountInit.processTran}" update="txt_count" />
             <p:dataTable var="tran" value="#{accountInit.trans}">
+                <p:column headerText="processed">
+                    <h:outputText value="#{tran.fileid}" />
+                </p:column>
                 <p:column headerText="fileid">
                     <h:outputText value="#{tran.fileid}" />
                 </p:column>
