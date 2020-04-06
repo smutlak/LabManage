@@ -29,7 +29,8 @@ public class AccountInit {
     //@WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_9081/PPOService/PPO.wsdl")
     private PPO_Service service;
     java.util.List<com.accumed.pposervice.ws.GetFacilityMonthTransactionResponse.Return> trans = null;
-    private String progressText;
+    private String transactionsStatus;
+
     /**
      * Creates a new instance of AccountInit
      */
@@ -78,14 +79,6 @@ public class AccountInit {
         this.trans = trans;
     }
 
-    public String getProgressText() {
-        return progressText;
-    }
-
-    public void setProgressText(String progressText) {
-        this.progressText = progressText;
-    }
-
 //    public void processTran() {
 //        if(trans != null){
 //            for(com.accumed.pposervice.ws.GetFacilityMonthTransactionResponse.Return t: trans){
@@ -95,4 +88,26 @@ public class AccountInit {
 //            }
 //        }
 //    }
+    public String getTransactionsStatus() {
+        java.lang.String result ="";
+        try { // Call Web Service Operation
+            com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
+            // TODO initialize WS operation arguments here
+            FacesContext context = FacesContext.getCurrentInstance();
+            Main mainBean = context.getApplication().evaluateExpressionGet(context, "#{main}", Main.class);
+            java.lang.Long accountId = mainBean.getAccountid();
+
+            // TODO process result here
+            result = port.getAccountTransactionStatus(accountId);
+            System.out.println("Result = " + result);
+        } catch (Exception ex) {
+            Logger.getLogger(AccountInit.class.getName()).log(Level.SEVERE,
+                        "exception caught", ex);
+        }
+        return result;
+    }
+
+    public void setTransactionsStatus(String transactionsStatus) {
+        this.transactionsStatus = transactionsStatus;
+    }
 }

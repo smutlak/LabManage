@@ -143,6 +143,10 @@
 
 <xs:element name="downloadClaimSubmissionFileResponse" type="tns:downloadClaimSubmissionFileResponse"/>
 
+<xs:element name="getAccountTransactionStatus" type="tns:getAccountTransactionStatus"/>
+
+<xs:element name="getAccountTransactionStatusResponse" type="tns:getAccountTransactionStatusResponse"/>
+
 <xs:element name="getFacilityMonthTransaction" type="tns:getFacilityMonthTransaction"/>
 
 <xs:element name="getFacilityMonthTransactionResponse" type="tns:getFacilityMonthTransactionResponse"/>
@@ -315,6 +319,18 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="getAccountTransactionStatus">
+<xs:sequence>
+<xs:element name="accountId" type="xs:long" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAccountTransactionStatusResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="downloadClaimSubmissionFile">
 <xs:sequence>
 <xs:element name="accountId" type="xs:long" minOccurs="0"/>
@@ -325,16 +341,6 @@
 <xs:complexType name="downloadClaimSubmissionFileResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="ProcessPendingTransactions">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="ProcessPendingTransactionsResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:boolean" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -349,6 +355,16 @@
 <xs:complexType name="testRegConnectionResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ProcessPendingTransactions">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="ProcessPendingTransactionsResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

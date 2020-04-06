@@ -12,6 +12,9 @@
     <h:body>
         <h2>ACCUMED LAB MANAGEMENT TOOL ACCOUNT INITIALIZATION</h2>
         <h:form>
+            <p:poll interval="500" update="transactionsStatusLabel" autoStart="true"></p:poll>
+            <p:outputLabel id="transactionsStatusLabel" value="#{accountInit.transactionsStatus}"></p:outputLabel>
+            
             <p:dataTable var="tran" value="#{accountInit.trans}">
                 <p:column headerText="processed">
                     <h:outputText value="#{tran.fileid}" />
