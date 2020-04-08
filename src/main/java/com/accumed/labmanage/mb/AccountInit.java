@@ -149,8 +149,12 @@ public class AccountInit implements Serializable {
                 if (splitted.length > 0) {
                     int done = Integer.parseInt(splitted[0]);
                     int from = Integer.parseInt(splitted[1]);
-                    int iPerc = (int) Math.ceil(done * 100 / from);
+                    int iPerc = (int) Math.ceil((done * 100 / from)+0.98);
                     progress = iPerc;
+                    if(progress>=99){
+                        context.getExternalContext().redirect(context.getExternalContext().getRequestContextPath()
+                            + "/faces/dashboard.xhtml");
+                    }
                 }
             }
             if (result.equalsIgnoreCase("No Transactions")) {
