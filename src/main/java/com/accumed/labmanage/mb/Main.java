@@ -123,7 +123,7 @@ public class Main {
                 this.setAccountid(result);
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.getExternalContext().redirect(context.getExternalContext().getRequestContextPath()
-                        +"/faces/initAcount.xhtml");
+                        +"/faces/initAccount.xhtml");
                 return "";
             }
         } catch (IOException | NumberFormatException ex) {

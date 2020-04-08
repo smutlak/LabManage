@@ -7,13 +7,14 @@ package com.accumed.labmanage.mb;
  */
 import com.accumed.pposervice.ws.GetFacilityMonthTransactionResponse;
 import com.accumed.pposervice.ws.PPO_Service;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.el.ELException;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -23,14 +24,13 @@ import javax.naming.NamingException;
  * @author smutlak
  */
 @ManagedBean
-@RequestScoped
-public class AccountInit {
+@ViewScoped
+public class AccountInit implements Serializable {
 
     //@WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_9081/PPOService/PPO.wsdl")
     private PPO_Service service;
     java.util.List<com.accumed.pposervice.ws.GetFacilityMonthTransactionResponse.Return> trans = null;
-    private String transactionsStatus;
-
+    private String progressStyle;
     /**
      * Creates a new instance of AccountInit
      */
@@ -89,7 +89,7 @@ public class AccountInit {
 //        }
 //    }
     public String getTransactionsStatus() {
-        java.lang.String result ="";
+        java.lang.String result = "";
         try { // Call Web Service Operation
             com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
             // TODO initialize WS operation arguments here
@@ -99,15 +99,56 @@ public class AccountInit {
 
             // TODO process result here
             result = port.getAccountTransactionStatus(accountId);
-            System.out.println("Result = " + result);
+            if (result != null && !result.equalsIgnoreCase("Completed") && result.length() > 0) {
+                String[] splitted = result.split("/");
+                if (splitted.length > 0) {
+                    int done = Integer.parseInt(splitted[0]);
+                    int from = Integer.parseInt(splitted[1]);
+                    double perc = done *100 / from;
+                    int iPerc = (int)perc;
+                }
+            }
         } catch (Exception ex) {
             Logger.getLogger(AccountInit.class.getName()).log(Level.SEVERE,
-                        "exception caught", ex);
+                    "exception caught", ex);
         }
         return result;
     }
 
-    public void setTransactionsStatus(String transactionsStatus) {
-        this.transactionsStatus = transactionsStatus;
+    public String getProgressStyle() {
+        return "c100 p" + getProgress() + " green";
     }
+
+    public void setProgressStyle(String progressStyle) {
+        this.progressStyle = progressStyle;
+    }
+
+    public Integer getProgress() {
+        java.lang.String result = "";
+        try { // Call Web Service Operation
+            com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
+            // TODO initialize WS operation arguments here
+            FacesContext context = FacesContext.getCurrentInstance();
+            Main mainBean = context.getApplication().evaluateExpressionGet(context, "#{main}", Main.class);
+            java.lang.Long accountId = mainBean.getAccountid();
+
+            // TODO process result here
+            result = port.getAccountTransactionStatus(accountId);
+            if (result != null && !result.equalsIgnoreCase("Completed") && result.length() > 0) {
+                String[] splitted = result.split("/");
+                if (splitted.length > 0) {
+                    int done = Integer.parseInt(splitted[0]);
+                    int from = Integer.parseInt(splitted[1]);
+                    double perc = done *100 / from;
+                    int iPerc = (int)perc;
+                    return iPerc;
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(AccountInit.class.getName()).log(Level.SEVERE,
+                    "exception caught", ex);
+        }
+        return 0;
+    }
+
 }
