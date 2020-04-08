@@ -31,6 +31,7 @@ public class AccountInit implements Serializable {
     private PPO_Service service;
     java.util.List<com.accumed.pposervice.ws.GetFacilityMonthTransactionResponse.Return> trans = null;
     private String progressStyle;
+    private Integer progress;
     /**
      * Creates a new instance of AccountInit
      */
@@ -116,14 +117,18 @@ public class AccountInit implements Serializable {
     }
 
     public String getProgressStyle() {
-        return "c100 p" + getProgress() + " green";
+        return "c100 p" + (getProgress()==null?0:getProgress()) + " green";
     }
 
     public void setProgressStyle(String progressStyle) {
         this.progressStyle = progressStyle;
     }
 
-    public Integer getProgress() {
+    public String getProgressPercentage() {
+        
+        return getProgress()+"%";
+    }
+    public Integer calcProgress() {
         java.lang.String result = "";
         try { // Call Web Service Operation
             com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
@@ -141,7 +146,7 @@ public class AccountInit implements Serializable {
                     int from = Integer.parseInt(splitted[1]);
                     double perc = done *100 / from;
                     int iPerc = (int)perc;
-                    return iPerc;
+                    progress = iPerc;
                 }
             }
         } catch (Exception ex) {
@@ -151,4 +156,14 @@ public class AccountInit implements Serializable {
         return 0;
     }
 
+    public Integer getProgress() {
+        return progress;
+    }
+
+    public void setProgress(Integer progress) {
+        this.progress = progress;
+    }
+
+    
+    
 }

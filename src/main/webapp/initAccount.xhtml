@@ -16,11 +16,11 @@
         </div>
         <h:form>
             <div style="width:50%;text-align: center">
-                <p:poll interval="5" update="transactionsStatusLabel" autoStart="true"></p:poll>
+                <p:poll interval="5" update="progressCircle" listener="#{accountInit.calcProgress()}" autoStart="true"></p:poll>
                 <p:outputLabel id="transactionsStatusLabel" value=""></p:outputLabel>
 
                 <p:outputPanel id="progressCircle" style="display:block" styleClass="#{accountInit.progressStyle}">
-                    <span>"#{accountInit.progress}"</span>
+                    <span>#{accountInit.progressPercentage}</span>
                     <div class="slice">
                         <div class="bar"></div>
                         <div class="fill"></div>
