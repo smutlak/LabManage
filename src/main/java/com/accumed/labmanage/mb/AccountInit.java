@@ -142,36 +142,38 @@ public class AccountInit implements Serializable {
 
             // TODO process result here
             result = port.getAccountTransactionStatus(accountId);
-            if (result != null && !result.equalsIgnoreCase("Completed")
-                    && result.length() > 0
-                    && !result.equalsIgnoreCase("No Transactions")) {
-                String[] splitted = result.split("/");
-                if (splitted.length > 0) {
-                    int done = Integer.parseInt(splitted[0]);
-                    int from = Integer.parseInt(splitted[1]);
-                    int iPerc = (int) Math.ceil((done * 100 / from)+0.98);
-                    progress = iPerc;
-                    if(progress>=99){
-                        context.getExternalContext().redirect(context.getExternalContext().getRequestContextPath()
-                            + "/faces/dashboard.xhtml");
+            if (result != null) {
+                if (result != null && !result.equalsIgnoreCase("Completed")
+                        && result.length() > 0
+                        && !result.equalsIgnoreCase("No Transactions")) {
+                    String[] splitted = result.split("/");
+                    if (splitted.length > 0) {
+                        int done = Integer.parseInt(splitted[0]);
+                        int from = Integer.parseInt(splitted[1]);
+                        int iPerc = (int) Math.ceil((done * 100 / from) + 0.98);
+                        progress = iPerc;
+                        if (progress >= 99) {
+                            context.getExternalContext().redirect(context.getExternalContext().getRequestContextPath()
+                                    + "/faces/dashboard.xhtml");
+                        }
                     }
                 }
-            }
-            if (result.equalsIgnoreCase("No Transactions")) {
-                if (delayCounter <= 0) {
-                    delayCounter++;
+                if (result.equalsIgnoreCase("No Transactions")) {
+                    if (delayCounter <= 0) {
+                        delayCounter++;
+                    }
+                    if (delayCounter >= DELAY_COUNT) {
+                        delayCounter = 0;
+                        context.getExternalContext().redirect(context.getExternalContext().getRequestContextPath()
+                                + "/faces/dashboard.xhtml");
+                    }
+                    return 0;
                 }
-                if (delayCounter >= DELAY_COUNT) {
-                    delayCounter = 0;
+                if (result.equalsIgnoreCase("Completed")) {
                     context.getExternalContext().redirect(context.getExternalContext().getRequestContextPath()
                             + "/faces/dashboard.xhtml");
-               }
-                return 0;
-            }
-            if (result.equalsIgnoreCase("Completed")) {
-                context.getExternalContext().redirect(context.getExternalContext().getRequestContextPath()
-                            + "/faces/dashboard.xhtml");
-                return 100;
+                    return 100;
+                }
             }
         } catch (Exception ex) {
             Logger.getLogger(AccountInit.class.getName()).log(Level.SEVERE,
