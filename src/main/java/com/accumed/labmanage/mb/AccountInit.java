@@ -159,13 +159,14 @@ public class AccountInit implements Serializable {
                 }
                 if (delayCounter >= DELAY_COUNT) {
                     delayCounter = 0;
-                    FacesContext context2 = FacesContext.getCurrentInstance();
-                    context2.getExternalContext().redirect(context2.getExternalContext().getRequestContextPath()
+                    context.getExternalContext().redirect(context.getExternalContext().getRequestContextPath()
                             + "/faces/dashboard.xhtml");
-                }
+               }
                 return 0;
             }
             if (result.equalsIgnoreCase("Completed")) {
+                context.getExternalContext().redirect(context.getExternalContext().getRequestContextPath()
+                            + "/faces/dashboard.xhtml");
                 return 100;
             }
         } catch (Exception ex) {
