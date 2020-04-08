@@ -126,7 +126,7 @@ public class AccountInit implements Serializable {
 
     public String getProgressPercentage() {
         
-        return getProgress()+"%";
+        return (getProgress()==null?0:getProgress())+"%";
     }
     public Integer calcProgress() {
         java.lang.String result = "";
