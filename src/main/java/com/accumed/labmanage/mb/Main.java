@@ -26,7 +26,6 @@ public class Main {
 
 //    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_9081/PPOService/PPO.wsdl")
     private PPO_Service service;
-    
 
     private String signupEmail;
     private String signupPass;
@@ -38,22 +37,27 @@ public class Main {
     private String status;
     private Long accountid;
 
+    //for login
+    private String message;
+    private String username;
+    private String password;
+
     /**
      * Creates a new instance of Main
      */
     public Main() {
-        
+
     }
-    
-    private PPO_Service getPPPService(){
+
+    private PPO_Service getPPPService() {
         String wsdlURL = "";
         try {
-            wsdlURL = (String)(new InitialContext().lookup("java:comp/env/com.accumed.labManage.PPO.WSDL.URL"));
+            wsdlURL = (String) (new InitialContext().lookup("java:comp/env/com.accumed.labManage.PPO.WSDL.URL"));
         } catch (NumberFormatException | NamingException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE,
                     "exception caught", ex);
         }
-        if(service == null){
+        if (service == null) {
             try {
                 service = new PPO_Service(new java.net.URL(wsdlURL));
             } catch (MalformedURLException ex) {
@@ -112,19 +116,21 @@ public class Main {
     }
 
     public String signup() {
+        message = "";
         try { // Call Web Service Operation
             com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
-            Long result = port.signUp(this.signupEmail, this.signupPass,
-                    this.signRegualtor, this.signupFacilityLicense, this.signupRegUsr,
-                    this.signupRegPass);
+            Long result = port.login(this.username, this.password);
             System.out.println("Result = " + result);
 
-            if (result> 0) {
+            if (result > 0) {
                 this.setAccountid(result);
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.getExternalContext().redirect(context.getExternalContext().getRequestContextPath()
-                        +"/faces/initAccount.xhtml");
+                        + "/faces/dashboard.xhtml");
                 return "";
+            }else
+            {
+                message = "Login failed!!";
             }
         } catch (IOException | NumberFormatException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, "Exception caught", ex);
@@ -133,17 +139,17 @@ public class Main {
     }
 
     public void testRegConnection() {
-        
+
         try { // Call Web Service Operation
             com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
             java.lang.String result = port.testRegConnection(
-                    this.signupFacilityLicense, this.signupRegUsr, 
+                    this.signupFacilityLicense, this.signupRegUsr,
                     this.signupRegPass);
-            System.out.println("Result = "+result);
-            if(result!=null && result.isEmpty()){
+            System.out.println("Result = " + result);
+            if (result != null && result.isEmpty()) {
                 this.status = "Regulator connection test completed successfully.";
                 this.PPOConnectionTest = true;
-            }else{
+            } else {
                 this.status = result;
                 this.PPOConnectionTest = false;
             }
@@ -229,5 +235,54 @@ public class Main {
         this.accountid = accountid;
     }
 
-    
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String goToSignup() {
+        return "signup.xhtml?faces-redirect=true";
+    }
+
+    public String login() {
+
+        try { // Call Web Service Operation
+            com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
+            Long result = port.signUp(this.signupEmail, this.signupPass,
+                    this.signRegualtor, this.signupFacilityLicense, this.signupRegUsr,
+                    this.signupRegPass);
+            System.out.println("Result = " + result);
+
+            if (result > 0) {
+                this.setAccountid(result);
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.getExternalContext().redirect(context.getExternalContext().getRequestContextPath()
+                        + "/faces/initAccount.xhtml");
+                return "";
+            }
+        } catch (IOException | NumberFormatException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, "Exception caught", ex);
+        }
+        return "";
+    }
+
 }

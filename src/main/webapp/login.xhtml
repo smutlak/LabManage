@@ -17,15 +17,15 @@
                 <h:form id="loginForm">
                     <h:panelGrid columns="2">
                         <p:outputLabel value="User name: "/>
-                        <p:inputText value ="#{loginBean.username}" />
+                        <p:inputText value ="#{main.username}" />
                         <p:outputLabel value ="Password: "/>
-                        <p:password value ="#{loginBean.password}"/>
-                        <p:commandButton value="Login" update="msg" action="#{loginBean.login}"/>
-                        <p:commandButton value="Create an account" update="msg" action="#{loginBean.signup}"/>
+                        <p:password value ="#{main.password}"/>
+                        <p:commandButton value="Login" update="msg" action="#{main.login}"/>
+                        <p:commandButton value="Create an account" update="msg" action="#{main.goToSignup}"/>
                     </h:panelGrid>
                     <p><a href="#" class="tooltip">Forgot Password?<span>Click To Reset Your Password</span></a></p>
                     <br/>
-                    <p:outputLabel id="msg" value="#{loginBean.message}" style="color: red"/>
+                    <p:outputLabel id="msg" value="#{main.message}" style="color: red"/>
                 </h:form>
             </div> 
         </div>
