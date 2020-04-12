@@ -8,7 +8,9 @@
         <title>ACCUMED LAB MANAGEMENT DASHBOARD</title>
     </h:head>
     <h:body>
-        <h2>ACCUMED LAB MANAGEMENT TOOL DASHBOARD</h2>
+        <div style="width:100%;text-align: center">
+            <h2>ACCUMED LAB MANAGEMENT TOOL - DASHBOARD</h2>
+        </div>
         <h:form>
             <p:dataTable var="lab" value="#{dashboard.labs}">
                 <p:column headerText="Month">
@@ -18,7 +20,7 @@
                 <p:column headerText="Receiver">
                     <h:outputText value="#{lab.receiverid}" />
                 </p:column>
-                
+
                 <p:column headerText="Claims count">
                     <h:outputText value="#{lab.claimsCount}" />
                 </p:column>

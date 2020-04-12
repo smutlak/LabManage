@@ -267,9 +267,7 @@ public class Main {
 
         try { // Call Web Service Operation
             com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
-            Long result = port.signUp(this.signupEmail, this.signupPass,
-                    this.signRegualtor, this.signupFacilityLicense, this.signupRegUsr,
-                    this.signupRegPass);
+            Long result = port.login(this.username, this.password);
             System.out.println("Result = " + result);
 
             if (result > 0) {

@@ -180,6 +180,10 @@
 
 <xs:element name="initResponse" type="tns:initResponse"/>
 
+<xs:element name="login" type="tns:login"/>
+
+<xs:element name="loginResponse" type="tns:loginResponse"/>
+
 <xs:element name="readClaimSubmissionFile" type="tns:readClaimSubmissionFile"/>
 
 <xs:element name="readClaimSubmissionFileResponse" type="tns:readClaimSubmissionFileResponse"/>
@@ -315,26 +319,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="init">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="initResponse">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="saveClaimSubmissionFile">
-<xs:sequence>
-<xs:element name="fileName" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="saveClaimSubmissionFileResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:boolean" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="getRegulators">
 <xs:sequence/>
 </xs:complexType>
@@ -349,18 +333,6 @@
 </xs:sequence>
 </xs:complexType>
 </xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getAccountTransactionStatus">
-<xs:sequence>
-<xs:element name="accountId" type="xs:long" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getAccountTransactionStatusResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -395,6 +367,62 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="testRegConnection">
+<xs:sequence>
+<xs:element name="facilityLicense" type="xs:string" minOccurs="0"/>
+<xs:element name="regUsr" type="xs:string" minOccurs="0"/>
+<xs:element name="regPass" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="testRegConnectionResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ProcessPendingTransactions">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="ProcessPendingTransactionsResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="init">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="initResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="saveClaimSubmissionFile">
+<xs:sequence>
+<xs:element name="fileName" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="saveClaimSubmissionFileResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAccountTransactionStatus">
+<xs:sequence>
+<xs:element name="accountId" type="xs:long" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAccountTransactionStatusResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="downloadClaimSubmissionFile">
 <xs:sequence>
 <xs:element name="accountId" type="xs:long" minOccurs="0"/>
@@ -425,27 +453,16 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="ProcessPendingTransactions">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="ProcessPendingTransactionsResponse">
+<xs:complexType name="login">
 <xs:sequence>
-<xs:element name="return" type="xs:boolean" minOccurs="0"/>
+<xs:element name="username" type="xs:string" minOccurs="0"/>
+<xs:element name="pass" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="testRegConnection">
+<xs:complexType name="loginResponse">
 <xs:sequence>
-<xs:element name="facilityLicense" type="xs:string" minOccurs="0"/>
-<xs:element name="regUsr" type="xs:string" minOccurs="0"/>
-<xs:element name="regPass" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="testRegConnectionResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0"/>
+<xs:element name="return" type="xs:long" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
