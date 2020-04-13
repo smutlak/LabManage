@@ -920,8 +920,8 @@ input.searchInput {
     width: 30px;
 }
 .headerLogo {  width:5%;}
-.headerMenu { width:80%;}
-.headerLogout { width:16%;}
+.headerMenu { width:75%;}
+.headerLogout { width:20%;}
 .header{
     height: 10%
 }
