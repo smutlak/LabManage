@@ -21,8 +21,10 @@ import javax.faces.context.FacesContext;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import org.primefaces.model.charts.ChartData;
+import org.primefaces.model.charts.optionconfig.legend.Legend;
 import org.primefaces.model.charts.pie.PieChartDataSet;
 import org.primefaces.model.charts.pie.PieChartModel;
+import org.primefaces.model.charts.pie.PieChartOptions;
 
 
 /**
@@ -87,30 +89,33 @@ public class Dashboard implements Serializable {
 
     @PostConstruct
     public void init() {
-        pieModel = new PieChartModel();
+       pieModel = new PieChartModel();
         ChartData data = new ChartData();
-
+         
         PieChartDataSet dataSet = new PieChartDataSet();
         List<Number> values = new ArrayList<>();
         values.add(300);
         values.add(50);
         values.add(100);
         dataSet.setData(values);
-
+         
         List<String> bgColors = new ArrayList<>();
         bgColors.add("rgb(255, 99, 132)");
         bgColors.add("rgb(54, 162, 235)");
         bgColors.add("rgb(255, 205, 86)");
         dataSet.setBackgroundColor(bgColors);
-
+         
         data.addChartDataSet(dataSet);
         List<String> labels = new ArrayList<>();
         labels.add("Red");
         labels.add("Blue");
         labels.add("Yellow");
         data.setLabels(labels);
-
-        pieModel.setExtender("removeLegend");
+        PieChartOptions opt = new PieChartOptions();
+        Legend legend = new Legend();
+        legend.setDisplay(false);
+        opt.setLegend(legend);
+        pieModel.setOptions(opt);
         pieModel.setData(data);
     }
 

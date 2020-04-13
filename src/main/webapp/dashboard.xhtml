@@ -39,7 +39,7 @@
                 <p:accordionPanel>
                     <p:tab title="Lab Percentage">
                         <h:panelGrid columns="2" cellpadding="10">
-                            <p:chart id="pie" type="pie" model="#{dashboard.pieModel}" responsive="true" />
+                            <p:pieChart model="#{dashboard.pieModel}" />
 
                             <p:dataTable var="lab" value="#{dashboard.labs}">
                                 <p:column headerText="Month">
