@@ -118,7 +118,7 @@ public class Main implements Serializable{
     }
 
     public String signup() {
-        message = "";
+        status = "";
         try { // Call Web Service Operation
             com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
             Long result = port.signUp(this.signupEmail, this.signupPass,
@@ -132,8 +132,12 @@ public class Main implements Serializable{
                 this.setPassword(signupPass);
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.getExternalContext().redirect(context.getExternalContext().getRequestContextPath()
-                        +"/faces/initAcount.xhtml");
+                        + "/faces/initAccount.xhtml");
                 return "";
+            } else if(result==-1){
+                status ="Error while signing up!!";
+            }else if(result==-2){
+                status ="User already exist!!";
             }
         } catch (IOException | NumberFormatException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, "Exception caught", ex);

@@ -1242,6 +1242,18 @@ div.timeline-event-selected {
     background: #4A6A6B ;
 }
 
+.signUpFieldsetStyle{
+    border-bottom-right-radius: 5px !important; 
+    border-bottom-left-radius: 5px !important; 
+    border-top-right-radius: 5px !important; 
+    border-top-left-radius: 5px !important; 
+    margin-top: -12px !important; 
+    margin: 25%;
+    top: 150px;
+    position: absolute;
+    /*background: #4A6A6B ;*/
+}
+
 .loginFieldsetStyle{
     border-bottom-right-radius: 5px !important; 
     border-bottom-left-radius: 5px !important; 

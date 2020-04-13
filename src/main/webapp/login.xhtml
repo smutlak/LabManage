@@ -15,7 +15,7 @@
             <p:growl id="growl" showDetail="true"/>
             <p:ajaxStatus onstart="document.getElementById('loaderAjax').style.display='';" onsuccess="document.getElementById('loaderAjax').style.display='none'" />
             <p:graphicImage name="/images/ajax-loader13.gif" style="display: none;  width:150px;height:150px; position: absolute;top: 75%;left: 90%; z-index: 55" id="loaderAjax" />
-            <h:form id="headerForm" >  
+            <h:form>
                 <h:panelGrid id="headerGRP" styleClass="headerGRP" columns="3" columnClasses="headerLogo,headerMenu,headerLogout">
                     <h:commandLink >
                         <h:graphicImage  style="cursor:pointer;  width: 180px; margin-top: 5px;" url="/resources/images/accumed-logo-transparent.png"></h:graphicImage>
@@ -24,8 +24,6 @@
                         <p style="font-size: larger; font-weight: bolder">ACCUMED LAB MANAGEMENT TOOL - LOGIN</p>
                     </h:panelGroup>
                     <h:panelGrid style="float: right; margin-right: 20px;" columns="2">
-                        <p style="color: #ffffff;">Welcome #{main.username}</p>
-                        <h:commandLink action="#{main.logout}" value="Logout"></h:commandLink> 
                     </h:panelGrid>
                 </h:panelGrid>               
             </h:form>
@@ -40,7 +38,7 @@
                             <p:commandButton value="Login" update="msg" action="#{main.login}"/>
                             <p:commandButton value="Create an account" update="msg" action="#{main.goToSignup}"/>
                         </h:panelGrid>
-                        <p><a href="#" class="tooltip">Forgot Password?<span>Click To Reset Your Password</span></a></p>
+                        <p><a href="#" class="tooltip">Forgot Password?<span style="padding-left: 10px; ">Click To Reset Your Password</span></a></p>
                         <br/>
                         <p:outputLabel id="msg" value="#{main.message}" style="color: red"/>
                     </h:form>

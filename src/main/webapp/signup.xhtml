@@ -7,39 +7,86 @@
     <h:head>
         <title>ACCUMED LAB MANAGEMENT TOOL::Login</title>
         <h:outputStylesheet library="css" name="style.css"/>
+        <style>
+            .fCol1{
+                width:50%;
+            }
+            .fCol2{
+                width:10%;
+            }
+            .fCol3{
+                width:30%;
+            }
+            
+            .sCol1{
+                width:50%;
+            }
+            .sCol2{
+                width:10%;
+            }
+            .sCol3{
+                width:30%;
+            }
+        </style>
     </h:head>
     <h:body>
-        <h2>ACCUMED LAB MANAGEMENT TOOL</h2>
-
-        <h:form id="loginForm">
-            <h3>REGISTRATION DETAILS</h3>
-            <h:panelGrid columns="2">
-                <h:outputLabel for="signupEmail" value="E-Mail Id (Enter your personal or facility e-mail Id)"></h:outputLabel>
-                <h:outputLabel for="signupPass" value="Password"></h:outputLabel>
-                <h:inputText id="signupEmail" value="#{main.signupEmail}"></h:inputText>
-                <h:inputText id ="signupPass" value="#{main.signupPass}"></h:inputText>
-            </h:panelGrid>
-            <h3>REGULARITY DETAILS</h3>
-            <p>Please provide your respective regulatory (Shafafiya/DHPO) credentials, then click on 'Test Connection' button to verify the details</p>
-            <h:panelGrid columns="2">
-                <h:outputLabel value="Regulator"></h:outputLabel>
-                <h:outputLabel value="Facility License Number"></h:outputLabel>
-                <p:selectOneMenu id="signRegualtor" value="#{main.signRegualtor}">
-                    <f:selectItem itemLabel="HAAD" itemValue="1" />
-                    <f:selectItem itemLabel="DHA" itemValue="2" />
-                </p:selectOneMenu>
-                <h:inputText id="signupFacilityLicense" value="#{main.signupFacilityLicense}"></h:inputText>
-                <h:outputLabel for="signupRegUsr" value="Regulator Username"></h:outputLabel>
-                <h:outputLabel for="signupRegPass" value="Regulator Password"></h:outputLabel>
-                <h:inputText id="signupRegUsr" value="#{main.signupRegUsr}" ></h:inputText>
-                <h:inputText id="signupRegPass" value="#{main.signupRegPass}"></h:inputText>
-            </h:panelGrid>
-            <p:commandButton value="Test Connection" actionListener="#{main.testRegConnection()}" update="status" />
-            <p:commandButton value="Register" actionListener="#{main.signup()}" update="status"/>
-            <!--<p:commandButton value="Login" action="login?faces-redirect=true"/>-->
-            <br/>
-            <p:outputLabel id="status" style="color: red;" value="#{main.status}"></p:outputLabel>
-        </h:form>
+        <h:panelGrid columns="1" width="100%" >
+            <p:growl id="growl" showDetail="true"/>
+            <p:ajaxStatus onstart="document.getElementById('loaderAjax').style.display='';" onsuccess="document.getElementById('loaderAjax').style.display='none'" />
+            <p:graphicImage name="/images/ajax-loader13.gif" style="display: none;  width:150px;height:150px; position: absolute;top: 75%;left: 90%; z-index: 55" id="loaderAjax" />
+            <h:form id="headerForm" >  
+                <h:panelGrid id="headerGRP" styleClass="headerGRP" columns="3" columnClasses="headerLogo,headerMenu,headerLogout">
+                    <h:commandLink >
+                        <h:graphicImage  style="cursor:pointer;  width: 180px; margin-top: 5px;" url="/resources/images/accumed-logo-transparent.png"></h:graphicImage>
+                    </h:commandLink>
+                    <h:panelGroup style="text-align: center; color: #ffffff;">
+                        <p style="font-size: larger; font-weight: bolder">ACCUMED LAB MANAGEMENT TOOL - SIGN UP</p>
+                    </h:panelGroup>
+                    <h:panelGrid style="float: right; margin-right: 20px;" columns="2">
+                        <p style="color: #ffffff;">Welcome #{main.username}</p>
+                        <h:commandLink action="#{main.logout}" value="Logout"></h:commandLink> 
+                    </h:panelGrid>
+                </h:panelGrid>               
+            </h:form>
+            <h:panelGroup>
+                <p:fieldset legend="REGISTRATION DETAILS" id="login" styleClass="signUpFieldsetStyle"> 
+                    <h:form id="loginForm">
+                        <h:panelGrid columns="3" columnClasses="fCol1,fCol2,fCol3">
+                            <h:outputLabel for="signupEmail" value="E-Mail Id (Enter your personal or facility e-mail Id)"></h:outputLabel>
+                            <span></span>
+                            <h:outputLabel for="signupPass" value="Password"></h:outputLabel>
+                            <h:inputText id="signupEmail" value="#{main.signupEmail}"></h:inputText>
+                            <span style="width20px;"></span>
+                            <h:inputText id ="signupPass" value="#{main.signupPass}"></h:inputText>
+                        </h:panelGrid>
+                        <p:panel style="margin:20px;">
+                            <h4>REGULARITY DETAILS</h4>
+                            <p>Please provide your respective regulatory (Shafafiya/DHPO) credentials, then click on 'Test Connection' button to verify the details</p>
+                            <h:panelGrid columns="3" columnClasses="sCol1,sCol2,sCol3">
+                                <h:outputLabel value="Regulator"></h:outputLabel>
+                                <span></span>
+                                <h:outputLabel value="Facility License Number"></h:outputLabel>
+                                <p:selectOneMenu id="signRegualtor" value="#{main.signRegualtor}">
+                                    <f:selectItem itemLabel="HAAD" itemValue="1" />
+                                    <f:selectItem itemLabel="DHA" itemValue="2" />
+                                </p:selectOneMenu>
+                                <span></span>
+                                <h:inputText id="signupFacilityLicense" value="#{main.signupFacilityLicense}"></h:inputText>
+                                <h:outputLabel for="signupRegUsr" value="Regulator Username"></h:outputLabel>
+                                <span></span>
+                                <h:outputLabel for="signupRegPass" value="Regulator Password"></h:outputLabel>
+                                <h:inputText id="signupRegUsr" value="#{main.signupRegUsr}" ></h:inputText>
+                                <span></span>
+                                <h:inputText id="signupRegPass" value="#{main.signupRegPass}"></h:inputText>
+                            </h:panelGrid>
+                        </p:panel>
+                        <p:commandButton value="Test Connection" actionListener="#{main.testRegConnection()}" update="status" />
+                        <p:commandButton value="Register" actionListener="#{main.signup()}" update="status"/>
+                        <p:outputLabel id="status" style="margin-left: 20px; color: red;" value="#{main.status}"></p:outputLabel>
+                    </h:form>
+                </p:fieldset>
+            </h:panelGroup>
+        </h:panelGrid>
     </h:body>
 </html>
 
