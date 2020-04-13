@@ -7,6 +7,7 @@ package com.accumed.labmanage.mb;
 
 import com.accumed.pposervice.ws.PPO_Service;
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,6 +16,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -22,7 +24,7 @@ import javax.naming.NamingException;
  */
 @ManagedBean
 @SessionScoped
-public class Main {
+public class Main implements Serializable{
 
 //    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_9081/PPOService/PPO.wsdl")
     private PPO_Service service;
@@ -119,18 +121,19 @@ public class Main {
         message = "";
         try { // Call Web Service Operation
             com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
-            Long result = port.login(this.username, this.password);
+            Long result = port.signUp(this.signupEmail, this.signupPass,
+                    this.signRegualtor, this.signupFacilityLicense, this.signupRegUsr,
+                    this.signupRegPass);
             System.out.println("Result = " + result);
 
-            if (result > 0) {
+            if (result> 0) {
                 this.setAccountid(result);
+                this.setUsername(signupEmail);
+                this.setPassword(signupPass);
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.getExternalContext().redirect(context.getExternalContext().getRequestContextPath()
-                        + "/faces/dashboard.xhtml");
+                        +"/faces/initAcount.xhtml");
                 return "";
-            }else
-            {
-                message = "Login failed!!";
             }
         } catch (IOException | NumberFormatException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, "Exception caught", ex);
@@ -283,4 +286,13 @@ public class Main {
         return "";
     }
 
+    public String logout() {
+
+        this.accountid = null;
+        this.username = "";
+        this.password = "";
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        session.invalidate();
+        return "/faces/login.xhtml?faces-redirect=true";
+    }
 }

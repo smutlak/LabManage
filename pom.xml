@@ -14,8 +14,16 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-
-        <dependencies>
+    <repositories>
+        <repository>
+            <id>prime-repo</id>
+            <name>PrimeFaces Maven Repository</name>
+            <url>https://repository.primefaces.org</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
+        
+    <dependencies>
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
@@ -103,7 +111,25 @@
             <artifactId>wsdl4j</artifactId>
             <version>1.6.2</version>
         </dependency>
+        
+        <!-- https://mvnrepository.com/artifact/org.primefaces.themes/all-themes -->
+        <dependency>
+            <groupId>org.primefaces.themes</groupId>
+            <artifactId>all-themes</artifactId>
+            <version>1.0.10</version>
+        </dependency>
 
+        <dependency>
+            <groupId>com.accumed.themes</groupId>
+            <artifactId>Accumed-theme</artifactId>
+            <version>1.0.0.2</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.accumed.ws</groupId>
+            <artifactId>wsInterface</artifactId>
+            <version>1.0.4.4</version>
+        </dependency>
         
     </dependencies>
    
