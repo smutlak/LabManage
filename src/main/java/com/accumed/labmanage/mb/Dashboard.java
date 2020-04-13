@@ -9,14 +9,21 @@ import com.accumed.pposervice.ws.GetFacilityMonthTransactionResponse;
 import com.accumed.pposervice.ws.PPO_Service;
 import java.io.Serializable;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import org.primefaces.model.charts.ChartData;
+import org.primefaces.model.charts.pie.PieChartDataSet;
+import org.primefaces.model.charts.pie.PieChartModel;
+
 
 /**
  *
@@ -29,6 +36,7 @@ public class Dashboard implements Serializable {
     //@WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_9081/PPOService/PPO.wsdl")
     private PPO_Service service;
     private List<com.accumed.pposervice.ws.GetAccuntTotalsVSLabsResponse.Return> labs;
+    private PieChartModel pieModel;
 
     /**
      * Creates a new instance of AccountInit
@@ -77,4 +85,37 @@ public class Dashboard implements Serializable {
         this.labs = labs;
     }
 
+    @PostConstruct
+    public void init() {
+        pieModel = new PieChartModel();
+        ChartData data = new ChartData();
+
+        PieChartDataSet dataSet = new PieChartDataSet();
+        List<Number> values = new ArrayList<>();
+        values.add(300);
+        values.add(50);
+        values.add(100);
+        dataSet.setData(values);
+
+        List<String> bgColors = new ArrayList<>();
+        bgColors.add("rgb(255, 99, 132)");
+        bgColors.add("rgb(54, 162, 235)");
+        bgColors.add("rgb(255, 205, 86)");
+        dataSet.setBackgroundColor(bgColors);
+
+        data.addChartDataSet(dataSet);
+        List<String> labels = new ArrayList<>();
+        labels.add("Red");
+        labels.add("Blue");
+        labels.add("Yellow");
+        data.setLabels(labels);
+
+        pieModel.setExtender("removeLegend");
+        pieModel.setData(data);
+    }
+
+    public PieChartModel getPieModel() {
+        pieModel.setExtender("removeLegend");
+        return pieModel;
+    }
 }

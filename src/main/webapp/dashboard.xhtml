@@ -7,6 +7,14 @@
     <h:head>
         <title>ACCUMED LAB MANAGEMENT DASHBOARD</title>
         <h:outputStylesheet library="css" name="style.css"/>
+        <script type="text/javascript">
+            function removeLegend()
+            {
+                this.cfg.legend = {
+                    show: false
+                };
+            }
+        </script>
     </h:head>
     <h:body>
         <h:panelGrid columns="1" width="100%" >
@@ -27,34 +35,49 @@
                     </h:panelGrid>
                 </h:panelGrid>               
             </h:form>
-            <h:panelGroup>
-                <h:form>
-                    <p:dataTable var="lab" value="#{dashboard.labs}">
-                        <p:column headerText="Month">
-                            <h:outputText value="#{lab.month}" />
-                        </p:column>
+            <h:form>
+                <p:accordionPanel>
+                    <p:tab title="Lab Percentage">
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <p:chart id="pie" type="pie" model="#{dashboard.pieModel}" responsive="true" />
 
-                        <p:column headerText="Receiver">
-                            <h:outputText value="#{lab.receiverid}" />
-                        </p:column>
+                            <p:dataTable var="lab" value="#{dashboard.labs}">
+                                <p:column headerText="Month">
+                                    <h:outputText value="#{lab.month}" />
+                                </p:column>
 
-                        <p:column headerText="Claims count">
-                            <h:outputText value="#{lab.claimsCount}" />
-                        </p:column>
+                                <p:column headerText="Receiver">
+                                    <h:outputText value="#{lab.receiverid}" />
+                                </p:column>
 
-                        <p:column headerText="Total">
-                            <h:outputText value="#{lab.total}" />
-                        </p:column>
+                                <p:column headerText="Claims count">
+                                    <h:outputText value="#{lab.claimsCount}" />
+                                </p:column>
 
-                        <p:column headerText="Lab Total">
-                            <h:outputText value="#{lab.totalLab}" />
-                        </p:column>
-                        <!--<p:column headerText="Percentage">
-                            <h:outputText value="#{lab.percentage}" />
-                        </p:column>-->
-                    </p:dataTable>
-                </h:form>
-            </h:panelGroup>
+                                <p:column headerText="Total">
+                                    <h:outputText value="#{lab.total}" />
+                                </p:column>
+
+                                <p:column headerText="Lab Total">
+                                    <h:outputText value="#{lab.totalLab}" />
+                                </p:column>
+                                <!--<p:column headerText="Percentage">
+                                    <h:outputText value="#{lab.percentage}" />
+                                </p:column>-->
+                            </p:dataTable>
+
+                        </h:panelGrid>
+                    </p:tab>
+                    <p:tab title="Claim Validation">
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <p:graphicImage name="demo/images/godfather/godfather2.jpg" />
+                            <h:outputText value="Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather, parallels the young Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark side of the American dream. 
+                                          In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy, 
+                                          killing the local Black Hand Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows." />
+                        </h:panelGrid>
+                    </p:tab>
+                </p:accordionPanel>
+            </h:form>
         </h:panelGrid>
     </h:body>
 </html>
