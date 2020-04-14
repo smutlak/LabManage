@@ -6,6 +6,7 @@ package com.accumed.labmanage.mb;
  * and open the template in the editor.
  */
 import com.accumed.pposervice.ws.FindCptResponse;
+import com.accumed.pposervice.ws.FindIcdResponse;
 import com.accumed.pposervice.ws.GetFacilityMonthTransactionResponse;
 import com.accumed.pposervice.ws.PPO_Service;
 import java.io.Serializable;
@@ -42,7 +43,9 @@ public class Dashboard implements Serializable {
     private PieChartModel pieModel;
     private com.accumed.pposervice.ws.FindCptResponse.Return cptCode;
     private List<com.accumed.pposervice.ws.FindCptResponse.Return> selectedCpts;
-
+    private com.accumed.pposervice.ws.FindIcdResponse.Return icdCode;
+    private List<com.accumed.pposervice.ws.FindIcdResponse.Return> selectedIcds;
+    private String gender="1";
     /**
      * Creates a new instance of AccountInit
      */
@@ -143,6 +146,23 @@ public class Dashboard implements Serializable {
         }
         return null;
     }
+    
+    public List<com.accumed.pposervice.ws.FindIcdResponse.Return> completeICD(String query) {
+        
+        try { // Call Web Service Operation
+            com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
+            java.lang.String code = query;
+            java.lang.String desc = "";
+            // TODO process result here
+            java.util.List<com.accumed.pposervice.ws.FindIcdResponse.Return> result = port.findIcd(code, desc);
+            System.out.println("Result = "+result);
+            return result;
+        } catch (Exception ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE,
+                        "exception caught", ex);
+        }
+        return null;
+    }
 
     public FindCptResponse.Return getCptCode() {
         return cptCode;
@@ -157,6 +177,14 @@ public class Dashboard implements Serializable {
             this.selectedCpts = new ArrayList();
         }
         this.selectedCpts.add(cptCode);
+        cptCode = null;
+    }
+    
+    public void addICD(){
+        if(this.selectedIcds == null){
+            this.selectedIcds = new ArrayList();
+        }
+        this.selectedIcds.add(icdCode);
     }
 
     public List<FindCptResponse.Return> getSelectedCpts() {
@@ -166,6 +194,31 @@ public class Dashboard implements Serializable {
     public void setSelectedCpts(List<FindCptResponse.Return> selectedCpts) {
         this.selectedCpts = selectedCpts;
     }
+
+    public FindIcdResponse.Return getIcdCode() {
+        return icdCode;
+    }
+
+    public void setIcdCode(FindIcdResponse.Return icdCode) {
+        this.icdCode = icdCode;
+    }
+
+    public List<FindIcdResponse.Return> getSelectedIcds() {
+        return selectedIcds;
+    }
+
+    public void setSelectedIcds(List<FindIcdResponse.Return> selectedIcds) {
+        this.selectedIcds = selectedIcds;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     
     
     
