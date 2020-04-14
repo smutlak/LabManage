@@ -18,10 +18,10 @@
             function doTheFocus(data) {
                 if (data.status === 'success') {
                     //PF('cptAutoComplVar').focus();
-                    setTimeout(function() {
-                    document.getElementById("dashBoardForm:accordionId:cptAutoCompl_input").focus();
-                }, 300);
-                    
+                    setTimeout(function () {
+                        document.getElementById("dashBoardForm:accordionId:cptAutoCompl_input").focus();
+                    }, 300);
+
                 }
             }
         </script>
@@ -68,12 +68,11 @@
                     <p:tab title="Lab Percentage">
                         <p:outputLabel value="#{dashboard.title}" style=" font-size: larger"></p:outputLabel>
                         <h:panelGrid columns="2">
-                            <p:pieChart model="#{dashboard.pieModel}" />
-
+                            <p:pieChart id="myPie" model="#{dashboard.pieModel}" style="" />
                             <p:dataTable var="lab" value="#{dashboard.labs}">
-                                <p:column headerText="Month">
+                                <!--<p:column headerText="Month">
                                     <h:outputText value="#{lab.month}" />
-                                </p:column>
+                                </p:column>-->
 
                                 <p:column headerText="Receiver">
                                     <h:outputText value="#{lab.receiverid}" />
@@ -90,8 +89,8 @@
                                 <p:column headerText="Lab Total">
                                     <h:outputText value="#{lab.totalLab}" />
                                 </p:column>
-                                <!--<p:column headerText="Percentage">
-                                    <h:outputText value="#{lab.percentage}" />
+                                <p:column headerText="Percentage">
+                                    <h:outputText value="#{dashboard.calcPercentage(lab.total, lab.totalLab)}" />
                                 </p:column>-->
                             </p:dataTable>
 
@@ -214,7 +213,7 @@
                         </p:fieldset>
 
                     </p:tab>
-                    
+
                 </p:accordionPanel>
             </h:form>
         </h:panelGrid>

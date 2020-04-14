@@ -28,7 +28,6 @@ import org.primefaces.model.charts.pie.PieChartDataSet;
 import org.primefaces.model.charts.pie.PieChartModel;
 import org.primefaces.model.charts.pie.PieChartOptions;
 
-
 /**
  *
  * @author smutlak
@@ -45,7 +44,8 @@ public class Dashboard implements Serializable {
     private List<com.accumed.pposervice.ws.FindCptResponse.Return> selectedCpts;
     private com.accumed.pposervice.ws.FindIcdResponse.Return icdCode;
     private List<com.accumed.pposervice.ws.FindIcdResponse.Return> selectedIcds;
-    private String gender="1";
+    private String gender = "1";
+
     /**
      * Creates a new instance of AccountInit
      */
@@ -72,7 +72,7 @@ public class Dashboard implements Serializable {
 
     public List<com.accumed.pposervice.ws.GetAccuntTotalsVSLabsResponse.Return> getLabs() {
 
-        if(labs!= null && !labs.isEmpty()){
+        if (labs != null && !labs.isEmpty()) {
             return labs;
         }
         try { // Call Web Service Operation
@@ -86,8 +86,8 @@ public class Dashboard implements Serializable {
             labs = result;
             System.out.println("Result = " + result);
         } catch (Exception ex) {
-             Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE,
-                        "exception caught", ex);
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE,
+                    "exception caught", ex);
         }
         return labs;
     }
@@ -98,27 +98,27 @@ public class Dashboard implements Serializable {
 
     @PostConstruct
     public void init() {
-       pieModel = new PieChartModel();
+        pieModel = new PieChartModel();
         ChartData data = new ChartData();
-         
+
         PieChartDataSet dataSet = new PieChartDataSet();
         List<Number> values = new ArrayList<>();
-        values.add(300);
-        values.add(50);
-        values.add(100);
+        values.add(getLabTotal());
+        values.add(getTotal());
+        //values.add(100);
         dataSet.setData(values);
-         
+
         List<String> bgColors = new ArrayList<>();
         bgColors.add("rgb(255, 99, 132)");
         bgColors.add("rgb(54, 162, 235)");
-        bgColors.add("rgb(255, 205, 86)");
+        //bgColors.add("rgb(255, 205, 86)");
         dataSet.setBackgroundColor(bgColors);
-         
+
         data.addChartDataSet(dataSet);
         List<String> labels = new ArrayList<>();
-        labels.add("Red");
-        labels.add("Blue");
-        labels.add("Yellow");
+        labels.add("Lab");
+        labels.add("Total");
+        //labels.add("Yellow");
         data.setLabels(labels);
         PieChartOptions opt = new PieChartOptions();
         Legend legend = new Legend();
@@ -132,37 +132,37 @@ public class Dashboard implements Serializable {
         pieModel.setExtender("removeLegend");
         return pieModel;
     }
-    
+
     public List<com.accumed.pposervice.ws.FindCptResponse.Return> complete(String query) {
-        
+
         try { // Call Web Service Operation
             com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
             java.lang.String code = query;
             java.lang.String desc = "";
             // TODO process result here
             java.util.List<com.accumed.pposervice.ws.FindCptResponse.Return> result = port.findCpt(code, desc);
-            System.out.println("Result = "+result);
+            System.out.println("Result = " + result);
             return result;
         } catch (Exception ex) {
             Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE,
-                        "exception caught", ex);
+                    "exception caught", ex);
         }
         return null;
     }
-    
+
     public List<com.accumed.pposervice.ws.FindIcdResponse.Return> completeICD(String query) {
-        
+
         try { // Call Web Service Operation
             com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
             java.lang.String code = query;
             java.lang.String desc = "";
             // TODO process result here
             java.util.List<com.accumed.pposervice.ws.FindIcdResponse.Return> result = port.findIcd(code, desc);
-            System.out.println("Result = "+result);
+            System.out.println("Result = " + result);
             return result;
         } catch (Exception ex) {
             Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE,
-                        "exception caught", ex);
+                    "exception caught", ex);
         }
         return null;
     }
@@ -174,17 +174,17 @@ public class Dashboard implements Serializable {
     public void setCptCode(FindCptResponse.Return cptCode) {
         this.cptCode = cptCode;
     }
-    
-    public void addCPT(){
-        if(this.selectedCpts == null){
+
+    public void addCPT() {
+        if (this.selectedCpts == null) {
             this.selectedCpts = new ArrayList();
         }
         this.selectedCpts.add(cptCode);
         cptCode = null;
     }
-    
-    public void addICD(){
-        if(this.selectedIcds == null){
+
+    public void addICD() {
+        if (this.selectedIcds == null) {
             this.selectedIcds = new ArrayList();
         }
         this.selectedIcds.add(icdCode);
@@ -221,13 +221,42 @@ public class Dashboard implements Serializable {
     public void setGender(String gender) {
         this.gender = gender;
     }
-    
-    public String getTitle(){
-        String sMonth="";
+
+    public String getTitle() {
+        String sMonth = "";
         getLabs();
-        if(labs != null && !labs.isEmpty()){
-            sMonth = new java.text.DateFormatSymbols().getMonths()[labs.get(0).getMonth()-1];
+        if (labs != null && !labs.isEmpty()) {
+            sMonth = new java.text.DateFormatSymbols().getMonths()[labs.get(0).getMonth() - 1];
         }
-        return sMonth+" Details";
+        return sMonth + " Details";
+    }
+
+    private int getTotal() {
+        getLabs();
+        double ret = 0;
+        if (labs != null && !labs.isEmpty()) {
+            for (com.accumed.pposervice.ws.GetAccuntTotalsVSLabsResponse.Return lab : labs) {
+                ret += lab.getTotal();
+            }
+        }
+        return (int)ret;
+    }
+    
+    private int getLabTotal() {
+        getLabs();
+        double ret = 0;
+        if (labs != null && !labs.isEmpty()) {
+            for (com.accumed.pposervice.ws.GetAccuntTotalsVSLabsResponse.Return lab : labs) {
+                ret += lab.getTotalLab();
+            }
+        }
+        return (int)ret;
+    }
+
+    public String calcPercentage(double total, double totalLab) {
+        double d = (totalLab / total) * 10000;
+        int i = (int) d;
+        d = new Double(i) / new Double(100);
+        return d + "%";
     }
 }
