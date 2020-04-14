@@ -152,6 +152,15 @@
 </xs:complexType>
 </xs:element>
 
+<xs:element name="cpt">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="short_description" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+
 <xs:element name="downloadClaimSubmissionFile" type="tns:downloadClaimSubmissionFile"/>
 
 <xs:element name="downloadClaimSubmissionFileResponse" type="tns:downloadClaimSubmissionFileResponse"/>
@@ -159,6 +168,14 @@
 <xs:element name="end" type="tns:end"/>
 
 <xs:element name="endResponse" type="tns:endResponse"/>
+
+<xs:element name="findCpt" type="tns:findCpt"/>
+
+<xs:element name="findCptResponse" type="tns:findCptResponse"/>
+
+<xs:element name="findIcd" type="tns:findIcd"/>
+
+<xs:element name="findIcdResponse" type="tns:findIcdResponse"/>
 
 <xs:element name="getAccountTransactionStatus" type="tns:getAccountTransactionStatus"/>
 
@@ -175,6 +192,15 @@
 <xs:element name="getRegulators" type="tns:getRegulators"/>
 
 <xs:element name="getRegulatorsResponse" type="tns:getRegulatorsResponse"/>
+
+<xs:element name="icd">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="short_description" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
 
 <xs:element name="init" type="tns:init"/>
 
@@ -336,6 +362,26 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="findIcd">
+<xs:sequence>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="desc" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findIcdResponse">
+<xs:sequence>
+<xs:element name="return" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="short_description" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="end">
 <xs:sequence/>
 </xs:complexType>
@@ -367,6 +413,16 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="ProcessPendingTransactions">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="ProcessPendingTransactionsResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="testRegConnection">
 <xs:sequence>
 <xs:element name="facilityLicense" type="xs:string" minOccurs="0"/>
@@ -378,16 +434,6 @@
 <xs:complexType name="testRegConnectionResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="ProcessPendingTransactions">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="ProcessPendingTransactionsResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:boolean" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -420,6 +466,26 @@
 <xs:complexType name="getAccountTransactionStatusResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findCpt">
+<xs:sequence>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="desc" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findCptResponse">
+<xs:sequence>
+<xs:element name="return" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="short_description" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
 </xs:sequence>
 </xs:complexType>
 
