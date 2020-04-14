@@ -5,6 +5,7 @@ package com.accumed.labmanage.mb;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import com.accumed.pposervice.ws.FindCptResponse;
 import com.accumed.pposervice.ws.GetFacilityMonthTransactionResponse;
 import com.accumed.pposervice.ws.PPO_Service;
 import java.io.Serializable;
@@ -39,6 +40,8 @@ public class Dashboard implements Serializable {
     private PPO_Service service;
     private List<com.accumed.pposervice.ws.GetAccuntTotalsVSLabsResponse.Return> labs;
     private PieChartModel pieModel;
+    private com.accumed.pposervice.ws.FindCptResponse.Return cptCode;
+    private List<com.accumed.pposervice.ws.FindCptResponse.Return> selectedCpts;
 
     /**
      * Creates a new instance of AccountInit
@@ -123,4 +126,48 @@ public class Dashboard implements Serializable {
         pieModel.setExtender("removeLegend");
         return pieModel;
     }
+    
+    public List<com.accumed.pposervice.ws.FindCptResponse.Return> complete(String query) {
+        
+        try { // Call Web Service Operation
+            com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
+            java.lang.String code = query;
+            java.lang.String desc = "";
+            // TODO process result here
+            java.util.List<com.accumed.pposervice.ws.FindCptResponse.Return> result = port.findCpt(code, desc);
+            System.out.println("Result = "+result);
+            return result;
+        } catch (Exception ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE,
+                        "exception caught", ex);
+        }
+        return null;
+    }
+
+    public FindCptResponse.Return getCptCode() {
+        return cptCode;
+    }
+
+    public void setCptCode(FindCptResponse.Return cptCode) {
+        this.cptCode = cptCode;
+    }
+    
+    public void addCPT(){
+        if(this.selectedCpts == null){
+            this.selectedCpts = new ArrayList();
+        }
+        this.selectedCpts.add(cptCode);
+    }
+
+    public List<FindCptResponse.Return> getSelectedCpts() {
+        return selectedCpts;
+    }
+
+    public void setSelectedCpts(List<FindCptResponse.Return> selectedCpts) {
+        this.selectedCpts = selectedCpts;
+    }
+    
+    
+    
+    
 }

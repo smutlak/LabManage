@@ -16,6 +16,9 @@
             }
         </script>
         <style>
+            .inp{
+                margin:5px;
+            }
             .c1{
 
             }
@@ -24,6 +27,10 @@
             }
             .c3{
 
+            }
+
+            .ui-fieldset .ui-fieldset-legend {
+                padding: 2px 2px !important;
             }
         </style>
     </h:head>
@@ -48,6 +55,85 @@
             </h:form>
             <h:form>
                 <p:accordionPanel>
+
+                    <p:tab title="Claim Validation">
+                        <p:fieldset legend="Claim &amp; Patient Details" style="margin:10px;">
+                            <h:panelGrid columns="2" style="width:100%" columnClasses="c1,c2,c3">
+                                <p:graphicImage name="images/excel.png" />
+                                <p:panel style="width:100%">
+                                    <h:panelGrid columns="3" style="width:100%">
+                                        <h:panelGroup>
+                                            <h:outputLabel value="Insurance" for="Insurance"></h:outputLabel>
+                                            <h:inputText id="Insurance" styleClass="inp"></h:inputText>
+                                        </h:panelGroup>
+                                        <h:panelGroup>
+                                            <h:outputLabel value="DOB" for="DOB"></h:outputLabel>
+                                            <p:datePicker id="DOB" showIcon="true" styleClass="inp"/>
+                                        </h:panelGroup>
+                                        <h:panelGroup>
+                                            <h:outputLabel value="Gender" for="Gender"></h:outputLabel>
+                                            <h:inputText id="Gender" styleClass="inp"></h:inputText>
+                                        </h:panelGroup>
+                                    </h:panelGrid>
+                                </p:panel>
+
+
+                                <h:outputLabel></h:outputLabel>
+                                <p:panel style="width:100%">
+                                    <h:panelGrid columns="2" style="width:100%">
+                                        <p:fieldset styleClass="smallLegend">
+                                            <h1>CPTs</h1>
+                                            <h:panelGrid columns="2">
+                                                <p:outputLabel value="CPT" for="cptAutoCompl" ></p:outputLabel>
+                                                <p:autoComplete value="#{dashboard.cptCode}"
+                                                                style="width:100%"
+                                                                id="cptAutoCompl"
+                                                                widgetVar="cptAutoComplVar"
+                                                                completeMethod="#{dashboard.complete}"
+                                                                var="cptCode"
+                                                                minQueryLength="4"
+                                                                forceSelection="true"
+                                                                maxResults="20"
+                                                                queryDelay="500"
+                                                                itemValue="#{cptCode.code}"
+                                                                itemLabel="#{cptCode.code}"
+                                                                size="40"
+                                                                >
+
+                                                    <f:ajax event="itemSelect" listener="#{dashboard.addCPT}"  execute="cptAutoCompl" render="cptList cptDesc" />
+
+                                                    <p:column style="width:50px">
+                                                        <h:outputText value="#{cptCode.code}" />
+                                                    </p:column>
+
+                                                    <p:column>
+                                                        <h:outputText value="#{cptCode ne null?cptCode.shortDescription:''}" />
+                                                    </p:column>
+
+                                                    <f:converter converterId="cptConverter"/>
+
+                                                </p:autoComplete>
+                                                <p:outputLabel value="Description" for="cptDesc" ></p:outputLabel>
+                                                <p:outputLabel id="cptDesc" style="width:100%"
+                                                               value="#{dashboard.cptCode ne null? (dashboard.cptCode.shortDescription.length() gt 80 ? dashboard.cptCode.shortDescription.substring(0,76).concat('...') : dashboard.cptCode.shortDescription):''}"></p:outputLabel>
+                                            </h:panelGrid>
+                                            <p:selectOneListbox id="cptList" style=" height: 150px" value="#{dashboard.selectedCpts}"></p:selectOneListbox>
+                                        </p:fieldset>
+                                        <p:fieldset styleClass="smallLegend">
+                                            <h1>ICDs</h1>
+                                        </p:fieldset>
+                                    </h:panelGrid>
+                                </p:panel>
+
+                                <h:outputLabel></h:outputLabel>
+                                <p:commandButton value="Validate" style="float: right;"></p:commandButton>
+                            </h:panelGrid>
+                        </p:fieldset>
+                        <p:fieldset legend="Validation Results">
+
+                        </p:fieldset>
+
+                    </p:tab>
                     <p:tab title="Lab Percentage">
                         <h:panelGrid columns="2">
                             <p:pieChart model="#{dashboard.pieModel}" />
@@ -78,31 +164,6 @@
                             </p:dataTable>
 
                         </h:panelGrid>
-                    </p:tab>
-                    <p:tab title="Claim Validation">
-                        <p:fieldset legend="Claim &amp; Patient Details" style="margin:10px;">
-                            <h:panelGrid columns="2" style="width:100%" columnClasses="c1,c2,c3">
-                                <p:graphicImage name="images/excel.png" />
-                                <p:panel>
-                                    <h:outputLabel value="Insurance"></h:outputLabel>
-                                    <h:outputLabel value="DOB"></h:outputLabel>
-                                    <h:outputLabel value="Gender"></h:outputLabel>
-                                </p:panel>
-
-
-                                <h:outputLabel></h:outputLabel>
-                                <p:panel>
-
-                                </p:panel>
-
-                                <h:outputLabel></h:outputLabel>
-                                <p:commandButton value="Validate" style="float: right;"></p:commandButton>
-                            </h:panelGrid>
-                        </p:fieldset>
-                        <p:fieldset legend="Validation Results">
-                            
-                        </p:fieldset>
-
                     </p:tab>
                 </p:accordionPanel>
             </h:form>
