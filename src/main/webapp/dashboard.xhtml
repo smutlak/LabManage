@@ -65,6 +65,38 @@
             </h:form>
             <h:form id="dashBoardForm">
                 <p:accordionPanel id="accordionId">
+                    <p:tab title="Lab Percentage">
+                        <p:outputLabel value="#{dashboard.title}" style=" font-size: larger"></p:outputLabel>
+                        <h:panelGrid columns="2">
+                            <p:pieChart model="#{dashboard.pieModel}" />
+
+                            <p:dataTable var="lab" value="#{dashboard.labs}">
+                                <p:column headerText="Month">
+                                    <h:outputText value="#{lab.month}" />
+                                </p:column>
+
+                                <p:column headerText="Receiver">
+                                    <h:outputText value="#{lab.receiverid}" />
+                                </p:column>
+
+                                <p:column headerText="Claims count">
+                                    <h:outputText value="#{lab.claimsCount}" />
+                                </p:column>
+
+                                <p:column headerText="Total">
+                                    <h:outputText value="#{lab.total}" />
+                                </p:column>
+
+                                <p:column headerText="Lab Total">
+                                    <h:outputText value="#{lab.totalLab}" />
+                                </p:column>
+                                <!--<p:column headerText="Percentage">
+                                    <h:outputText value="#{lab.percentage}" />
+                                </p:column>-->
+                            </p:dataTable>
+
+                        </h:panelGrid>
+                    </p:tab>
                     <p:tab title="Claim Validation" id="claimTab">
                         <p:fieldset legend="Claim &amp; Patient Details" style="margin:10px;">
                             <h:panelGrid columns="2" style="width:100%" columnClasses="c1,c2,c3">
@@ -182,37 +214,7 @@
                         </p:fieldset>
 
                     </p:tab>
-                    <p:tab title="Lab Percentage">
-                        <h:panelGrid columns="2">
-                            <p:pieChart model="#{dashboard.pieModel}" />
-
-                            <p:dataTable var="lab" value="#{dashboard.labs}">
-                                <p:column headerText="Month">
-                                    <h:outputText value="#{lab.month}" />
-                                </p:column>
-
-                                <p:column headerText="Receiver">
-                                    <h:outputText value="#{lab.receiverid}" />
-                                </p:column>
-
-                                <p:column headerText="Claims count">
-                                    <h:outputText value="#{lab.claimsCount}" />
-                                </p:column>
-
-                                <p:column headerText="Total">
-                                    <h:outputText value="#{lab.total}" />
-                                </p:column>
-
-                                <p:column headerText="Lab Total">
-                                    <h:outputText value="#{lab.totalLab}" />
-                                </p:column>
-                                <!--<p:column headerText="Percentage">
-                                    <h:outputText value="#{lab.percentage}" />
-                                </p:column>-->
-                            </p:dataTable>
-
-                        </h:panelGrid>
-                    </p:tab>
+                    
                 </p:accordionPanel>
             </h:form>
         </h:panelGrid>

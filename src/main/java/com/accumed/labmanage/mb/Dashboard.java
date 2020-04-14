@@ -72,6 +72,9 @@ public class Dashboard implements Serializable {
 
     public List<com.accumed.pposervice.ws.GetAccuntTotalsVSLabsResponse.Return> getLabs() {
 
+        if(labs!= null && !labs.isEmpty()){
+            return labs;
+        }
         try { // Call Web Service Operation
             com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
 
@@ -218,9 +221,13 @@ public class Dashboard implements Serializable {
     public void setGender(String gender) {
         this.gender = gender;
     }
-
     
-    
-    
-    
+    public String getTitle(){
+        String sMonth="";
+        getLabs();
+        if(labs != null && !labs.isEmpty()){
+            sMonth = new java.text.DateFormatSymbols().getMonths()[labs.get(0).getMonth()-1];
+        }
+        return sMonth+" Details";
+    }
 }
