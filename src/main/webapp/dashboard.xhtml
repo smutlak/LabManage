@@ -68,7 +68,7 @@
                     <p:tab title="Lab Percentage">
                         <p:outputLabel value="#{dashboard.title}" style=" font-size: larger"></p:outputLabel>
                         <h:panelGrid columns="2">
-                            <p:pieChart id="myPie" model="#{dashboard.pieModel}" style="" />
+                            <p:pieChart id="myPie" model="#{dashboard.pieModel}" />
                             <p:dataTable var="lab" value="#{dashboard.labs}">
                                 <!--<p:column headerText="Month">
                                     <h:outputText value="#{lab.month}" />
@@ -108,7 +108,7 @@
                                         </h:panelGroup>
                                         <h:panelGroup>
                                             <h:outputLabel value="DOB" for="DOB"></h:outputLabel>
-                                            <p:datePicker id="DOB" showIcon="true" styleClass="inp"/>
+                                            <p:datePicker id="DOB" showIcon="true" styleClass="inp" value="#{dashboard.DOB}"/>
                                         </h:panelGroup>
                                         <h:panelGroup>
                                             <h:panelGrid columns="2">

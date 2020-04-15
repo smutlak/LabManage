@@ -40,11 +40,16 @@ public class Dashboard implements Serializable {
     private PPO_Service service;
     private List<com.accumed.pposervice.ws.GetAccuntTotalsVSLabsResponse.Return> labs;
     private PieChartModel pieModel;
+    
+    
+    
+    //Claim Validation
     private com.accumed.pposervice.ws.FindCptResponse.Return cptCode;
     private List<com.accumed.pposervice.ws.FindCptResponse.Return> selectedCpts;
     private com.accumed.pposervice.ws.FindIcdResponse.Return icdCode;
     private List<com.accumed.pposervice.ws.FindIcdResponse.Return> selectedIcds;
     private String gender = "1";
+    private String DOB;
 
     /**
      * Creates a new instance of AccountInit
@@ -259,4 +264,14 @@ public class Dashboard implements Serializable {
         d = new Double(i) / new Double(100);
         return d + "%";
     }
+
+    public String getDOB() {
+        return DOB;
+    }
+
+    public void setDOB(String DOB) {
+        this.DOB = DOB;
+    }
+    
+    
 }
