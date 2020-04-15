@@ -152,6 +152,10 @@
 </xs:complexType>
 </xs:element>
 
+<xs:element name="ValidateClaim" type="tns:ValidateClaim"/>
+
+<xs:element name="ValidateClaimResponse" type="tns:ValidateClaimResponse"/>
+
 <xs:element name="cpt" nillable="true" type="xs:anyType"/>
 
 <xs:element name="downloadClaimSubmissionFile" type="tns:downloadClaimSubmissionFile"/>
@@ -534,6 +538,1785 @@
 <xs:complexType name="signUpResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:long" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ValidateClaim">
+<xs:sequence>
+<xs:element name="request" type="tns:scrubScrubbingRequest" minOccurs="0"/>
+<xs:element name="user" type="xs:string" minOccurs="0"/>
+<xs:element name="psw" type="xs:string" minOccurs="0"/>
+<xs:element name="debug" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequest">
+<xs:sequence>
+<xs:element name="callingApp" type="xs:string" minOccurs="0"/>
+<xs:element name="callingAppVersion" type="xs:string" minOccurs="0"/>
+<xs:element name="callingServer" type="xs:string" minOccurs="0"/>
+<xs:element name="claim" type="tns:scrubScrubbingRequestClaim" minOccurs="0"/>
+<xs:element name="excludeDBRules" type="xs:boolean" minOccurs="0"/>
+<xs:element name="header" type="tns:scrubScrubbingRequestHeader" minOccurs="0"/>
+<xs:element name="outcome" type="tns:scrubScrubbingRequestOutcome" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="sender" type="xs:string" minOccurs="0"/>
+<xs:element name="top20" type="xs:int" minOccurs="0"/>
+<xs:element name="userID" type="xs:int"/>
+<xs:element name="userName" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaim">
+<xs:sequence>
+<xs:element name="activity" type="tns:scrubScrubbingRequestClaimActivity" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="claimType" type="tns:scrubScrubbingRequestClaimClaimType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="contract" type="tns:scrubScrubbingRequestClaimContract" minOccurs="0"/>
+<xs:element name="dateSettlement" type="xs:string" minOccurs="0"/>
+<xs:element name="denialCode" type="xs:string" minOccurs="0"/>
+<xs:element name="diagnosis" type="tns:scrubScrubbingRequestClaimDiagnosis" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="emiratesIDNumber" type="xs:string" minOccurs="0"/>
+<xs:element name="encounter" type="tns:scrubScrubbingRequestClaimEncounter" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="FClaim" type="tns:scrubScrubbingRequestClaimFClaim" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="fileAttached" type="xs:boolean" minOccurs="0"/>
+<xs:element name="gross" type="xs:float"/>
+<xs:element name="ID" type="xs:int"/>
+<xs:element name="IDPayer" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="imported" type="xs:boolean" minOccurs="0"/>
+<xs:element name="memberID" type="xs:string" minOccurs="0"/>
+<xs:element name="net" type="xs:float"/>
+<xs:element name="outcome" type="tns:scrubScrubbingRequestClaimOutcome" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="patient" type="tns:scrubScrubbingRequestClaimPatient" minOccurs="0"/>
+<xs:element name="patientShare" type="xs:float"/>
+<xs:element name="payerID" type="xs:string" minOccurs="0"/>
+<xs:element name="paymentReference" type="xs:string" minOccurs="0"/>
+<xs:element name="pending" type="xs:boolean" minOccurs="0"/>
+<xs:element name="providerID" type="xs:string" minOccurs="0"/>
+<xs:element name="providerInvoiceAmount" type="xs:float"/>
+<xs:element name="RClaim" type="tns:scrubScrubbingRequestClaimRClaim" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="regulatorMemberInfo" type="tns:scrubScrubbingRequestClaimRegulatorMemberInfo" minOccurs="0"/>
+<xs:element name="resubmission" type="tns:scrubScrubbingRequestClaimResubmission" minOccurs="0"/>
+<xs:element name="status" type="xs:string" minOccurs="0"/>
+<xs:element name="XClaim" type="tns:scrubScrubbingRequestClaimXClaim" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimActivity">
+<xs:sequence>
+<xs:element name="clinician" type="xs:string" minOccurs="0"/>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="copayment" type="xs:float"/>
+<xs:element name="deductible" type="xs:float"/>
+<xs:element name="denialCode" type="xs:string" minOccurs="0"/>
+<xs:element name="gross" type="xs:float"/>
+<xs:element name="ID" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="list" type="xs:float"/>
+<xs:element name="manualPrices" type="xs:boolean" minOccurs="0"/>
+<xs:element name="net" type="xs:float"/>
+<xs:element name="observation" type="tns:scrubScrubbingRequestClaimActivityObservation" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="orderingClinician" type="xs:string" minOccurs="0"/>
+<xs:element name="outcome" type="tns:scrubScrubbingRequestClaimActivityOutcome" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="patientShare" type="xs:float"/>
+<xs:element name="paymentAmount" type="xs:float"/>
+<xs:element name="priorAuthorizationID" type="xs:string" minOccurs="0"/>
+<xs:element name="providerCode" type="xs:string" minOccurs="0"/>
+<xs:element name="providerNet" type="xs:float"/>
+<xs:element name="providerPatientShare" type="xs:float"/>
+<xs:element name="providerType" type="xs:int" minOccurs="0"/>
+<xs:element name="quantity" type="xs:float"/>
+<xs:element name="start" type="xs:string" minOccurs="0"/>
+<xs:element name="sysList" type="xs:float"/>
+<xs:element name="sysNet" type="xs:float"/>
+<xs:element name="type" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimActivityObservation">
+<xs:sequence>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="outcome" type="tns:scrubScrubbingRequestClaimActivityObservationOutcome" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+<xs:element name="value" type="xs:string" minOccurs="0"/>
+<xs:element name="valueType" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimActivityObservationOutcome">
+<xs:sequence>
+<xs:element name="categories" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="longMsg" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleID" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleName" type="xs:string" minOccurs="0"/>
+<xs:element name="severity" type="xs:string" minOccurs="0"/>
+<xs:element name="shortMsg" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimActivityOutcome">
+<xs:sequence>
+<xs:element name="categories" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="longMsg" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleID" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleName" type="xs:string" minOccurs="0"/>
+<xs:element name="severity" type="xs:string" minOccurs="0"/>
+<xs:element name="shortMsg" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimClaimType">
+<xs:sequence>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimContract">
+<xs:sequence>
+<xs:element name="network" type="xs:string" minOccurs="0"/>
+<xs:element name="outcome" type="tns:scrubScrubbingRequestClaimContractOutcome" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="packageName" type="xs:string" minOccurs="0"/>
+<xs:element name="policy" type="xs:string" minOccurs="0"/>
+<xs:element name="subNetworkName" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimContractOutcome">
+<xs:sequence>
+<xs:element name="categories" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="longMsg" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleID" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleName" type="xs:string" minOccurs="0"/>
+<xs:element name="severity" type="xs:string" minOccurs="0"/>
+<xs:element name="shortMsg" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimDiagnosis">
+<xs:sequence>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="dxInfo" type="tns:scrubScrubbingRequestClaimDiagnosisDxInfo" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="outcome" type="tns:scrubScrubbingRequestClaimDiagnosisOutcome" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="providerCode" type="xs:string" minOccurs="0"/>
+<xs:element name="providerType" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimDiagnosisDxInfo">
+<xs:sequence>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="outcome" type="tns:scrubScrubbingRequestClaimDiagnosisDxInfoOutcome" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="type" type="tns:dxInfoType" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimDiagnosisDxInfoOutcome">
+<xs:sequence>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="longMsg" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleID" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleName" type="xs:string" minOccurs="0"/>
+<xs:element name="severity" type="xs:string" minOccurs="0"/>
+<xs:element name="shortMsg" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dxInfoType">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimDiagnosisOutcome">
+<xs:sequence>
+<xs:element name="categories" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="longMsg" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleID" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleName" type="xs:string" minOccurs="0"/>
+<xs:element name="severity" type="xs:string" minOccurs="0"/>
+<xs:element name="shortMsg" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimEncounter">
+<xs:sequence>
+<xs:element name="authorisation" type="tns:scrubScrubbingRequestClaimEncounterAuthorisation" minOccurs="0"/>
+<xs:element name="end" type="xs:string" minOccurs="0"/>
+<xs:element name="endType" type="xs:int" minOccurs="0"/>
+<xs:element name="facilityID" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="newPatient" type="xs:int" minOccurs="0"/>
+<xs:element name="orderingClinician" type="xs:string" minOccurs="0"/>
+<xs:element name="outcome" type="tns:scrubScrubbingRequestClaimEncounterOutcome" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="patientID" type="xs:string" minOccurs="0"/>
+<xs:element name="start" type="xs:string" minOccurs="0"/>
+<xs:element name="startType" type="xs:int" minOccurs="0"/>
+<xs:element name="transferDestination" type="xs:string" minOccurs="0"/>
+<xs:element name="transferSource" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimEncounterAuthorisation">
+<xs:sequence>
+<xs:element name="end" type="xs:string" minOccurs="0"/>
+<xs:element name="outcome" type="tns:scrubScrubbingRequestClaimEncounterAuthorisationOutcome" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="start" type="xs:string" minOccurs="0"/>
+<xs:element name="verbal" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimEncounterAuthorisationOutcome">
+<xs:sequence>
+<xs:element name="categories" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="longMsg" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleID" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleName" type="xs:string" minOccurs="0"/>
+<xs:element name="severity" type="xs:string" minOccurs="0"/>
+<xs:element name="shortMsg" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimEncounterOutcome">
+<xs:sequence>
+<xs:element name="categories" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="longMsg" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleID" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleName" type="xs:string" minOccurs="0"/>
+<xs:element name="severity" type="xs:string" minOccurs="0"/>
+<xs:element name="shortMsg" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimFClaim">
+<xs:sequence>
+<xs:element name="dateSettlement" type="xs:string" minOccurs="0"/>
+<xs:element name="denialCode" type="xs:string" minOccurs="0"/>
+<xs:element name="emiratesIDNumber" type="xs:string" minOccurs="0"/>
+<xs:element name="FActivity" type="tns:scrubScrubbingRequestClaimFClaimFActivity" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="FClaimType" type="tns:scrubScrubbingRequestClaimFClaimFClaimType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="FContract" type="tns:scrubScrubbingRequestClaimFClaimFContract" minOccurs="0"/>
+<xs:element name="FDiagnosis" type="tns:scrubScrubbingRequestClaimFClaimFDiagnosis" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="FEncounter" type="tns:scrubScrubbingRequestClaimFClaimFEncounter" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="FResubmission" type="tns:scrubScrubbingRequestClaimFClaimFResubmission" minOccurs="0"/>
+<xs:element name="gross" type="xs:float"/>
+<xs:element name="ID" type="xs:int"/>
+<xs:element name="IDPayer" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="imported" type="xs:boolean" minOccurs="0"/>
+<xs:element name="memberID" type="xs:string" minOccurs="0"/>
+<xs:element name="net" type="xs:float"/>
+<xs:element name="patientShare" type="xs:float"/>
+<xs:element name="payerID" type="xs:string" minOccurs="0"/>
+<xs:element name="paymentReference" type="xs:string" minOccurs="0"/>
+<xs:element name="pending" type="xs:boolean" minOccurs="0"/>
+<xs:element name="providerID" type="xs:string" minOccurs="0"/>
+<xs:element name="providerInvoiceAmount" type="xs:float"/>
+<xs:element name="receiverID" type="xs:string" minOccurs="0"/>
+<xs:element name="status" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimFClaimFActivity">
+<xs:sequence>
+<xs:element name="clinician" type="xs:string" minOccurs="0"/>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="copayment" type="xs:float"/>
+<xs:element name="deductible" type="xs:float"/>
+<xs:element name="denialCode" type="xs:string" minOccurs="0"/>
+<xs:element name="FObservation" type="tns:scrubScrubbingRequestClaimFClaimFActivityFObservation" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="gross" type="xs:float"/>
+<xs:element name="ID" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="list" type="xs:float"/>
+<xs:element name="manualPrices" type="xs:boolean" minOccurs="0"/>
+<xs:element name="net" type="xs:float"/>
+<xs:element name="orderingClinician" type="xs:string" minOccurs="0"/>
+<xs:element name="patientShare" type="xs:float"/>
+<xs:element name="paymentAmount" type="xs:float"/>
+<xs:element name="priorAuthorizationID" type="xs:string" minOccurs="0"/>
+<xs:element name="providerCode" type="xs:string" minOccurs="0"/>
+<xs:element name="providerNet" type="xs:float"/>
+<xs:element name="providerPatientShare" type="xs:float"/>
+<xs:element name="providerType" type="xs:int" minOccurs="0"/>
+<xs:element name="quantity" type="xs:float"/>
+<xs:element name="start" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimFClaimFActivityFObservation">
+<xs:sequence>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+<xs:element name="value" type="xs:string" minOccurs="0"/>
+<xs:element name="valueType" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimFClaimFClaimType">
+<xs:sequence>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimFClaimFContract">
+<xs:sequence>
+<xs:element name="network" type="xs:string" minOccurs="0"/>
+<xs:element name="packageName" type="xs:string" minOccurs="0"/>
+<xs:element name="policy" type="xs:string" minOccurs="0"/>
+<xs:element name="subNetworkName" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimFClaimFDiagnosis">
+<xs:sequence>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="FDxInfo" type="tns:scrubScrubbingRequestClaimFClaimFDiagnosisFDxInfo" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="providerCode" type="xs:string" minOccurs="0"/>
+<xs:element name="providerType" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimFClaimFDiagnosisFDxInfo">
+<xs:sequence>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="tns:dxInfoType" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimFClaimFEncounter">
+<xs:sequence>
+<xs:element name="end" type="xs:string" minOccurs="0"/>
+<xs:element name="endType" type="xs:int" minOccurs="0"/>
+<xs:element name="FAuthorisation" type="tns:scrubScrubbingRequestClaimFClaimFEncounterFAuthorisation" minOccurs="0"/>
+<xs:element name="facilityID" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="newPatient" type="xs:int" minOccurs="0"/>
+<xs:element name="orderingClinician" type="xs:string" minOccurs="0"/>
+<xs:element name="patientID" type="xs:string" minOccurs="0"/>
+<xs:element name="start" type="xs:string" minOccurs="0"/>
+<xs:element name="startType" type="xs:int" minOccurs="0"/>
+<xs:element name="transferDestination" type="xs:string" minOccurs="0"/>
+<xs:element name="transferSource" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimFClaimFEncounterFAuthorisation">
+<xs:sequence>
+<xs:element name="end" type="xs:string" minOccurs="0"/>
+<xs:element name="start" type="xs:string" minOccurs="0"/>
+<xs:element name="verbal" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimFClaimFResubmission">
+<xs:sequence>
+<xs:element name="attachment" type="xs:base64Binary" minOccurs="0"/>
+<xs:element name="comment" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimOutcome">
+<xs:sequence>
+<xs:element name="categories" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="longMsg" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleID" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleName" type="xs:string" minOccurs="0"/>
+<xs:element name="severity" type="xs:string" minOccurs="0"/>
+<xs:element name="shortMsg" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimPatient">
+<xs:sequence>
+<xs:element name="DATE_OF_BIRTH" type="xs:string" minOccurs="0"/>
+<xs:element name="DRIVING_LICENSE" type="xs:string" minOccurs="0"/>
+<xs:element name="EMIRATES_ID" type="xs:string" minOccurs="0"/>
+<xs:element name="EMIRATE_TYPES" type="xs:int"/>
+<xs:element name="GENDER_ID" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="MARTIAL_STATUS" type="xs:string" minOccurs="0"/>
+<xs:element name="NATIONALITY" type="xs:string" minOccurs="0"/>
+<xs:element name="outcome" type="tns:scrubScrubbingRequestClaimPatientOutcome" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="PASSPORT_ID" type="xs:string" minOccurs="0"/>
+<xs:element name="PATIENT_NAME" type="xs:string" minOccurs="0"/>
+<xs:element name="PATIENT_SURNAME" type="xs:string" minOccurs="0"/>
+<xs:element name="patientInsurance" type="tns:scrubScrubbingRequestClaimPatientPatientInsurance" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimPatientOutcome">
+<xs:sequence>
+<xs:element name="categories" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="longMsg" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleID" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleName" type="xs:string" minOccurs="0"/>
+<xs:element name="severity" type="xs:string" minOccurs="0"/>
+<xs:element name="shortMsg" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimPatientPatientInsurance">
+<xs:sequence>
+<xs:element name="ADMISSION_TYPE" type="xs:int"/>
+<xs:element name="coPayment" type="tns:scrubScrubbingRequestClaimPatientPatientInsuranceCoPayment" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="DENTAL" type="xs:int" minOccurs="0"/>
+<xs:element name="deductible" type="tns:scrubScrubbingRequestClaimPatientPatientInsuranceDeductible" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="END_DATE" type="xs:string" minOccurs="0"/>
+<xs:element name="GROSS_PREMIUM" type="xs:float"/>
+<xs:element name="INSURANCE_LISENCE" type="xs:string" minOccurs="0"/>
+<xs:element name="IS_EXPIRED" type="xs:int"/>
+<xs:element name="IS_PENDING" type="xs:int"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="MATERNITY" type="xs:int" minOccurs="0"/>
+<xs:element name="networkId" type="xs:int" minOccurs="0"/>
+<xs:element name="networkName" type="xs:string" minOccurs="0"/>
+<xs:element name="OPTICAL" type="xs:int" minOccurs="0"/>
+<xs:element name="outcome" type="tns:scrubScrubbingRequestClaimPatientPatientInsuranceOutcome" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="PACKAGE_NAME" type="xs:string" minOccurs="0"/>
+<xs:element name="PATIENT_INSURANCE_ID" type="xs:string" minOccurs="0"/>
+<xs:element name="POLICY_HOLDER_TYPE_ID" type="xs:string" minOccurs="0"/>
+<xs:element name="PRINCIPLE_INSURANCE_ID" type="xs:string" minOccurs="0"/>
+<xs:element name="PRINCIPLE_INSURANCE_NUMBER" type="xs:string" minOccurs="0"/>
+<xs:element name="planId" type="xs:int" minOccurs="0"/>
+<xs:element name="planName" type="xs:string" minOccurs="0"/>
+<xs:element name="policy_Number" type="xs:string" minOccurs="0"/>
+<xs:element name="RELATION_TO" type="xs:string" minOccurs="0"/>
+<xs:element name="RENEWAL_DATE" type="xs:string" minOccurs="0"/>
+<xs:element name="START_DATE" type="xs:string" minOccurs="0"/>
+<xs:element name="subNetworkId" type="xs:int" minOccurs="0"/>
+<xs:element name="subNetworkName" type="xs:string" minOccurs="0"/>
+<xs:element name="verified" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimPatientPatientInsuranceCoPayment">
+<xs:sequence>
+<xs:element name="ceiling" type="xs:double" minOccurs="0"/>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+<xs:element name="outNet" type="xs:int"/>
+<xs:element name="preAuth" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+<xs:element name="value" type="xs:double" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimPatientPatientInsuranceDeductible">
+<xs:sequence>
+<xs:element name="ceiling" type="xs:double" minOccurs="0"/>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+<xs:element name="outNet" type="xs:int"/>
+<xs:element name="preAuth" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+<xs:element name="value" type="xs:double" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimPatientPatientInsuranceOutcome">
+<xs:sequence>
+<xs:element name="categories" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="longMsg" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleID" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleName" type="xs:string" minOccurs="0"/>
+<xs:element name="severity" type="xs:string" minOccurs="0"/>
+<xs:element name="shortMsg" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimRClaim">
+<xs:sequence>
+<xs:element name="dateSettlement" type="xs:string" minOccurs="0"/>
+<xs:element name="denialCode" type="xs:string" minOccurs="0"/>
+<xs:element name="emiratesIDNumber" type="xs:string" minOccurs="0"/>
+<xs:element name="gross" type="xs:float"/>
+<xs:element name="ID" type="xs:int"/>
+<xs:element name="IDPayer" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="imported" type="xs:boolean" minOccurs="0"/>
+<xs:element name="memberID" type="xs:string" minOccurs="0"/>
+<xs:element name="net" type="xs:float"/>
+<xs:element name="patientShare" type="xs:float"/>
+<xs:element name="payerID" type="xs:string" minOccurs="0"/>
+<xs:element name="paymentReference" type="xs:string" minOccurs="0"/>
+<xs:element name="pending" type="xs:boolean" minOccurs="0"/>
+<xs:element name="providerID" type="xs:string" minOccurs="0"/>
+<xs:element name="providerInvoiceAmount" type="xs:float"/>
+<xs:element name="RActivity" type="tns:scrubScrubbingRequestClaimRClaimRActivity" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="RClaimType" type="tns:scrubScrubbingRequestClaimRClaimRClaimType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="RContract" type="tns:scrubScrubbingRequestClaimRClaimRContract" minOccurs="0"/>
+<xs:element name="RDiagnosis" type="tns:scrubScrubbingRequestClaimRClaimRDiagnosis" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="REncounter" type="tns:scrubScrubbingRequestClaimRClaimREncounter" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="RResubmission" type="tns:scrubScrubbingRequestClaimRClaimRResubmission" minOccurs="0"/>
+<xs:element name="receiverID" type="xs:string" minOccurs="0"/>
+<xs:element name="status" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimRClaimRActivity">
+<xs:sequence>
+<xs:element name="clinician" type="xs:string" minOccurs="0"/>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="copayment" type="xs:float"/>
+<xs:element name="deductible" type="xs:float"/>
+<xs:element name="denialCode" type="xs:string" minOccurs="0"/>
+<xs:element name="gross" type="xs:float"/>
+<xs:element name="ID" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="list" type="xs:float"/>
+<xs:element name="manualPrices" type="xs:boolean" minOccurs="0"/>
+<xs:element name="net" type="xs:float"/>
+<xs:element name="orderingClinician" type="xs:string" minOccurs="0"/>
+<xs:element name="patientShare" type="xs:float"/>
+<xs:element name="paymentAmount" type="xs:float"/>
+<xs:element name="priorAuthorizationID" type="xs:string" minOccurs="0"/>
+<xs:element name="providerCode" type="xs:string" minOccurs="0"/>
+<xs:element name="providerNet" type="xs:float"/>
+<xs:element name="providerPatientShare" type="xs:float"/>
+<xs:element name="providerType" type="xs:int" minOccurs="0"/>
+<xs:element name="quantity" type="xs:float"/>
+<xs:element name="RObservation" type="tns:scrubScrubbingRequestClaimRClaimRActivityRObservation" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="start" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimRClaimRActivityRObservation">
+<xs:sequence>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+<xs:element name="value" type="xs:string" minOccurs="0"/>
+<xs:element name="valueType" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimRClaimRClaimType">
+<xs:sequence>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimRClaimRContract">
+<xs:sequence>
+<xs:element name="network" type="xs:string" minOccurs="0"/>
+<xs:element name="packageName" type="xs:string" minOccurs="0"/>
+<xs:element name="policy" type="xs:string" minOccurs="0"/>
+<xs:element name="subNetworkName" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimRClaimRDiagnosis">
+<xs:sequence>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="providerCode" type="xs:string" minOccurs="0"/>
+<xs:element name="providerType" type="xs:string" minOccurs="0"/>
+<xs:element name="RDxInfo" type="tns:scrubScrubbingRequestClaimRClaimRDiagnosisRDxInfo" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimRClaimRDiagnosisRDxInfo">
+<xs:sequence>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="tns:dxInfoType" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimRClaimREncounter">
+<xs:sequence>
+<xs:element name="end" type="xs:string" minOccurs="0"/>
+<xs:element name="endType" type="xs:int" minOccurs="0"/>
+<xs:element name="facilityID" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="newPatient" type="xs:int" minOccurs="0"/>
+<xs:element name="orderingClinician" type="xs:string" minOccurs="0"/>
+<xs:element name="patientID" type="xs:string" minOccurs="0"/>
+<xs:element name="RAuthorisation" type="tns:scrubScrubbingRequestClaimRClaimREncounterRAuthorisation" minOccurs="0"/>
+<xs:element name="start" type="xs:string" minOccurs="0"/>
+<xs:element name="startType" type="xs:int" minOccurs="0"/>
+<xs:element name="transferDestination" type="xs:string" minOccurs="0"/>
+<xs:element name="transferSource" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimRClaimREncounterRAuthorisation">
+<xs:sequence>
+<xs:element name="end" type="xs:string" minOccurs="0"/>
+<xs:element name="start" type="xs:string" minOccurs="0"/>
+<xs:element name="verbal" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimRClaimRResubmission">
+<xs:sequence>
+<xs:element name="attachment" type="xs:base64Binary" minOccurs="0"/>
+<xs:element name="comment" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimRegulatorMemberInfo">
+<xs:sequence>
+<xs:element name="dateOfBirth" type="xs:string" minOccurs="0"/>
+<xs:element name="deletionDate" type="xs:string" minOccurs="0"/>
+<xs:element name="enrollmentDate" type="xs:string" minOccurs="0"/>
+<xs:element name="familyName" type="xs:string" minOccurs="0"/>
+<xs:element name="firstName" type="xs:string" minOccurs="0"/>
+<xs:element name="gender" type="xs:int"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="outcome" type="tns:scrubScrubbingRequestClaimRegulatorMemberInfoOutcome" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="payerID" type="xs:string" minOccurs="0"/>
+<xs:element name="payerName" type="xs:string" minOccurs="0"/>
+<xs:element name="policyID" type="xs:string" minOccurs="0"/>
+<xs:element name="referenceNumber" type="xs:string" minOccurs="0"/>
+<xs:element name="secondName" type="xs:string" minOccurs="0"/>
+<xs:element name="transactionDate" type="xs:string" minOccurs="0"/>
+<xs:element name="uidNumber" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimRegulatorMemberInfoOutcome">
+<xs:sequence>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="longMsg" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleID" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleName" type="xs:string" minOccurs="0"/>
+<xs:element name="severity" type="xs:string" minOccurs="0"/>
+<xs:element name="shortMsg" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimResubmission">
+<xs:sequence>
+<xs:element name="attachment" type="xs:base64Binary" minOccurs="0"/>
+<xs:element name="comment" type="xs:string" minOccurs="0"/>
+<xs:element name="outcome" type="tns:scrubScrubbingRequestClaimResubmissionOutcome" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimResubmissionOutcome">
+<xs:sequence>
+<xs:element name="categories" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="longMsg" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleID" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleName" type="xs:string" minOccurs="0"/>
+<xs:element name="severity" type="xs:string" minOccurs="0"/>
+<xs:element name="shortMsg" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimXClaim">
+<xs:sequence>
+<xs:element name="dateSettlement" type="xs:string" minOccurs="0"/>
+<xs:element name="denialCode" type="xs:string" minOccurs="0"/>
+<xs:element name="emiratesIDNumber" type="xs:string" minOccurs="0"/>
+<xs:element name="gross" type="xs:float"/>
+<xs:element name="ID" type="xs:int"/>
+<xs:element name="IDPayer" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="imported" type="xs:boolean" minOccurs="0"/>
+<xs:element name="memberID" type="xs:string" minOccurs="0"/>
+<xs:element name="net" type="xs:float"/>
+<xs:element name="patientShare" type="xs:float"/>
+<xs:element name="payerID" type="xs:string" minOccurs="0"/>
+<xs:element name="paymentReference" type="xs:string" minOccurs="0"/>
+<xs:element name="pending" type="xs:boolean" minOccurs="0"/>
+<xs:element name="providerID" type="xs:string" minOccurs="0"/>
+<xs:element name="providerInvoiceAmount" type="xs:float"/>
+<xs:element name="receiverID" type="xs:string" minOccurs="0"/>
+<xs:element name="status" type="xs:string" minOccurs="0"/>
+<xs:element name="XActivity" type="tns:scrubScrubbingRequestClaimXClaimXActivity" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="XClaimType" type="tns:scrubScrubbingRequestClaimXClaimXClaimType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="XContract" type="tns:scrubScrubbingRequestClaimXClaimXContract" minOccurs="0"/>
+<xs:element name="XDiagnosis" type="tns:scrubScrubbingRequestClaimXClaimXDiagnosis" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="XEncounter" type="tns:scrubScrubbingRequestClaimXClaimXEncounter" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="XResubmission" type="tns:scrubScrubbingRequestClaimXClaimXResubmission" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimXClaimXActivity">
+<xs:sequence>
+<xs:element name="clinician" type="xs:string" minOccurs="0"/>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="copayment" type="xs:float"/>
+<xs:element name="deductible" type="xs:float"/>
+<xs:element name="denialCode" type="xs:string" minOccurs="0"/>
+<xs:element name="gross" type="xs:float"/>
+<xs:element name="ID" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="list" type="xs:float"/>
+<xs:element name="manualPrices" type="xs:boolean" minOccurs="0"/>
+<xs:element name="net" type="xs:float"/>
+<xs:element name="orderingClinician" type="xs:string" minOccurs="0"/>
+<xs:element name="patientShare" type="xs:float"/>
+<xs:element name="paymentAmount" type="xs:float"/>
+<xs:element name="priorAuthorizationID" type="xs:string" minOccurs="0"/>
+<xs:element name="providerCode" type="xs:string" minOccurs="0"/>
+<xs:element name="providerNet" type="xs:float"/>
+<xs:element name="providerPatientShare" type="xs:float"/>
+<xs:element name="providerType" type="xs:int" minOccurs="0"/>
+<xs:element name="quantity" type="xs:float"/>
+<xs:element name="start" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:int"/>
+<xs:element name="XObservation" type="tns:scrubScrubbingRequestClaimXClaimXActivityXObservation" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimXClaimXActivityXObservation">
+<xs:sequence>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+<xs:element name="value" type="xs:string" minOccurs="0"/>
+<xs:element name="valueType" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimXClaimXClaimType">
+<xs:sequence>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimXClaimXContract">
+<xs:sequence>
+<xs:element name="network" type="xs:string" minOccurs="0"/>
+<xs:element name="packageName" type="xs:string" minOccurs="0"/>
+<xs:element name="policy" type="xs:string" minOccurs="0"/>
+<xs:element name="subNetworkName" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimXClaimXDiagnosis">
+<xs:sequence>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="providerCode" type="xs:string" minOccurs="0"/>
+<xs:element name="providerType" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+<xs:element name="XDxInfo" type="tns:scrubScrubbingRequestClaimXClaimXDiagnosisXDxInfo" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimXClaimXDiagnosisXDxInfo">
+<xs:sequence>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="tns:dxInfoType" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimXClaimXEncounter">
+<xs:sequence>
+<xs:element name="end" type="xs:string" minOccurs="0"/>
+<xs:element name="endType" type="xs:int" minOccurs="0"/>
+<xs:element name="facilityID" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="newPatient" type="xs:int" minOccurs="0"/>
+<xs:element name="orderingClinician" type="xs:string" minOccurs="0"/>
+<xs:element name="patientID" type="xs:string" minOccurs="0"/>
+<xs:element name="start" type="xs:string" minOccurs="0"/>
+<xs:element name="startType" type="xs:int" minOccurs="0"/>
+<xs:element name="transferDestination" type="xs:string" minOccurs="0"/>
+<xs:element name="transferSource" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:int"/>
+<xs:element name="XAuthorisation" type="tns:scrubScrubbingRequestClaimXClaimXEncounterXAuthorisation" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimXClaimXEncounterXAuthorisation">
+<xs:sequence>
+<xs:element name="end" type="xs:string" minOccurs="0"/>
+<xs:element name="start" type="xs:string" minOccurs="0"/>
+<xs:element name="verbal" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestClaimXClaimXResubmission">
+<xs:sequence>
+<xs:element name="attachment" type="xs:base64Binary" minOccurs="0"/>
+<xs:element name="comment" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestHeader">
+<xs:sequence>
+<xs:element name="extendedValidationType" type="tns:scrubScrubbingRequestHeaderExtendedValidationType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="outcome" type="tns:scrubScrubbingRequestHeaderOutcome" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="receiverID" type="xs:string" minOccurs="0"/>
+<xs:element name="workflow" type="tns:scrubScrubbingRequestHeaderWorkflow" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestHeaderExtendedValidationType">
+<xs:sequence>
+<xs:element name="outcome" type="tns:scrubScrubbingRequestHeaderExtendedValidationTypeOutcome" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestHeaderExtendedValidationTypeOutcome">
+<xs:sequence>
+<xs:element name="categories" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="longMsg" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleID" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleName" type="xs:string" minOccurs="0"/>
+<xs:element name="severity" type="xs:string" minOccurs="0"/>
+<xs:element name="shortMsg" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestHeaderOutcome">
+<xs:sequence>
+<xs:element name="categories" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="longMsg" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleID" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleName" type="xs:string" minOccurs="0"/>
+<xs:element name="severity" type="xs:string" minOccurs="0"/>
+<xs:element name="shortMsg" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestHeaderWorkflow">
+<xs:sequence>
+<xs:element name="action" type="xs:string" minOccurs="0"/>
+<xs:element name="actionThreshold" type="xs:string" minOccurs="0"/>
+<xs:element name="conditionalWorkflowNextNode" type="xs:string" minOccurs="0"/>
+<xs:element name="currentNode" type="xs:string" minOccurs="0"/>
+<xs:element name="outcome" type="tns:scrubScrubbingRequestHeaderWorkflowOutcome" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="routingRule" type="xs:string" minOccurs="0"/>
+<xs:element name="workflowNextNode" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestHeaderWorkflowOutcome">
+<xs:sequence>
+<xs:element name="categories" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="longMsg" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleID" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleName" type="xs:string" minOccurs="0"/>
+<xs:element name="severity" type="xs:string" minOccurs="0"/>
+<xs:element name="shortMsg" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubScrubbingRequestOutcome">
+<xs:sequence>
+<xs:element name="categories" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="longMsg" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleID" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleName" type="xs:string" minOccurs="0"/>
+<xs:element name="severity" type="xs:string" minOccurs="0"/>
+<xs:element name="shortMsg" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ValidateClaimResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:scrubResponseReturn" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturn">
+<xs:sequence>
+<xs:element name="callingApp" type="xs:string" minOccurs="0"/>
+<xs:element name="callingAppVersion" type="xs:string" minOccurs="0"/>
+<xs:element name="callingServer" type="xs:string" minOccurs="0"/>
+<xs:element name="claim" type="tns:scrubResponseReturnClaim" minOccurs="0"/>
+<xs:element name="excludeDBRules" type="xs:boolean" minOccurs="0"/>
+<xs:element name="header" type="tns:scrubResponseReturnHeader" minOccurs="0"/>
+<xs:element name="outcome" type="tns:scrubResponseReturnOutcome" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="sender" type="xs:string" minOccurs="0"/>
+<xs:element name="top20" type="xs:int" minOccurs="0"/>
+<xs:element name="userID" type="xs:int"/>
+<xs:element name="userName" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaim">
+<xs:sequence>
+<xs:element name="activity" type="tns:scrubResponseReturnClaimActivity" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="claimType" type="tns:scrubResponseReturnClaimClaimType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="contract" type="tns:scrubResponseReturnClaimContract" minOccurs="0"/>
+<xs:element name="dateSettlement" type="xs:string" minOccurs="0"/>
+<xs:element name="denialCode" type="xs:string" minOccurs="0"/>
+<xs:element name="diagnosis" type="tns:scrubResponseReturnClaimDiagnosis" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="emiratesIDNumber" type="xs:string" minOccurs="0"/>
+<xs:element name="encounter" type="tns:scrubResponseReturnClaimEncounter" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="FClaim" type="tns:scrubResponseReturnClaimFClaim" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="fileAttached" type="xs:boolean" minOccurs="0"/>
+<xs:element name="gross" type="xs:float"/>
+<xs:element name="ID" type="xs:int"/>
+<xs:element name="IDPayer" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="imported" type="xs:boolean" minOccurs="0"/>
+<xs:element name="memberID" type="xs:string" minOccurs="0"/>
+<xs:element name="net" type="xs:float"/>
+<xs:element name="outcome" type="tns:scrubResponseReturnClaimOutcome" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="patient" type="tns:scrubResponseReturnClaimPatient" minOccurs="0"/>
+<xs:element name="patientShare" type="xs:float"/>
+<xs:element name="payerID" type="xs:string" minOccurs="0"/>
+<xs:element name="paymentReference" type="xs:string" minOccurs="0"/>
+<xs:element name="pending" type="xs:boolean" minOccurs="0"/>
+<xs:element name="providerID" type="xs:string" minOccurs="0"/>
+<xs:element name="providerInvoiceAmount" type="xs:float"/>
+<xs:element name="RClaim" type="tns:scrubResponseReturnClaimRClaim" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="regulatorMemberInfo" type="tns:scrubResponseReturnClaimRegulatorMemberInfo" minOccurs="0"/>
+<xs:element name="resubmission" type="tns:scrubResponseReturnClaimResubmission" minOccurs="0"/>
+<xs:element name="status" type="xs:string" minOccurs="0"/>
+<xs:element name="XClaim" type="tns:scrubResponseReturnClaimXClaim" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimActivity">
+<xs:sequence>
+<xs:element name="clinician" type="xs:string" minOccurs="0"/>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="copayment" type="xs:float"/>
+<xs:element name="deductible" type="xs:float"/>
+<xs:element name="denialCode" type="xs:string" minOccurs="0"/>
+<xs:element name="gross" type="xs:float"/>
+<xs:element name="ID" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="list" type="xs:float"/>
+<xs:element name="manualPrices" type="xs:boolean" minOccurs="0"/>
+<xs:element name="net" type="xs:float"/>
+<xs:element name="observation" type="tns:scrubResponseReturnClaimActivityObservation" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="orderingClinician" type="xs:string" minOccurs="0"/>
+<xs:element name="outcome" type="tns:scrubResponseReturnClaimActivityOutcome" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="patientShare" type="xs:float"/>
+<xs:element name="paymentAmount" type="xs:float"/>
+<xs:element name="priorAuthorizationID" type="xs:string" minOccurs="0"/>
+<xs:element name="providerCode" type="xs:string" minOccurs="0"/>
+<xs:element name="providerNet" type="xs:float"/>
+<xs:element name="providerPatientShare" type="xs:float"/>
+<xs:element name="providerType" type="xs:int" minOccurs="0"/>
+<xs:element name="quantity" type="xs:float"/>
+<xs:element name="start" type="xs:string" minOccurs="0"/>
+<xs:element name="sysList" type="xs:float"/>
+<xs:element name="sysNet" type="xs:float"/>
+<xs:element name="type" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimActivityObservation">
+<xs:sequence>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="outcome" type="tns:scrubResponseReturnClaimActivityObservationOutcome" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+<xs:element name="value" type="xs:string" minOccurs="0"/>
+<xs:element name="valueType" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimActivityObservationOutcome">
+<xs:sequence>
+<xs:element name="categories" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="longMsg" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleID" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleName" type="xs:string" minOccurs="0"/>
+<xs:element name="severity" type="xs:string" minOccurs="0"/>
+<xs:element name="shortMsg" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimActivityOutcome">
+<xs:sequence>
+<xs:element name="categories" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="longMsg" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleID" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleName" type="xs:string" minOccurs="0"/>
+<xs:element name="severity" type="xs:string" minOccurs="0"/>
+<xs:element name="shortMsg" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimClaimType">
+<xs:sequence>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimContract">
+<xs:sequence>
+<xs:element name="network" type="xs:string" minOccurs="0"/>
+<xs:element name="outcome" type="tns:scrubResponseReturnClaimContractOutcome" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="packageName" type="xs:string" minOccurs="0"/>
+<xs:element name="policy" type="xs:string" minOccurs="0"/>
+<xs:element name="subNetworkName" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimContractOutcome">
+<xs:sequence>
+<xs:element name="categories" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="longMsg" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleID" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleName" type="xs:string" minOccurs="0"/>
+<xs:element name="severity" type="xs:string" minOccurs="0"/>
+<xs:element name="shortMsg" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimDiagnosis">
+<xs:sequence>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="dxInfo" type="tns:scrubResponseReturnClaimDiagnosisDxInfo" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="outcome" type="tns:scrubResponseReturnClaimDiagnosisOutcome" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="providerCode" type="xs:string" minOccurs="0"/>
+<xs:element name="providerType" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimDiagnosisDxInfo">
+<xs:sequence>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="outcome" type="tns:scrubResponseReturnClaimDiagnosisDxInfoOutcome" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="type" type="tns:dxInfoType" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimDiagnosisDxInfoOutcome">
+<xs:sequence>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="longMsg" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleID" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleName" type="xs:string" minOccurs="0"/>
+<xs:element name="severity" type="xs:string" minOccurs="0"/>
+<xs:element name="shortMsg" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimDiagnosisOutcome">
+<xs:sequence>
+<xs:element name="categories" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="longMsg" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleID" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleName" type="xs:string" minOccurs="0"/>
+<xs:element name="severity" type="xs:string" minOccurs="0"/>
+<xs:element name="shortMsg" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimEncounter">
+<xs:sequence>
+<xs:element name="authorisation" type="tns:scrubResponseReturnClaimEncounterAuthorisation" minOccurs="0"/>
+<xs:element name="end" type="xs:string" minOccurs="0"/>
+<xs:element name="endType" type="xs:int" minOccurs="0"/>
+<xs:element name="facilityID" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="newPatient" type="xs:int" minOccurs="0"/>
+<xs:element name="orderingClinician" type="xs:string" minOccurs="0"/>
+<xs:element name="outcome" type="tns:scrubResponseReturnClaimEncounterOutcome" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="patientID" type="xs:string" minOccurs="0"/>
+<xs:element name="start" type="xs:string" minOccurs="0"/>
+<xs:element name="startType" type="xs:int" minOccurs="0"/>
+<xs:element name="transferDestination" type="xs:string" minOccurs="0"/>
+<xs:element name="transferSource" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimEncounterAuthorisation">
+<xs:sequence>
+<xs:element name="end" type="xs:string" minOccurs="0"/>
+<xs:element name="outcome" type="tns:scrubResponseReturnClaimEncounterAuthorisationOutcome" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="start" type="xs:string" minOccurs="0"/>
+<xs:element name="verbal" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimEncounterAuthorisationOutcome">
+<xs:sequence>
+<xs:element name="categories" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="longMsg" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleID" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleName" type="xs:string" minOccurs="0"/>
+<xs:element name="severity" type="xs:string" minOccurs="0"/>
+<xs:element name="shortMsg" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimEncounterOutcome">
+<xs:sequence>
+<xs:element name="categories" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="longMsg" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleID" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleName" type="xs:string" minOccurs="0"/>
+<xs:element name="severity" type="xs:string" minOccurs="0"/>
+<xs:element name="shortMsg" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimFClaim">
+<xs:sequence>
+<xs:element name="dateSettlement" type="xs:string" minOccurs="0"/>
+<xs:element name="denialCode" type="xs:string" minOccurs="0"/>
+<xs:element name="emiratesIDNumber" type="xs:string" minOccurs="0"/>
+<xs:element name="FActivity" type="tns:scrubResponseReturnClaimFClaimFActivity" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="FClaimType" type="tns:scrubResponseReturnClaimFClaimFClaimType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="FContract" type="tns:scrubResponseReturnClaimFClaimFContract" minOccurs="0"/>
+<xs:element name="FDiagnosis" type="tns:scrubResponseReturnClaimFClaimFDiagnosis" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="FEncounter" type="tns:scrubResponseReturnClaimFClaimFEncounter" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="FResubmission" type="tns:scrubResponseReturnClaimFClaimFResubmission" minOccurs="0"/>
+<xs:element name="gross" type="xs:float"/>
+<xs:element name="ID" type="xs:int"/>
+<xs:element name="IDPayer" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="imported" type="xs:boolean" minOccurs="0"/>
+<xs:element name="memberID" type="xs:string" minOccurs="0"/>
+<xs:element name="net" type="xs:float"/>
+<xs:element name="patientShare" type="xs:float"/>
+<xs:element name="payerID" type="xs:string" minOccurs="0"/>
+<xs:element name="paymentReference" type="xs:string" minOccurs="0"/>
+<xs:element name="pending" type="xs:boolean" minOccurs="0"/>
+<xs:element name="providerID" type="xs:string" minOccurs="0"/>
+<xs:element name="providerInvoiceAmount" type="xs:float"/>
+<xs:element name="receiverID" type="xs:string" minOccurs="0"/>
+<xs:element name="status" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimFClaimFActivity">
+<xs:sequence>
+<xs:element name="clinician" type="xs:string" minOccurs="0"/>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="copayment" type="xs:float"/>
+<xs:element name="deductible" type="xs:float"/>
+<xs:element name="denialCode" type="xs:string" minOccurs="0"/>
+<xs:element name="FObservation" type="tns:scrubResponseReturnClaimFClaimFActivityFObservation" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="gross" type="xs:float"/>
+<xs:element name="ID" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="list" type="xs:float"/>
+<xs:element name="manualPrices" type="xs:boolean" minOccurs="0"/>
+<xs:element name="net" type="xs:float"/>
+<xs:element name="orderingClinician" type="xs:string" minOccurs="0"/>
+<xs:element name="patientShare" type="xs:float"/>
+<xs:element name="paymentAmount" type="xs:float"/>
+<xs:element name="priorAuthorizationID" type="xs:string" minOccurs="0"/>
+<xs:element name="providerCode" type="xs:string" minOccurs="0"/>
+<xs:element name="providerNet" type="xs:float"/>
+<xs:element name="providerPatientShare" type="xs:float"/>
+<xs:element name="providerType" type="xs:int" minOccurs="0"/>
+<xs:element name="quantity" type="xs:float"/>
+<xs:element name="start" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimFClaimFActivityFObservation">
+<xs:sequence>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+<xs:element name="value" type="xs:string" minOccurs="0"/>
+<xs:element name="valueType" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimFClaimFClaimType">
+<xs:sequence>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimFClaimFContract">
+<xs:sequence>
+<xs:element name="network" type="xs:string" minOccurs="0"/>
+<xs:element name="packageName" type="xs:string" minOccurs="0"/>
+<xs:element name="policy" type="xs:string" minOccurs="0"/>
+<xs:element name="subNetworkName" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimFClaimFDiagnosis">
+<xs:sequence>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="FDxInfo" type="tns:scrubResponseReturnClaimFClaimFDiagnosisFDxInfo" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="providerCode" type="xs:string" minOccurs="0"/>
+<xs:element name="providerType" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimFClaimFDiagnosisFDxInfo">
+<xs:sequence>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="tns:dxInfoType" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimFClaimFEncounter">
+<xs:sequence>
+<xs:element name="end" type="xs:string" minOccurs="0"/>
+<xs:element name="endType" type="xs:int" minOccurs="0"/>
+<xs:element name="FAuthorisation" type="tns:scrubResponseReturnClaimFClaimFEncounterFAuthorisation" minOccurs="0"/>
+<xs:element name="facilityID" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="newPatient" type="xs:int" minOccurs="0"/>
+<xs:element name="orderingClinician" type="xs:string" minOccurs="0"/>
+<xs:element name="patientID" type="xs:string" minOccurs="0"/>
+<xs:element name="start" type="xs:string" minOccurs="0"/>
+<xs:element name="startType" type="xs:int" minOccurs="0"/>
+<xs:element name="transferDestination" type="xs:string" minOccurs="0"/>
+<xs:element name="transferSource" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimFClaimFEncounterFAuthorisation">
+<xs:sequence>
+<xs:element name="end" type="xs:string" minOccurs="0"/>
+<xs:element name="start" type="xs:string" minOccurs="0"/>
+<xs:element name="verbal" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimFClaimFResubmission">
+<xs:sequence>
+<xs:element name="attachment" type="xs:base64Binary" minOccurs="0"/>
+<xs:element name="comment" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimOutcome">
+<xs:sequence>
+<xs:element name="categories" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="longMsg" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleID" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleName" type="xs:string" minOccurs="0"/>
+<xs:element name="severity" type="xs:string" minOccurs="0"/>
+<xs:element name="shortMsg" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimPatient">
+<xs:sequence>
+<xs:element name="DATE_OF_BIRTH" type="xs:string" minOccurs="0"/>
+<xs:element name="DRIVING_LICENSE" type="xs:string" minOccurs="0"/>
+<xs:element name="EMIRATES_ID" type="xs:string" minOccurs="0"/>
+<xs:element name="EMIRATE_TYPES" type="xs:int"/>
+<xs:element name="GENDER_ID" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="MARTIAL_STATUS" type="xs:string" minOccurs="0"/>
+<xs:element name="NATIONALITY" type="xs:string" minOccurs="0"/>
+<xs:element name="outcome" type="tns:scrubResponseReturnClaimPatientOutcome" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="PASSPORT_ID" type="xs:string" minOccurs="0"/>
+<xs:element name="PATIENT_NAME" type="xs:string" minOccurs="0"/>
+<xs:element name="PATIENT_SURNAME" type="xs:string" minOccurs="0"/>
+<xs:element name="patientInsurance" type="tns:scrubResponseReturnClaimPatientPatientInsurance" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimPatientOutcome">
+<xs:sequence>
+<xs:element name="categories" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="longMsg" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleID" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleName" type="xs:string" minOccurs="0"/>
+<xs:element name="severity" type="xs:string" minOccurs="0"/>
+<xs:element name="shortMsg" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimPatientPatientInsurance">
+<xs:sequence>
+<xs:element name="ADMISSION_TYPE" type="xs:int"/>
+<xs:element name="coPayment" type="tns:scrubResponseReturnClaimPatientPatientInsuranceCoPayment" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="DENTAL" type="xs:int" minOccurs="0"/>
+<xs:element name="deductible" type="tns:scrubResponseReturnClaimPatientPatientInsuranceDeductible" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="END_DATE" type="xs:string" minOccurs="0"/>
+<xs:element name="GROSS_PREMIUM" type="xs:float"/>
+<xs:element name="INSURANCE_LISENCE" type="xs:string" minOccurs="0"/>
+<xs:element name="IS_EXPIRED" type="xs:int"/>
+<xs:element name="IS_PENDING" type="xs:int"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="MATERNITY" type="xs:int" minOccurs="0"/>
+<xs:element name="networkId" type="xs:int" minOccurs="0"/>
+<xs:element name="networkName" type="xs:string" minOccurs="0"/>
+<xs:element name="OPTICAL" type="xs:int" minOccurs="0"/>
+<xs:element name="outcome" type="tns:scrubResponseReturnClaimPatientPatientInsuranceOutcome" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="PACKAGE_NAME" type="xs:string" minOccurs="0"/>
+<xs:element name="PATIENT_INSURANCE_ID" type="xs:string" minOccurs="0"/>
+<xs:element name="POLICY_HOLDER_TYPE_ID" type="xs:string" minOccurs="0"/>
+<xs:element name="PRINCIPLE_INSURANCE_ID" type="xs:string" minOccurs="0"/>
+<xs:element name="PRINCIPLE_INSURANCE_NUMBER" type="xs:string" minOccurs="0"/>
+<xs:element name="planId" type="xs:int" minOccurs="0"/>
+<xs:element name="planName" type="xs:string" minOccurs="0"/>
+<xs:element name="policy_Number" type="xs:string" minOccurs="0"/>
+<xs:element name="RELATION_TO" type="xs:string" minOccurs="0"/>
+<xs:element name="RENEWAL_DATE" type="xs:string" minOccurs="0"/>
+<xs:element name="START_DATE" type="xs:string" minOccurs="0"/>
+<xs:element name="subNetworkId" type="xs:int" minOccurs="0"/>
+<xs:element name="subNetworkName" type="xs:string" minOccurs="0"/>
+<xs:element name="verified" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimPatientPatientInsuranceCoPayment">
+<xs:sequence>
+<xs:element name="ceiling" type="xs:double" minOccurs="0"/>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+<xs:element name="outNet" type="xs:int"/>
+<xs:element name="preAuth" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+<xs:element name="value" type="xs:double" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimPatientPatientInsuranceDeductible">
+<xs:sequence>
+<xs:element name="ceiling" type="xs:double" minOccurs="0"/>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+<xs:element name="outNet" type="xs:int"/>
+<xs:element name="preAuth" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+<xs:element name="value" type="xs:double" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimPatientPatientInsuranceOutcome">
+<xs:sequence>
+<xs:element name="categories" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="longMsg" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleID" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleName" type="xs:string" minOccurs="0"/>
+<xs:element name="severity" type="xs:string" minOccurs="0"/>
+<xs:element name="shortMsg" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimRClaim">
+<xs:sequence>
+<xs:element name="dateSettlement" type="xs:string" minOccurs="0"/>
+<xs:element name="denialCode" type="xs:string" minOccurs="0"/>
+<xs:element name="emiratesIDNumber" type="xs:string" minOccurs="0"/>
+<xs:element name="gross" type="xs:float"/>
+<xs:element name="ID" type="xs:int"/>
+<xs:element name="IDPayer" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="imported" type="xs:boolean" minOccurs="0"/>
+<xs:element name="memberID" type="xs:string" minOccurs="0"/>
+<xs:element name="net" type="xs:float"/>
+<xs:element name="patientShare" type="xs:float"/>
+<xs:element name="payerID" type="xs:string" minOccurs="0"/>
+<xs:element name="paymentReference" type="xs:string" minOccurs="0"/>
+<xs:element name="pending" type="xs:boolean" minOccurs="0"/>
+<xs:element name="providerID" type="xs:string" minOccurs="0"/>
+<xs:element name="providerInvoiceAmount" type="xs:float"/>
+<xs:element name="RActivity" type="tns:scrubResponseReturnClaimRClaimRActivity" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="RClaimType" type="tns:scrubResponseReturnClaimRClaimRClaimType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="RContract" type="tns:scrubResponseReturnClaimRClaimRContract" minOccurs="0"/>
+<xs:element name="RDiagnosis" type="tns:scrubResponseReturnClaimRClaimRDiagnosis" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="REncounter" type="tns:scrubResponseReturnClaimRClaimREncounter" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="RResubmission" type="tns:scrubResponseReturnClaimRClaimRResubmission" minOccurs="0"/>
+<xs:element name="receiverID" type="xs:string" minOccurs="0"/>
+<xs:element name="status" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimRClaimRActivity">
+<xs:sequence>
+<xs:element name="clinician" type="xs:string" minOccurs="0"/>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="copayment" type="xs:float"/>
+<xs:element name="deductible" type="xs:float"/>
+<xs:element name="denialCode" type="xs:string" minOccurs="0"/>
+<xs:element name="gross" type="xs:float"/>
+<xs:element name="ID" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="list" type="xs:float"/>
+<xs:element name="manualPrices" type="xs:boolean" minOccurs="0"/>
+<xs:element name="net" type="xs:float"/>
+<xs:element name="orderingClinician" type="xs:string" minOccurs="0"/>
+<xs:element name="patientShare" type="xs:float"/>
+<xs:element name="paymentAmount" type="xs:float"/>
+<xs:element name="priorAuthorizationID" type="xs:string" minOccurs="0"/>
+<xs:element name="providerCode" type="xs:string" minOccurs="0"/>
+<xs:element name="providerNet" type="xs:float"/>
+<xs:element name="providerPatientShare" type="xs:float"/>
+<xs:element name="providerType" type="xs:int" minOccurs="0"/>
+<xs:element name="quantity" type="xs:float"/>
+<xs:element name="RObservation" type="tns:scrubResponseReturnClaimRClaimRActivityRObservation" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="start" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimRClaimRActivityRObservation">
+<xs:sequence>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+<xs:element name="value" type="xs:string" minOccurs="0"/>
+<xs:element name="valueType" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimRClaimRClaimType">
+<xs:sequence>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimRClaimRContract">
+<xs:sequence>
+<xs:element name="network" type="xs:string" minOccurs="0"/>
+<xs:element name="packageName" type="xs:string" minOccurs="0"/>
+<xs:element name="policy" type="xs:string" minOccurs="0"/>
+<xs:element name="subNetworkName" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimRClaimRDiagnosis">
+<xs:sequence>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="providerCode" type="xs:string" minOccurs="0"/>
+<xs:element name="providerType" type="xs:string" minOccurs="0"/>
+<xs:element name="RDxInfo" type="tns:scrubResponseReturnClaimRClaimRDiagnosisRDxInfo" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimRClaimRDiagnosisRDxInfo">
+<xs:sequence>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="tns:dxInfoType" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimRClaimREncounter">
+<xs:sequence>
+<xs:element name="end" type="xs:string" minOccurs="0"/>
+<xs:element name="endType" type="xs:int" minOccurs="0"/>
+<xs:element name="facilityID" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="newPatient" type="xs:int" minOccurs="0"/>
+<xs:element name="orderingClinician" type="xs:string" minOccurs="0"/>
+<xs:element name="patientID" type="xs:string" minOccurs="0"/>
+<xs:element name="RAuthorisation" type="tns:scrubResponseReturnClaimRClaimREncounterRAuthorisation" minOccurs="0"/>
+<xs:element name="start" type="xs:string" minOccurs="0"/>
+<xs:element name="startType" type="xs:int" minOccurs="0"/>
+<xs:element name="transferDestination" type="xs:string" minOccurs="0"/>
+<xs:element name="transferSource" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimRClaimREncounterRAuthorisation">
+<xs:sequence>
+<xs:element name="end" type="xs:string" minOccurs="0"/>
+<xs:element name="start" type="xs:string" minOccurs="0"/>
+<xs:element name="verbal" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimRClaimRResubmission">
+<xs:sequence>
+<xs:element name="attachment" type="xs:base64Binary" minOccurs="0"/>
+<xs:element name="comment" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimRegulatorMemberInfo">
+<xs:sequence>
+<xs:element name="dateOfBirth" type="xs:string" minOccurs="0"/>
+<xs:element name="deletionDate" type="xs:string" minOccurs="0"/>
+<xs:element name="enrollmentDate" type="xs:string" minOccurs="0"/>
+<xs:element name="familyName" type="xs:string" minOccurs="0"/>
+<xs:element name="firstName" type="xs:string" minOccurs="0"/>
+<xs:element name="gender" type="xs:int"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="outcome" type="tns:scrubResponseReturnClaimRegulatorMemberInfoOutcome" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="payerID" type="xs:string" minOccurs="0"/>
+<xs:element name="payerName" type="xs:string" minOccurs="0"/>
+<xs:element name="policyID" type="xs:string" minOccurs="0"/>
+<xs:element name="referenceNumber" type="xs:string" minOccurs="0"/>
+<xs:element name="secondName" type="xs:string" minOccurs="0"/>
+<xs:element name="transactionDate" type="xs:string" minOccurs="0"/>
+<xs:element name="uidNumber" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimRegulatorMemberInfoOutcome">
+<xs:sequence>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="longMsg" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleID" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleName" type="xs:string" minOccurs="0"/>
+<xs:element name="severity" type="xs:string" minOccurs="0"/>
+<xs:element name="shortMsg" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimResubmission">
+<xs:sequence>
+<xs:element name="attachment" type="xs:base64Binary" minOccurs="0"/>
+<xs:element name="comment" type="xs:string" minOccurs="0"/>
+<xs:element name="outcome" type="tns:scrubResponseReturnClaimResubmissionOutcome" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimResubmissionOutcome">
+<xs:sequence>
+<xs:element name="categories" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="longMsg" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleID" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleName" type="xs:string" minOccurs="0"/>
+<xs:element name="severity" type="xs:string" minOccurs="0"/>
+<xs:element name="shortMsg" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimXClaim">
+<xs:sequence>
+<xs:element name="dateSettlement" type="xs:string" minOccurs="0"/>
+<xs:element name="denialCode" type="xs:string" minOccurs="0"/>
+<xs:element name="emiratesIDNumber" type="xs:string" minOccurs="0"/>
+<xs:element name="gross" type="xs:float"/>
+<xs:element name="ID" type="xs:int"/>
+<xs:element name="IDPayer" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="imported" type="xs:boolean" minOccurs="0"/>
+<xs:element name="memberID" type="xs:string" minOccurs="0"/>
+<xs:element name="net" type="xs:float"/>
+<xs:element name="patientShare" type="xs:float"/>
+<xs:element name="payerID" type="xs:string" minOccurs="0"/>
+<xs:element name="paymentReference" type="xs:string" minOccurs="0"/>
+<xs:element name="pending" type="xs:boolean" minOccurs="0"/>
+<xs:element name="providerID" type="xs:string" minOccurs="0"/>
+<xs:element name="providerInvoiceAmount" type="xs:float"/>
+<xs:element name="receiverID" type="xs:string" minOccurs="0"/>
+<xs:element name="status" type="xs:string" minOccurs="0"/>
+<xs:element name="XActivity" type="tns:scrubResponseReturnClaimXClaimXActivity" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="XClaimType" type="tns:scrubResponseReturnClaimXClaimXClaimType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="XContract" type="tns:scrubResponseReturnClaimXClaimXContract" minOccurs="0"/>
+<xs:element name="XDiagnosis" type="tns:scrubResponseReturnClaimXClaimXDiagnosis" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="XEncounter" type="tns:scrubResponseReturnClaimXClaimXEncounter" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="XResubmission" type="tns:scrubResponseReturnClaimXClaimXResubmission" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimXClaimXActivity">
+<xs:sequence>
+<xs:element name="clinician" type="xs:string" minOccurs="0"/>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="copayment" type="xs:float"/>
+<xs:element name="deductible" type="xs:float"/>
+<xs:element name="denialCode" type="xs:string" minOccurs="0"/>
+<xs:element name="gross" type="xs:float"/>
+<xs:element name="ID" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="list" type="xs:float"/>
+<xs:element name="manualPrices" type="xs:boolean" minOccurs="0"/>
+<xs:element name="net" type="xs:float"/>
+<xs:element name="orderingClinician" type="xs:string" minOccurs="0"/>
+<xs:element name="patientShare" type="xs:float"/>
+<xs:element name="paymentAmount" type="xs:float"/>
+<xs:element name="priorAuthorizationID" type="xs:string" minOccurs="0"/>
+<xs:element name="providerCode" type="xs:string" minOccurs="0"/>
+<xs:element name="providerNet" type="xs:float"/>
+<xs:element name="providerPatientShare" type="xs:float"/>
+<xs:element name="providerType" type="xs:int" minOccurs="0"/>
+<xs:element name="quantity" type="xs:float"/>
+<xs:element name="start" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:int"/>
+<xs:element name="XObservation" type="tns:scrubResponseReturnClaimXClaimXActivityXObservation" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimXClaimXActivityXObservation">
+<xs:sequence>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+<xs:element name="value" type="xs:string" minOccurs="0"/>
+<xs:element name="valueType" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimXClaimXClaimType">
+<xs:sequence>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimXClaimXContract">
+<xs:sequence>
+<xs:element name="network" type="xs:string" minOccurs="0"/>
+<xs:element name="packageName" type="xs:string" minOccurs="0"/>
+<xs:element name="policy" type="xs:string" minOccurs="0"/>
+<xs:element name="subNetworkName" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimXClaimXDiagnosis">
+<xs:sequence>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="providerCode" type="xs:string" minOccurs="0"/>
+<xs:element name="providerType" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+<xs:element name="XDxInfo" type="tns:scrubResponseReturnClaimXClaimXDiagnosisXDxInfo" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimXClaimXDiagnosisXDxInfo">
+<xs:sequence>
+<xs:element name="code" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="tns:dxInfoType" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimXClaimXEncounter">
+<xs:sequence>
+<xs:element name="end" type="xs:string" minOccurs="0"/>
+<xs:element name="endType" type="xs:int" minOccurs="0"/>
+<xs:element name="facilityID" type="xs:string" minOccurs="0"/>
+<xs:element name="idCaller" type="xs:int" minOccurs="0"/>
+<xs:element name="newPatient" type="xs:int" minOccurs="0"/>
+<xs:element name="orderingClinician" type="xs:string" minOccurs="0"/>
+<xs:element name="patientID" type="xs:string" minOccurs="0"/>
+<xs:element name="start" type="xs:string" minOccurs="0"/>
+<xs:element name="startType" type="xs:int" minOccurs="0"/>
+<xs:element name="transferDestination" type="xs:string" minOccurs="0"/>
+<xs:element name="transferSource" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:int"/>
+<xs:element name="XAuthorisation" type="tns:scrubResponseReturnClaimXClaimXEncounterXAuthorisation" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimXClaimXEncounterXAuthorisation">
+<xs:sequence>
+<xs:element name="end" type="xs:string" minOccurs="0"/>
+<xs:element name="start" type="xs:string" minOccurs="0"/>
+<xs:element name="verbal" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnClaimXClaimXResubmission">
+<xs:sequence>
+<xs:element name="attachment" type="xs:base64Binary" minOccurs="0"/>
+<xs:element name="comment" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnHeader">
+<xs:sequence>
+<xs:element name="extendedValidationType" type="tns:scrubResponseReturnHeaderExtendedValidationType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="outcome" type="tns:scrubResponseReturnHeaderOutcome" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="receiverID" type="xs:string" minOccurs="0"/>
+<xs:element name="workflow" type="tns:scrubResponseReturnHeaderWorkflow" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnHeaderExtendedValidationType">
+<xs:sequence>
+<xs:element name="outcome" type="tns:scrubResponseReturnHeaderExtendedValidationTypeOutcome" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnHeaderExtendedValidationTypeOutcome">
+<xs:sequence>
+<xs:element name="categories" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="longMsg" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleID" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleName" type="xs:string" minOccurs="0"/>
+<xs:element name="severity" type="xs:string" minOccurs="0"/>
+<xs:element name="shortMsg" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnHeaderOutcome">
+<xs:sequence>
+<xs:element name="categories" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="longMsg" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleID" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleName" type="xs:string" minOccurs="0"/>
+<xs:element name="severity" type="xs:string" minOccurs="0"/>
+<xs:element name="shortMsg" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnHeaderWorkflow">
+<xs:sequence>
+<xs:element name="action" type="xs:string" minOccurs="0"/>
+<xs:element name="actionThreshold" type="xs:string" minOccurs="0"/>
+<xs:element name="conditionalWorkflowNextNode" type="xs:string" minOccurs="0"/>
+<xs:element name="currentNode" type="xs:string" minOccurs="0"/>
+<xs:element name="outcome" type="tns:scrubResponseReturnHeaderWorkflowOutcome" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="routingRule" type="xs:string" minOccurs="0"/>
+<xs:element name="workflowNextNode" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnHeaderWorkflowOutcome">
+<xs:sequence>
+<xs:element name="categories" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="longMsg" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleID" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleName" type="xs:string" minOccurs="0"/>
+<xs:element name="severity" type="xs:string" minOccurs="0"/>
+<xs:element name="shortMsg" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="scrubResponseReturnOutcome">
+<xs:sequence>
+<xs:element name="categories" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="longMsg" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleID" type="xs:string" minOccurs="0"/>
+<xs:element name="ruleName" type="xs:string" minOccurs="0"/>
+<xs:element name="severity" type="xs:string" minOccurs="0"/>
+<xs:element name="shortMsg" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
