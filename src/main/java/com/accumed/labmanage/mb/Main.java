@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
  */
 @ManagedBean
 @SessionScoped
-public class Main implements Serializable{
+public class Main implements Serializable {
 
 //    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_9081/PPOService/PPO.wsdl")
     private PPO_Service service;
@@ -127,20 +127,20 @@ public class Main implements Serializable{
                     this.signupRegPass);
             System.out.println("Result = " + result);
 
-            if (result> 0) {
+            if (result > 0) {
                 this.setAccountid(result);
                 this.setUsername(signupEmail);
                 this.setPassword(signupPass);
                 this.setFacilityLicense(signupFacilityLicense);
-                
+
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.getExternalContext().redirect(context.getExternalContext().getRequestContextPath()
                         + "/faces/initAccount.xhtml");
                 return "";
-            } else if(result==-1){
-                status ="Error while signing up!!";
-            }else if(result==-2){
-                status ="User already exist!!";
+            } else if (result == -1) {
+                status = "Error while signing up!!";
+            } else if (result == -2) {
+                status = "User already exist!!";
             }
         } catch (IOException | NumberFormatException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, "Exception caught", ex);
@@ -304,16 +304,26 @@ public class Main implements Serializable{
     }
 
     public String getFacilityLicense() {
-        if(facilityLicense==null && this.accountid>0){
+        if (facilityLicense == null && this.accountid > 0) {
 
-            facilityLicense = "XX";
+            try {
+                com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
+                java.lang.Long accountId = Long.valueOf(this.accountid);
+                String result = port.getAccountFacilityLicense(accountId);
+                System.out.println("Result = " + result);
+                if(result != null){
+                    facilityLicense = result;
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, "Exception caught", ex);
+            }
+
         }
-        return facilityLicense;
+        return facilityLicense==null?"Unknown":facilityLicense;
     }
 
     public void setFacilityLicense(String facilityLicense) {
         this.facilityLicense = facilityLicense;
     }
-    
-    
+
 }
