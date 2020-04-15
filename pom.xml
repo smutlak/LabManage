@@ -125,11 +125,11 @@
             <version>1.0.0.2</version>
         </dependency>
         
-        <dependency>
+        <!--<dependency>
             <groupId>com.accumed.ws</groupId>
             <artifactId>wsInterface</artifactId>
             <version>1.0.4.4</version>
-        </dependency>
+        </dependency>-->
         
     </dependencies>
    
