@@ -22,16 +22,16 @@ import javax.faces.convert.FacesConverter;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-@FacesConverter("icdConverter")
-public class ICDConverter implements Converter, Serializable {
+@FacesConverter("insurerConverter")
+public class InsurerConverter implements Converter, Serializable {
 
     private PPO_Service service;
 
     @Override
-    public com.accumed.pposervice.ws.FindIcdResponse.Return getAsObject(FacesContext context, UIComponent component, String value) {
+    public com.accumed.pposervice.ws.FindInsurerResponse.Return getAsObject(FacesContext context, UIComponent component, String value) {
         if (value != null && value.trim().length() > 0) {
-            for (com.accumed.pposervice.ws.FindIcdResponse.Return p : getIcds(value)) {
-                if (p.getCode().equals(value)) {
+            for (com.accumed.pposervice.ws.FindInsurerResponse.Return p : getInsurers(value)) {
+                if (p.getAuth().equals(value)) {
                     return p;
                 }
             }
@@ -41,24 +41,24 @@ public class ICDConverter implements Converter, Serializable {
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
-        if (value instanceof com.accumed.pposervice.ws.FindCptResponse.Return) {
-            com.accumed.pposervice.ws.FindCptResponse.Return xcode = (com.accumed.pposervice.ws.FindCptResponse.Return) value;
-            return xcode.getCode();
+        if (value instanceof com.accumed.pposervice.ws.FindInsurerResponse.Return) {
+            com.accumed.pposervice.ws.FindInsurerResponse.Return xcode = (com.accumed.pposervice.ws.FindInsurerResponse.Return) value;
+            return xcode.getAuth();
         }
         return (String) value;
     }
 
-    private List<com.accumed.pposervice.ws.FindIcdResponse.Return> getIcds(String query) {
+    private List<com.accumed.pposervice.ws.FindInsurerResponse.Return> getInsurers(String query) {
         try { // Call Web Service Operation
             com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
-            java.lang.String code = query;
-            java.lang.String desc = "";
+            java.lang.String auth = query;
+            java.lang.String name = query;
             // TODO process result here
-            java.util.List<com.accumed.pposervice.ws.FindIcdResponse.Return> result = port.findIcd(code, desc);
+            java.util.List<com.accumed.pposervice.ws.FindInsurerResponse.Return> result = port.findInsurer(auth, name);
             System.out.println("Result = " + result);
             return result;
         } catch (Exception ex) {
-            Logger.getLogger(ICDConverter.class.getName()).log(Level.SEVERE,
+            Logger.getLogger(InsurerConverter.class.getName()).log(Level.SEVERE,
                     "exception caught", ex);
         }
         return null;
@@ -69,14 +69,14 @@ public class ICDConverter implements Converter, Serializable {
         try {
             wsdlURL = (String) (new InitialContext().lookup("java:comp/env/com.accumed.labManage.PPO.WSDL.URL"));
         } catch (NumberFormatException | NamingException ex) {
-            Logger.getLogger(ICDConverter.class.getName()).log(Level.SEVERE,
+            Logger.getLogger(InsurerConverter.class.getName()).log(Level.SEVERE,
                     "exception caught", ex);
         }
         if (service == null) {
             try {
                 service = new PPO_Service(new java.net.URL(wsdlURL));
             } catch (MalformedURLException ex) {
-                Logger.getLogger(ICDConverter.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(InsurerConverter.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return service;

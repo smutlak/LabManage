@@ -7,6 +7,7 @@ package com.accumed.labmanage.mb;
  */
 import com.accumed.pposervice.ws.FindCptResponse;
 import com.accumed.pposervice.ws.FindIcdResponse;
+import com.accumed.pposervice.ws.FindInsurerResponse;
 import com.accumed.pposervice.ws.GetFacilityMonthTransactionResponse;
 import com.accumed.pposervice.ws.PPO_Service;
 import java.io.Serializable;
@@ -50,6 +51,8 @@ public class Dashboard implements Serializable {
     private List<com.accumed.pposervice.ws.FindIcdResponse.Return> selectedIcds;
     private String gender = "1";
     private String DOB;
+    private com.accumed.pposervice.ws.FindInsurerResponse.Return insurer;
+    
 
     /**
      * Creates a new instance of AccountInit
@@ -171,6 +174,24 @@ public class Dashboard implements Serializable {
         }
         return null;
     }
+    
+    public List<com.accumed.pposervice.ws.FindInsurerResponse.Return> completeInsurer(String query) {
+
+        try { // Call Web Service Operation
+            com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
+            java.lang.String auth = query;
+            java.lang.String name = query;
+            // TODO process result here
+            java.util.List<com.accumed.pposervice.ws.FindInsurerResponse.Return> result = port.findInsurer(auth, name);
+            System.out.println("Result = " + result);
+            return result;
+            
+        } catch (Exception ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE,
+                    "exception caught", ex);
+        }
+        return null;
+    }
 
     public FindCptResponse.Return getCptCode() {
         return cptCode;
@@ -193,6 +214,7 @@ public class Dashboard implements Serializable {
             this.selectedIcds = new ArrayList();
         }
         this.selectedIcds.add(icdCode);
+        icdCode = null;
     }
 
     public List<FindCptResponse.Return> getSelectedCpts() {
@@ -272,6 +294,26 @@ public class Dashboard implements Serializable {
     public void setDOB(String DOB) {
         this.DOB = DOB;
     }
+
+    public FindInsurerResponse.Return getInsurer() {
+        return insurer;
+    }
+
+    public void setInsurer(FindInsurerResponse.Return insurer) {
+        this.insurer = insurer;
+    }
+    
+    public void resetClaimValidation(){
+        this.cptCode = null;
+        this.icdCode = null;
+        this.DOB = null;
+        this.insurer = null;
+        this.selectedCpts = new ArrayList();
+        this.selectedIcds = new ArrayList();
+    }
     
     
+    public void onTabChanged(){
+        
+    }
 }
