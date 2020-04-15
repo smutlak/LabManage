@@ -43,6 +43,7 @@ public class Main implements Serializable{
     private String message;
     private String username;
     private String password;
+    private String facilityLicense;
 
     /**
      * Creates a new instance of Main
@@ -130,6 +131,8 @@ public class Main implements Serializable{
                 this.setAccountid(result);
                 this.setUsername(signupEmail);
                 this.setPassword(signupPass);
+                this.setFacilityLicense(signupFacilityLicense);
+                
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.getExternalContext().redirect(context.getExternalContext().getRequestContextPath()
                         + "/faces/initAccount.xhtml");
@@ -299,4 +302,18 @@ public class Main implements Serializable{
         session.invalidate();
         return "/faces/login.xhtml?faces-redirect=true";
     }
+
+    public String getFacilityLicense() {
+        if(facilityLicense==null && this.accountid>0){
+
+            facilityLicense = "XX";
+        }
+        return facilityLicense;
+    }
+
+    public void setFacilityLicense(String facilityLicense) {
+        this.facilityLicense = facilityLicense;
+    }
+    
+    
 }

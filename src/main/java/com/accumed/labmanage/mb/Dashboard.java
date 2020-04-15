@@ -13,6 +13,7 @@ import com.accumed.pposervice.ws.PPO_Service;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -41,18 +42,15 @@ public class Dashboard implements Serializable {
     private PPO_Service service;
     private List<com.accumed.pposervice.ws.GetAccuntTotalsVSLabsResponse.Return> labs;
     private PieChartModel pieModel;
-    
-    
-    
+
     //Claim Validation
     private com.accumed.pposervice.ws.FindCptResponse.Return cptCode;
     private List<com.accumed.pposervice.ws.FindCptResponse.Return> selectedCpts;
     private com.accumed.pposervice.ws.FindIcdResponse.Return icdCode;
     private List<com.accumed.pposervice.ws.FindIcdResponse.Return> selectedIcds;
     private String gender = "1";
-    private String DOB;
+    private Date DOB;
     private com.accumed.pposervice.ws.FindInsurerResponse.Return insurer;
-    
 
     /**
      * Creates a new instance of AccountInit
@@ -174,7 +172,7 @@ public class Dashboard implements Serializable {
         }
         return null;
     }
-    
+
     public List<com.accumed.pposervice.ws.FindInsurerResponse.Return> completeInsurer(String query) {
 
         try { // Call Web Service Operation
@@ -185,7 +183,7 @@ public class Dashboard implements Serializable {
             java.util.List<com.accumed.pposervice.ws.FindInsurerResponse.Return> result = port.findInsurer(auth, name);
             System.out.println("Result = " + result);
             return result;
-            
+
         } catch (Exception ex) {
             Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE,
                     "exception caught", ex);
@@ -266,9 +264,9 @@ public class Dashboard implements Serializable {
                 ret += lab.getTotal();
             }
         }
-        return (int)ret;
+        return (int) ret;
     }
-    
+
     private int getLabTotal() {
         getLabs();
         double ret = 0;
@@ -277,7 +275,7 @@ public class Dashboard implements Serializable {
                 ret += lab.getTotalLab();
             }
         }
-        return (int)ret;
+        return (int) ret;
     }
 
     public String calcPercentage(double total, double totalLab) {
@@ -287,13 +285,15 @@ public class Dashboard implements Serializable {
         return d + "%";
     }
 
-    public String getDOB() {
+    public Date getDOB() {
         return DOB;
     }
 
-    public void setDOB(String DOB) {
+    public void setDOB(Date DOB) {
         this.DOB = DOB;
     }
+
+   
 
     public FindInsurerResponse.Return getInsurer() {
         return insurer;
@@ -302,8 +302,8 @@ public class Dashboard implements Serializable {
     public void setInsurer(FindInsurerResponse.Return insurer) {
         this.insurer = insurer;
     }
-    
-    public void resetClaimValidation(){
+
+    public void resetClaimValidation() {
         this.cptCode = null;
         this.icdCode = null;
         this.DOB = null;
@@ -311,13 +311,17 @@ public class Dashboard implements Serializable {
         this.selectedCpts = new ArrayList();
         this.selectedIcds = new ArrayList();
     }
-    
-    
-    public void onTabChanged(){
-        
+
+    public void onTabChanged() {
+
     }
-    
-    public void validate(){
-        (new Utils()).validate();
+
+    public void validate() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        Main mainBean = context.getApplication().evaluateExpressionGet(context, "#{main}", Main.class);
+        
+        com.accumed.pposervice.ws.ScrubResponseReturn ret = (new Utils()).validate(mainBean.getUsername(), mainBean.getFacilityLicense(),
+                insurer == null ? "Unknown" : insurer.getAuth(),
+                gender, DOB, selectedCpts, selectedIcds);
     }
 }
