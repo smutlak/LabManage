@@ -316,4 +316,8 @@ public class Dashboard implements Serializable {
     public void onTabChanged(){
         
     }
+    
+    public void validate(){
+        (new Utils()).validate();
+    }
 }

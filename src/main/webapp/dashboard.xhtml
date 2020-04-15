@@ -239,7 +239,7 @@
                                 </p:panel>
                                 <h:outputLabel></h:outputLabel>
                                 <h:panelGroup>
-                                    <p:commandButton value="Validate" style="float: right;"></p:commandButton>
+                                    <p:commandButton value="Validate" style="float: right;" actionListener="#{dashboard.validate}" update="validationResults"></p:commandButton>
                                     <p:commandButton value="Reset" style="float: right;" actionListener="#{dashboard.resetClaimValidation}" update="claimTab validationResults"></p:commandButton>
                                 </h:panelGroup>
                             </h:panelGrid>
