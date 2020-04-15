@@ -178,6 +178,10 @@
 
 <xs:element name="findInsurerResponse" type="tns:findInsurerResponse"/>
 
+<xs:element name="getAccountFacilityLicense" type="tns:getAccountFacilityLicense"/>
+
+<xs:element name="getAccountFacilityLicenseResponse" type="tns:getAccountFacilityLicenseResponse"/>
+
 <xs:element name="getAccountTransactionStatus" type="tns:getAccountTransactionStatus"/>
 
 <xs:element name="getAccountTransactionStatusResponse" type="tns:getAccountTransactionStatusResponse"/>
@@ -389,6 +393,18 @@
 
 <xs:complexType name="endResponse">
 <xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getAccountFacilityLicense">
+<xs:sequence>
+<xs:element name="accountId" type="xs:long" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAccountFacilityLicenseResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="getAccuntTotalsVSLabs">

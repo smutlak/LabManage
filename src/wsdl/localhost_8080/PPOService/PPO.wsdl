@@ -25,6 +25,12 @@
 <message name="loginResponse">
 <part name="parameters" element="tns:loginResponse"/>
 </message>
+<message name="getAccountFacilityLicense">
+<part name="parameters" element="tns:getAccountFacilityLicense"/>
+</message>
+<message name="getAccountFacilityLicenseResponse">
+<part name="parameters" element="tns:getAccountFacilityLicenseResponse"/>
+</message>
 <message name="getRegulators">
 <part name="parameters" element="tns:getRegulators"/>
 </message>
@@ -122,6 +128,10 @@
 <input wsam:Action="http://ws.pposervice.accumed.com/PPO/loginRequest" message="tns:login"/>
 <output wsam:Action="http://ws.pposervice.accumed.com/PPO/loginResponse" message="tns:loginResponse"/>
 </operation>
+<operation name="getAccountFacilityLicense">
+<input wsam:Action="http://ws.pposervice.accumed.com/PPO/getAccountFacilityLicenseRequest" message="tns:getAccountFacilityLicense"/>
+<output wsam:Action="http://ws.pposervice.accumed.com/PPO/getAccountFacilityLicenseResponse" message="tns:getAccountFacilityLicenseResponse"/>
+</operation>
 <operation name="getRegulators">
 <input wsam:Action="http://ws.pposervice.accumed.com/PPO/getRegulatorsRequest" message="tns:getRegulators"/>
 <output wsam:Action="http://ws.pposervice.accumed.com/PPO/getRegulatorsResponse" message="tns:getRegulatorsResponse"/>
@@ -200,6 +210,15 @@
 </output>
 </operation>
 <operation name="login">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getAccountFacilityLicense">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
