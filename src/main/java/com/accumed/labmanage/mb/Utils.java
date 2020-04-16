@@ -83,16 +83,19 @@ public class Utils {
 
             //call first time
             result = port.validateClaim(request, user, psw, debug);
+            if (result != null) {
+                request.getClaim().getClaimType().addAll(convert(result.getClaim().getClaimType()));
 
-            request.getClaim().getClaimType().addAll(convert(result.getClaim().getClaimType()));
+                request.getHeader().getExtendedValidationType().remove(0);
+                ScrubScrubbingRequestHeaderExtendedValidationType extValidatioType = new ScrubScrubbingRequestHeaderExtendedValidationType();
+                extValidatioType.setType("Submission");
+                request.getHeader().getExtendedValidationType().add(extValidatioType);
 
-            request.getHeader().getExtendedValidationType().remove(0);
-            ScrubScrubbingRequestHeaderExtendedValidationType extValidatioType = new ScrubScrubbingRequestHeaderExtendedValidationType();
-            extValidatioType.setType("Submission");
-            request.getHeader().getExtendedValidationType().add(extValidatioType);
-
-            //call second time
-            result = port.validateClaim(request, user, psw, debug);
+                //call second time
+                result = port.validateClaim(request, user, psw, debug);
+            }else{
+                Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, "Error: Rules Engine returned null on callig Analyzing");
+            }
 
             System.out.println("Result = " + result);
         } catch (Exception ex) {
