@@ -6,7 +6,27 @@
 package com.accumed.labmanage.mb;
 
 import com.accumed.pposervice.ws.PPO_Service;
+import com.accumed.pposervice.ws.ScrubResponseReturnClaimActivity;
+import com.accumed.pposervice.ws.ScrubResponseReturnClaimActivityObservation;
+import com.accumed.pposervice.ws.ScrubResponseReturnClaimActivityObservationOutcome;
+import com.accumed.pposervice.ws.ScrubResponseReturnClaimActivityOutcome;
 import com.accumed.pposervice.ws.ScrubResponseReturnClaimClaimType;
+import com.accumed.pposervice.ws.ScrubResponseReturnClaimContractOutcome;
+import com.accumed.pposervice.ws.ScrubResponseReturnClaimDiagnosis;
+import com.accumed.pposervice.ws.ScrubResponseReturnClaimDiagnosisOutcome;
+import com.accumed.pposervice.ws.ScrubResponseReturnClaimEncounter;
+import com.accumed.pposervice.ws.ScrubResponseReturnClaimEncounterAuthorisationOutcome;
+import com.accumed.pposervice.ws.ScrubResponseReturnClaimEncounterOutcome;
+import com.accumed.pposervice.ws.ScrubResponseReturnClaimOutcome;
+import com.accumed.pposervice.ws.ScrubResponseReturnClaimPatientOutcome;
+import com.accumed.pposervice.ws.ScrubResponseReturnClaimPatientPatientInsurance;
+import com.accumed.pposervice.ws.ScrubResponseReturnClaimPatientPatientInsuranceOutcome;
+import com.accumed.pposervice.ws.ScrubResponseReturnClaimResubmissionOutcome;
+import com.accumed.pposervice.ws.ScrubResponseReturnHeaderExtendedValidationType;
+import com.accumed.pposervice.ws.ScrubResponseReturnHeaderExtendedValidationTypeOutcome;
+import com.accumed.pposervice.ws.ScrubResponseReturnHeaderOutcome;
+import com.accumed.pposervice.ws.ScrubResponseReturnHeaderWorkflowOutcome;
+import com.accumed.pposervice.ws.ScrubResponseReturnOutcome;
 import com.accumed.pposervice.ws.ScrubScrubbingRequestClaim;
 import com.accumed.pposervice.ws.ScrubScrubbingRequestClaimActivity;
 import com.accumed.pposervice.ws.ScrubScrubbingRequestClaimClaimType;
@@ -93,7 +113,7 @@ public class Utils {
 
                 //call second time
                 result = port.validateClaim(request, user, psw, debug);
-            }else{
+            } else {
                 Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, "Error: Rules Engine returned null on callig Analyzing");
             }
 
@@ -261,4 +281,156 @@ public class Utils {
         return arr;
     }
 
+    public List<RulesOutcome> getAllOutcomes(com.accumed.pposervice.ws.ScrubResponseReturn result) {
+
+        List<RulesOutcome> ret = new ArrayList();
+
+        if (result.getOutcome() != null) {
+            for (ScrubResponseReturnOutcome obj : result.getOutcome()) {
+                ret.add(new RulesOutcome("Request", obj.getId(), obj.getRuleID(),
+                        obj.getRuleName(), obj.getSeverity(), obj.getShortMsg(),
+                        obj.getLongMsg(), obj.getCategories()));
+            }
+        }
+
+        if (result.getHeader() != null) {
+            if (result.getHeader().getOutcome() != null) {
+                for (ScrubResponseReturnHeaderOutcome obj : result.getHeader().getOutcome()) {
+                    ret.add(new RulesOutcome("Header", obj.getId(), obj.getRuleID(),
+                            obj.getRuleName(), obj.getSeverity(), obj.getShortMsg(),
+                            obj.getLongMsg(), obj.getCategories()));
+                }
+            }
+            if (result.getHeader().getWorkflow() != null) {
+                if (result.getHeader().getWorkflow().getOutcome() != null) {
+                    for (ScrubResponseReturnHeaderWorkflowOutcome obj : result.getHeader().getWorkflow().getOutcome()) {
+                        ret.add(new RulesOutcome("WF", obj.getId(), obj.getRuleID(),
+                                obj.getRuleName(), obj.getSeverity(), obj.getShortMsg(),
+                                obj.getLongMsg(), obj.getCategories()));
+                    }
+                }
+            }
+
+            if (result.getHeader().getExtendedValidationType() != null) {
+                for (ScrubResponseReturnHeaderExtendedValidationType extendedValidationType : result.getHeader().getExtendedValidationType()) {
+                    if (extendedValidationType.getOutcome() != null) {
+                        for (ScrubResponseReturnHeaderExtendedValidationTypeOutcome obj : extendedValidationType.getOutcome()) {
+                            ret.add(new RulesOutcome("ExtValType", obj.getId(), obj.getRuleID(),
+                                    obj.getRuleName(), obj.getSeverity(), obj.getShortMsg(),
+                                    obj.getLongMsg(), obj.getCategories()));
+                        }
+                    }
+                }
+            }
+        }
+
+        //Claim
+        if (result.getClaim() != null) {
+            if (result.getClaim().getOutcome() != null) {
+                for (ScrubResponseReturnClaimOutcome obj : result.getClaim().getOutcome()) {
+                    ret.add(new RulesOutcome("Claim", obj.getId(), obj.getRuleID(),
+                            obj.getRuleName(), obj.getSeverity(), obj.getShortMsg(),
+                            obj.getLongMsg(), obj.getCategories()));
+                }
+            }
+
+            if (result.getClaim().getEncounter() != null) {
+                for (ScrubResponseReturnClaimEncounter encounter : result.getClaim().getEncounter()) {
+                    if (encounter.getOutcome() != null) {
+                        for (ScrubResponseReturnClaimEncounterOutcome obj : encounter.getOutcome()) {
+                            ret.add(new RulesOutcome("Encounter", obj.getId(), obj.getRuleID(),
+                                    obj.getRuleName(), obj.getSeverity(), obj.getShortMsg(),
+                                    obj.getLongMsg(), obj.getCategories()));
+                        }
+
+                    }
+
+                    if (encounter.getAuthorisation() != null) {
+                        if (encounter.getAuthorisation().getOutcome() != null) {
+                            for (ScrubResponseReturnClaimEncounterAuthorisationOutcome obj : encounter.getAuthorisation().getOutcome()) {
+                                ret.add(new RulesOutcome("Auth", obj.getId(), obj.getRuleID(),
+                                        obj.getRuleName(), obj.getSeverity(), obj.getShortMsg(),
+                                        obj.getLongMsg(), obj.getCategories()));
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (result.getClaim().getDiagnosis() != null) {
+                for (ScrubResponseReturnClaimDiagnosis diagnosis : result.getClaim().getDiagnosis()) {
+                    if (diagnosis.getOutcome() != null) {
+                        for (ScrubResponseReturnClaimDiagnosisOutcome obj : diagnosis.getOutcome()) {
+                            ret.add(new RulesOutcome("Diagnosis", obj.getId(), obj.getRuleID(),
+                                    obj.getRuleName(), obj.getSeverity(), obj.getShortMsg(),
+                                    obj.getLongMsg(), obj.getCategories()));
+                        }
+                    }
+                }
+            }
+
+            if (result.getClaim().getActivity() != null) {
+                for (ScrubResponseReturnClaimActivity activity : result.getClaim().getActivity()) {
+                    if (activity.getOutcome() != null) {
+                        for (ScrubResponseReturnClaimActivityOutcome obj : activity.getOutcome()) {
+                            ret.add(new RulesOutcome("Activity", obj.getId(), obj.getRuleID(),
+                                    obj.getRuleName(), obj.getSeverity(), obj.getShortMsg(),
+                                    obj.getLongMsg(), obj.getCategories()));
+                        }
+                    }
+
+                    if (activity.getObservation() != null) {
+                        for (ScrubResponseReturnClaimActivityObservation observation : activity.getObservation()) {
+                            if (observation.getOutcome() != null) {
+                                for (ScrubResponseReturnClaimActivityObservationOutcome obj : observation.getOutcome()) {
+                                    ret.add(new RulesOutcome("Observation", obj.getId(), obj.getRuleID(),
+                                            obj.getRuleName(), obj.getSeverity(), obj.getShortMsg(),
+                                            obj.getLongMsg(), obj.getCategories()));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (result.getClaim().getResubmission() != null) {
+                if (result.getClaim().getResubmission().getOutcome() != null) {
+                    for (ScrubResponseReturnClaimResubmissionOutcome obj : result.getClaim().getResubmission().getOutcome()) {
+                        ret.add(new RulesOutcome("Resubmission", obj.getId(), obj.getRuleID(),
+                                obj.getRuleName(), obj.getSeverity(), obj.getShortMsg(),
+                                obj.getLongMsg(), obj.getCategories()));
+                    }
+                }
+            }
+            if (result.getClaim().getContract() != null) {
+                if (result.getClaim().getContract().getOutcome() != null) {
+                    for (ScrubResponseReturnClaimContractOutcome obj : result.getClaim().getContract().getOutcome()) {
+                        ret.add(new RulesOutcome("Contract", obj.getId(), obj.getRuleID(),
+                                obj.getRuleName(), obj.getSeverity(), obj.getShortMsg(),
+                                obj.getLongMsg(), obj.getCategories()));
+                    }
+                }
+            }
+            if (result.getClaim().getPatient() != null) {
+                if (result.getClaim().getPatient().getOutcome() != null) {
+                    for (ScrubResponseReturnClaimPatientOutcome obj : result.getClaim().getPatient().getOutcome()) {
+                        ret.add(new RulesOutcome("Patient", obj.getId(), obj.getRuleID(),
+                                obj.getRuleName(), obj.getSeverity(), obj.getShortMsg(),
+                                obj.getLongMsg(), obj.getCategories()));
+                    }
+                }
+
+                if (result.getClaim().getPatient().getPatientInsurance() != null) {
+                    if (result.getClaim().getPatient().getPatientInsurance().getOutcome() != null) {
+                        for (ScrubResponseReturnClaimPatientPatientInsuranceOutcome obj : result.getClaim().getPatient().getPatientInsurance().getOutcome()) {
+                            ret.add(new RulesOutcome("PatientInsurance", obj.getId(), obj.getRuleID(),
+                                    obj.getRuleName(), obj.getSeverity(), obj.getShortMsg(),
+                                    obj.getLongMsg(), obj.getCategories()));
+                        }
+                    }
+                }
+            }
+        }
+        return ret;
+    }
 }
