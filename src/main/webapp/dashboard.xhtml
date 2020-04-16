@@ -24,7 +24,7 @@
 
                 }
             }
-            
+
             function doTheFocusICD(data) {
                 if (data.status === 'success') {
                     //PF('cptAutoComplVar').focus();
@@ -34,8 +34,8 @@
 
                 }
             }
-            
-            
+
+
         </script>
         <style>
             .inp{
@@ -77,7 +77,7 @@
             </h:form>
             <h:form id="dashBoardForm">
                 <p:accordionPanel id="accordionId">
-                    
+
                     <p:ajax event="tabChange" listener="#{dashboard.onTabChanged}" update="myPie"/>
                     <p:tab title="Lab Percentage"  >
                         <p:outputLabel value="#{dashboard.title}" style=" font-size: larger"></p:outputLabel>
@@ -119,28 +119,28 @@
                                         <h:panelGroup>
                                             <h:outputLabel value="Insurance" for="Insurance"></h:outputLabel>
                                             <p:autoComplete value="#{dashboard.insurer}"
-                                                                style="width:100%"
-                                                                id="InsurerAutoCompl"
-                                                                widgetVar="InsurerAutoComplVar"
-                                                                completeMethod="#{dashboard.completeInsurer}"
-                                                                var="ins"
-                                                                minQueryLength="3"
-                                                                forceSelection="true"
-                                                                maxResults="10"
-                                                                queryDelay="500"
-                                                                itemValue="#{ins.auth}"
-                                                                itemLabel="#{ins.auth} #{ins.insurerName}"
-                                                                size="50"
-                                                                >
+                                                            style="width:100%"
+                                                            id="InsurerAutoCompl"
+                                                            widgetVar="InsurerAutoComplVar"
+                                                            completeMethod="#{dashboard.completeInsurer}"
+                                                            var="ins"
+                                                            minQueryLength="3"
+                                                            forceSelection="true"
+                                                            maxResults="10"
+                                                            queryDelay="500"
+                                                            itemValue="#{ins.auth}"
+                                                            itemLabel="#{ins.auth} #{ins.insurerName}"
+                                                            size="50"
+                                                            >
 
-                                                    <p:column style="width:50px">
-                                                        <h:outputText value="#{ins.auth}" />
-                                                    </p:column>
-                                                    <p:column>
-                                                        <h:outputText value="#{ins ne null?ins.insurerName:''}" />
-                                                    </p:column>
-                                                    <f:converter converterId="insurerConverter"/>
-                                                </p:autoComplete>
+                                                <p:column style="width:50px">
+                                                    <h:outputText value="#{ins.auth}" />
+                                                </p:column>
+                                                <p:column>
+                                                    <h:outputText value="#{ins ne null?ins.insurerName:''}" />
+                                                </p:column>
+                                                <f:converter converterId="insurerConverter"/>
+                                            </p:autoComplete>
                                         </h:panelGroup>
                                         <h:panelGroup>
                                             <h:outputLabel value="DOB" for="DOB"></h:outputLabel>
@@ -245,11 +245,45 @@
                             </h:panelGrid>
                         </p:fieldset>
                         <p:fieldset legend="Validation Results" id="validationResults">
+                            <p:dataTable var="alert" value="#{dashboard.rulesAlerts}" rendered="#{dashboard.rulesAlerts ne null}">
+                                <!--<p:column headerText="Month">
+                                    <h:outputText value="#{lab.month}" />
+                                </p:column>-->
 
+                                <p:column headerText="Iem">
+                                    <h:outputText value="#{alert.targetObject}" />
+                                </p:column>
+
+                                <p:column headerText="ID">
+                                    <h:outputText value="#{alert.id}" />
+                                </p:column>
+
+                                <p:column headerText="Rule ID">
+                                    <h:outputText value="#{alert.ruleID}" />
+                                </p:column>
+
+                                <p:column headerText="Severity">
+                                    <h:outputText value="#{alert.severity}" />
+                                </p:column>
+
+                                <p:column headerText="Rule Name">
+                                    <h:outputText value="#{alert.ruleName}" />
+                                </p:column>
+
+                                <p:column headerText="Alert">
+                                    <h:outputText value="#{alert.shortMsg}" />
+                                </p:column>
+
+                                <p:column headerText="Alert Description">
+                                    <h:outputText value="#{alert.longMsg}" />
+                                </p:column>
+
+                                <p:column headerText="Categories">
+                                    <h:outputText value="#{alert.categories}" />
+                                </p:column>
+                            </p:dataTable>
                         </p:fieldset>
-
                     </p:tab>
-
                 </p:accordionPanel>
             </h:form>
         </h:panelGrid>

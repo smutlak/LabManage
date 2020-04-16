@@ -85,7 +85,7 @@ public class Utils {
         return ret;
     }
 
-    protected com.accumed.pposervice.ws.ScrubResponseReturn validate(String userName,
+    protected List<RulesOutcome> validate(String userName,
             String senderID, String receiverID, String gender,
             Date DOB, List<com.accumed.pposervice.ws.FindCptResponse.Return> cpts,
             List<com.accumed.pposervice.ws.FindIcdResponse.Return> icds) {
@@ -121,7 +121,7 @@ public class Utils {
         } catch (Exception ex) {
             Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return result;
+        return getAllOutcomes(result);
     }
 
     protected com.accumed.pposervice.ws.ScrubScrubbingRequest buildRequest(String userName,

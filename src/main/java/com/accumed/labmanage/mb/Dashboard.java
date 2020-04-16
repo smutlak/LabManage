@@ -52,6 +52,9 @@ public class Dashboard implements Serializable {
     private Date DOB;
     private com.accumed.pposervice.ws.FindInsurerResponse.Return insurer;
 
+    //validation
+    List<RulesOutcome> rulesAlerts;
+
     /**
      * Creates a new instance of AccountInit
      */
@@ -293,8 +296,6 @@ public class Dashboard implements Serializable {
         this.DOB = DOB;
     }
 
-   
-
     public FindInsurerResponse.Return getInsurer() {
         return insurer;
     }
@@ -319,9 +320,19 @@ public class Dashboard implements Serializable {
     public void validate() {
         FacesContext context = FacesContext.getCurrentInstance();
         Main mainBean = context.getApplication().evaluateExpressionGet(context, "#{main}", Main.class);
-        
-        com.accumed.pposervice.ws.ScrubResponseReturn ret = (new Utils()).validate(mainBean.getUsername(), mainBean.getFacilityLicense(),
+
+        rulesAlerts = (new Utils()).validate(mainBean.getUsername(), mainBean.getFacilityLicense(),
                 insurer == null ? "Unknown" : insurer.getAuth(),
                 gender, DOB, selectedCpts, selectedIcds);
     }
+
+    public List<RulesOutcome> getRulesAlerts() {
+        return rulesAlerts;
+    }
+
+    public void setRulesAlerts(List<RulesOutcome> rulesAlerts) {
+        this.rulesAlerts = rulesAlerts;
+    }
+    
+    
 }
