@@ -244,41 +244,39 @@
                                 </h:panelGroup>
                             </h:panelGrid>
                         </p:fieldset>
-                        <p:fieldset legend="Validation Results" id="validationResults">
-                            <p:dataTable var="alert" value="#{dashboard.rulesAlerts}" rendered="#{dashboard.rulesAlerts ne null}">
-                                <!--<p:column headerText="Month">
-                                    <h:outputText value="#{lab.month}" />
-                                </p:column>-->
-
-                                <p:column headerText="Iem">
+                        <p:fieldset legend="Validation Results" id="validationResults" style="height: 250px;">
+                            <p:dataTable var="alert" value="#{dashboard.rulesAlerts}" 
+                                         rendered="#{dashboard.rulesAlerts ne null}"
+                                         scrollable="true" scrollHeight="150">
+                                <p:column headerText="Item" width="1%">
                                     <h:outputText value="#{alert.targetObject}" />
                                 </p:column>
 
-                                <p:column headerText="ID">
+<!--                                <p:column headerText="ID">
                                     <h:outputText value="#{alert.id}" />
                                 </p:column>
 
                                 <p:column headerText="Rule ID">
                                     <h:outputText value="#{alert.ruleID}" />
-                                </p:column>
+                                </p:column>-->
 
-                                <p:column headerText="Severity">
+                                <p:column headerText="Severity" width="1%">
                                     <h:outputText value="#{alert.severity}" />
                                 </p:column>
 
-                                <p:column headerText="Rule Name">
+                                <p:column headerText="Rule Name" width="3%">
                                     <h:outputText value="#{alert.ruleName}" />
                                 </p:column>
 
-                                <p:column headerText="Alert">
+                                <p:column headerText="Alert" width="5%">
                                     <h:outputText value="#{alert.shortMsg}" />
                                 </p:column>
 
-                                <p:column headerText="Alert Description">
+                                <p:column headerText="Alert Description" width="10%">
                                     <h:outputText value="#{alert.longMsg}" />
                                 </p:column>
 
-                                <p:column headerText="Categories">
+                                <p:column headerText="Categories" width="5%">
                                     <h:outputText value="#{alert.categories}" />
                                 </p:column>
                             </p:dataTable>
