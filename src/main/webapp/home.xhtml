@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>ACCUMED LAB MANAGEMENT HOME</title>
+        <h:outputStylesheet library="css" name="style.css"/>
+        <script type="text/javascript">
+        </script>
+        <style>
+            .centered {
+                position: absolute;
+                /*                top: 0;
+                                bottom: 0;*/
+                margin:auto;
+                left:40%;
+                margin-left:-200px;
+                width:200px;
+            }
+            .col1{
+                padding: 50px;
+            }
+            img.nav:hover{
+                /*-webkit-filter: invert(100%) !important;*/
+                -moz-border-radius-topleft: 10px;
+                -moz-border-radius-topright: 10px;
+                -moz-border-radius-bottomright: 0px;
+                -moz-border-radius-bottomleft: 0px;
+                -webkit-border-radius: 10px 10px 0px 0px;
+                border-radius: 10px 10px 0px 0px;
+                border: #7f9394 thick solid; 
+            }
+            .nav{
+                border: white thick solid;
+            }
+
+        </style>
+    </h:head>
+    <h:body>
+        <h:panelGrid columns="1" width="100%" >
+            <p:growl id="growl" showDetail="true"/>
+            <p:ajaxStatus onstart="document.getElementById('loaderAjax').style.display='';" onsuccess="document.getElementById('loaderAjax').style.display='none'" />
+            <p:graphicImage name="/images/ajax-loader13.gif" style="display: none;  width:150px;height:150px; position: absolute;top: 75%;left: 90%; z-index: 55" id="loaderAjax" />
+            <h:form id="headerForm" >  
+                <h:panelGrid id="headerGRP" styleClass="headerGRP" columns="3" columnClasses="headerLogo,headerMenu,headerLogout">
+                    <h:commandLink >
+                        <h:graphicImage style="cursor:pointer;  width: 180px; margin-top: 5px;" url="/resources/images/accumed-logo-transparent.png"></h:graphicImage>
+                    </h:commandLink>
+                    <h:panelGroup style="text-align: center; color: #ffffff;">
+                        <p style="font-size: larger; font-weight: bolder">ACCUMED LAB MANAGEMENT TOOL - HOME</p>
+                    </h:panelGroup>
+                    <h:panelGrid style="float: right; margin-right: 20px;" columns="2">
+                        <p style="color: #ffffff;">Welcome #{main.username}</p>
+                        <h:commandLink action="#{main.logout}" value="Logout"></h:commandLink> 
+                    </h:panelGrid>
+                </h:panelGrid>               
+            </h:form>
+            <h:form id="dashBoardForm">
+
+                <h:panelGrid columns="2" styleClass="centered" columnClasses="col1,col1">
+                    <h:commandLink>
+                        <p:graphicImage styleClass="nav" url="/resources/images/LabDashboard.png" width="200px"></p:graphicImage>                    
+                    </h:commandLink>
+
+                    <h:commandLink>
+                        <p:graphicImage styleClass="nav" url="/resources/images/LabOrderValidaation.png" width="200px"></p:graphicImage>
+                    </h:commandLink>
+                </h:panelGrid>
+
+            </h:form>
+        </h:panelGrid>
+    </h:body>
+</html>
+
