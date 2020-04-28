@@ -83,7 +83,7 @@
                         <p:panel style="width:100%">
                             <h:panelGrid columns="3" style="width:100%">
                                 <h:panelGroup>
-                                    <h:outputLabel value="Insurance" for="Insurance"></h:outputLabel>
+                                    <h:outputLabel value="Insurance" for="InsurerAutoCompl"></h:outputLabel>
                                     <p:autoComplete value="#{dashboard.insurer}"
                                                     style="width:100%"
                                                     id="InsurerAutoCompl"
@@ -126,83 +126,82 @@
 
 
                         <h:outputLabel></h:outputLabel>
-                        <p:panel style="width:100%">
-                            <h:panelGrid columns="2" style="width:100%">
-                                <p:fieldset styleClass="smallLegend">
-                                    <h:panelGrid columns="2">
-                                        <p:outputLabel value="CPT" for="cptAutoCompl" ></p:outputLabel>
-                                        <p:autoComplete value="#{dashboard.cptCode}"
-                                                        style="width:100%"
-                                                        id="cptAutoCompl"
-                                                        widgetVar="cptAutoComplVar"
-                                                        completeMethod="#{dashboard.complete}"
-                                                        var="cptCode"
-                                                        minQueryLength="3"
-                                                        forceSelection="true"
-                                                        maxResults="20"
-                                                        queryDelay="500"
-                                                        itemValue="#{cptCode.code}"
-                                                        itemLabel="#{cptCode.code}"
-                                                        size="40"
-                                                        >
 
-                                            <f:ajax event="itemSelect" listener="#{dashboard.addCPT}"  execute="cptAutoCompl" render="cptList cptAutoCompl" onevent="doTheFocus"/>
+                        <h:panelGrid columns="2" style="width:100%">
+                            <p:fieldset styleClass="smallLegend">
+                                <h:panelGrid columns="2">
+                                    <p:outputLabel value="ICD" for="icdAutoCompl" ></p:outputLabel>
+                                    <p:autoComplete value="#{dashboard.icdCode}"
+                                                    style="width:100%"
+                                                    id="icdAutoCompl"
+                                                    widgetVar="icdAutoComplVar"
+                                                    completeMethod="#{dashboard.completeICD}"
+                                                    var="icdCode"
+                                                    minQueryLength="3"
+                                                    forceSelection="true"
+                                                    maxResults="20"
+                                                    queryDelay="500"
+                                                    itemValue="#{icdCode.code}"
+                                                    itemLabel="#{icdCode.code}"
+                                                    size="40"
+                                                    >
 
-                                            <p:column style="width:50px">
-                                                <h:outputText value="#{cptCode.code}" />
-                                            </p:column>
+                                        <f:ajax event="itemSelect" listener="#{dashboard.addICD}"  execute="icdAutoCompl" render="icdList icdAutoCompl"  onevent="doTheFocusICD" />
 
-                                            <p:column>
-                                                <h:outputText value="#{cptCode ne null?cptCode.shortDescription:''}" />
-                                            </p:column>
+                                        <p:column headerText="Code">
+                                            <h:outputText value="#{icdCode.code}" />
+                                        </p:column>
+                                        <p:column headerText="Description">
+                                            <h:outputText value="#{icdCode ne null?icdCode.shortDescription:''}" />
+                                        </p:column>
 
-                                            <f:converter converterId="cptConverter"/>
+                                        <f:converter converterId="icdConverter"/>
 
-                                        </p:autoComplete>
-                                    </h:panelGrid>
-                                    <p:selectOneListbox id="cptList" style=" height: 150px; width: 100%;">
-                                        <f:selectItems value="#{dashboard.selectedCpts}" var="cpt" itemLabel="#{cpt.code} #{cpt.shortDescription}" itemValue="#{cpt.code}" />
-                                    </p:selectOneListbox>
-                                </p:fieldset>
-                                <p:fieldset styleClass="smallLegend">
-                                    <h:panelGrid columns="2">
-                                        <p:outputLabel value="ICD" for="icdAutoCompl" ></p:outputLabel>
-                                        <p:autoComplete value="#{dashboard.icdCode}"
-                                                        style="width:100%"
-                                                        id="icdAutoCompl"
-                                                        widgetVar="icdAutoComplVar"
-                                                        completeMethod="#{dashboard.completeICD}"
-                                                        var="icdCode"
-                                                        minQueryLength="3"
-                                                        forceSelection="true"
-                                                        maxResults="20"
-                                                        queryDelay="500"
-                                                        itemValue="#{icdCode.code}"
-                                                        itemLabel="#{icdCode.code}"
-                                                        size="40"
-                                                        >
+                                    </p:autoComplete>
 
-                                            <f:ajax event="itemSelect" listener="#{dashboard.addICD}"  execute="icdAutoCompl" render="icdList icdAutoCompl"  onevent="doTheFocusICD" />
+                                </h:panelGrid>
+                                <p:selectOneListbox id="icdList" style=" height: 150px; width: 100%;" >
+                                    <f:selectItems value="#{dashboard.selectedIcds}" var="icd" itemLabel="#{icd.code} #{icd.shortDescription}" itemValue="#{icd.code}" />
+                                </p:selectOneListbox>
+                            </p:fieldset>
+                            <p:fieldset styleClass="smallLegend">
+                                <h:panelGrid columns="2">
+                                    <p:outputLabel value="CPT" for="cptAutoCompl" ></p:outputLabel>
+                                    <p:autoComplete value="#{dashboard.cptCode}"
+                                                    style="width:100%"
+                                                    id="cptAutoCompl"
+                                                    widgetVar="cptAutoComplVar"
+                                                    completeMethod="#{dashboard.complete}"
+                                                    var="cptCode"
+                                                    minQueryLength="3"
+                                                    forceSelection="true"
+                                                    maxResults="20"
+                                                    queryDelay="500"
+                                                    itemValue="#{cptCode.code}"
+                                                    itemLabel="#{cptCode.code}"
+                                                    size="40"
+                                                    >
 
-                                            <p:column style="width:50px">
-                                                <h:outputText value="#{icdCode.code}" />
-                                            </p:column>
+                                        <f:ajax event="itemSelect" listener="#{dashboard.addCPT}"  execute="cptAutoCompl" render="cptList cptAutoCompl" onevent="doTheFocus"/>
 
-                                            <p:column>
-                                                <h:outputText value="#{icdCode ne null?icdCode.shortDescription:''}" />
-                                            </p:column>
+                                        <p:column style="width:50px">
+                                            <h:outputText value="#{cptCode.code}" />
+                                        </p:column>
 
-                                            <f:converter converterId="icdConverter"/>
+                                        <p:column>
+                                            <h:outputText value="#{cptCode ne null?cptCode.shortDescription:''}" />
+                                        </p:column>
 
-                                        </p:autoComplete>
+                                        <f:converter converterId="cptConverter"/>
 
-                                    </h:panelGrid>
-                                    <p:selectOneListbox id="icdList" style=" height: 150px; width: 100%;" >
-                                        <f:selectItems value="#{dashboard.selectedIcds}" var="icd" itemLabel="#{icd.code} #{icd.shortDescription}" itemValue="#{icd.code}" />
-                                    </p:selectOneListbox>
-                                </p:fieldset>
-                            </h:panelGrid>
-                        </p:panel>
+                                    </p:autoComplete>
+                                </h:panelGrid>
+                                <p:selectOneListbox id="cptList" style=" height: 150px; width: 100%;">
+                                    <f:selectItems value="#{dashboard.selectedCpts}" var="cpt" itemLabel="#{cpt.code} #{cpt.shortDescription}" itemValue="#{cpt.code}" />
+                                </p:selectOneListbox>
+                            </p:fieldset>
+                        </h:panelGrid>
+
                         <h:outputLabel></h:outputLabel>
                         <h:panelGroup>
                             <p:commandButton value="Validate" style="float: right;" actionListener="#{dashboard.validate}" update="validationResults"></p:commandButton>

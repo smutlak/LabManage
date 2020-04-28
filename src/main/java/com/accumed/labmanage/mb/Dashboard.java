@@ -163,10 +163,7 @@ public class Dashboard implements Serializable {
 
         try { // Call Web Service Operation
             com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
-            java.lang.String code = query;
-            java.lang.String desc = "";
-            // TODO process result here
-            java.util.List<com.accumed.pposervice.ws.FindIcdResponse.Return> result = port.findIcd(code, desc);
+            java.util.List<com.accumed.pposervice.ws.FindIcdResponse.Return> result = port.findIcd(query, query);
             System.out.println("Result = " + result);
             return result;
         } catch (Exception ex) {
@@ -180,11 +177,8 @@ public class Dashboard implements Serializable {
 
         try { // Call Web Service Operation
             com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
-            java.lang.String auth = query;
-            java.lang.String name = query;
-            // TODO process result here
-            java.util.List<com.accumed.pposervice.ws.FindInsurerResponse.Return> result = port.findInsurer(auth, name);
-            System.out.println("Result = " + result);
+            java.util.List<com.accumed.pposervice.ws.FindInsurerResponse.Return> result = port.findInsurer(query, query);
+            System.out.println("Result = " + result +" For = "+query);
             return result;
 
         } catch (Exception ex) {
