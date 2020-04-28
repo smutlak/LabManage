@@ -154,7 +154,7 @@ public class AccountInit implements Serializable {
                         progress = iPerc;
                         if (progress >= 99) {
                             context.getExternalContext().redirect(context.getExternalContext().getRequestContextPath()
-                                    + "/faces/dashboard.xhtml");
+                                    + "/faces/home.xhtml");
                         }
                     }
                 }
@@ -165,13 +165,13 @@ public class AccountInit implements Serializable {
                     if (delayCounter >= DELAY_COUNT) {
                         delayCounter = 0;
                         context.getExternalContext().redirect(context.getExternalContext().getRequestContextPath()
-                                + "/faces/dashboard.xhtml");
+                                + "/faces/home.xhtml");
                     }
                     return 0;
                 }
                 if (result.equalsIgnoreCase("Completed")) {
                     context.getExternalContext().redirect(context.getExternalContext().getRequestContextPath()
-                            + "/faces/dashboard.xhtml");
+                            + "/faces/home.xhtml");
                     return 100;
                 }
             }
