@@ -41,6 +41,7 @@ import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -93,7 +94,8 @@ public class Utils {
         try {
             com.accumed.pposervice.ws.ScrubScrubbingRequest request = buildRequest(userName,
                     senderID, receiverID, "Analyzing", gender,
-                    dateFormatter.format(DOB), cpts, icds);
+                    DOB!=null?dateFormatter.format(DOB) : (dateFormatter.format(new Date())), 
+                    cpts, icds);
 
             java.lang.String user = "ACCUMED";
             java.lang.String psw = "@CCUMED";

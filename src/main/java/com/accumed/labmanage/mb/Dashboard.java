@@ -155,12 +155,12 @@ public class Dashboard implements Serializable {
 
         try { // Call Web Service Operation
             com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
-            java.lang.String code = query;
-            java.lang.String desc = "";
+//            java.lang.String code = query;
+//            java.lang.String desc = "";
             // TODO process result here
             //java.util.List<com.accumed.pposervice.ws.FindCptResponse.Return> result = port.findCpt(code, desc);
-            partitialCptList = port.findCpt(code, desc);
-            System.out.println("Result = " + partitialCptList);
+            partitialCptList = port.findCpt(query, query);
+            System.out.println("Result = " + partitialCptList + "For =" + query );
             return partitialCptList;
         } catch (Exception ex) {
             Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE,
