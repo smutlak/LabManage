@@ -54,15 +54,14 @@ public class Dashboard implements Serializable {
 
     //validation
     List<RulesOutcome> rulesAlerts;
-    
+
     //last options in list.
     java.util.List<com.accumed.pposervice.ws.FindIcdResponse.Return> partitialIcdList;
     java.util.List<com.accumed.pposervice.ws.FindCptResponse.Return> partitialCptList;
     java.util.List<com.accumed.pposervice.ws.FindInsurerResponse.Return> partitialInsurersList;
-    
+
     com.accumed.pposervice.ws.FindIcdResponse.Return selectedIcd;
     com.accumed.pposervice.ws.FindCptResponse.Return selectedCpt;
-    
 
     /**
      * Creates a new instance of AccountInit
@@ -160,7 +159,7 @@ public class Dashboard implements Serializable {
             // TODO process result here
             //java.util.List<com.accumed.pposervice.ws.FindCptResponse.Return> result = port.findCpt(code, desc);
             partitialCptList = port.findCpt(query, query);
-            System.out.println("Result = " + partitialCptList + "For =" + query );
+            System.out.println("Result = " + partitialCptList + "For =" + query);
             return partitialCptList;
         } catch (Exception ex) {
             Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE,
@@ -190,7 +189,7 @@ public class Dashboard implements Serializable {
             com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
             //java.util.List<com.accumed.pposervice.ws.FindInsurerResponse.Return> result = port.findInsurer(query, query);
             partitialInsurersList = port.findInsurer(query, query);
-            System.out.println("Result = " + partitialInsurersList +" For = "+query);
+            System.out.println("Result = " + partitialInsurersList + " For = " + query);
             return partitialInsurersList;
 
         } catch (Exception ex) {
@@ -379,6 +378,18 @@ public class Dashboard implements Serializable {
     public void setSelectedCpt(FindCptResponse.Return selectedCpt) {
         this.selectedCpt = selectedCpt;
     }
-    
-    
+
+    public String getImage(RulesOutcome alert) {
+        switch (alert.getSeverity()) {
+            case "Blocker":
+                return "images/Blocker.png";
+            case "Severe":
+                return "images/Severe.png";
+            case "warning":
+                return "images/warning.png";
+            case "Info":
+                return "images/Info.png";
+        }
+        return "Blocker.png"; 
+    }
 }

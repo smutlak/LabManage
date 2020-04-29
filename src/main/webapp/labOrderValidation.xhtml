@@ -84,7 +84,7 @@
 
                 <p:fieldset legend="Claim &amp; Patient Details" style="margin:10px;">
                     <h:panelGrid columns="2" style="width:100%" columnClasses="c1,c2,c3">
-                        <p:graphicImage name="images/right-animated-arrows.gif" width="100" />
+                        <p:graphicImage  name="images/right-animated-arrows.gif" width="100" />
                         <p:panel style="width:100%">
                             <h:panelGrid columns="3" style="width:100%">
                                 <h:panelGroup>
@@ -248,18 +248,21 @@
                                  rendered="#{dashboard.rulesAlerts ne null}"
                                  scrollable="true" scrollHeight="150"
                                  resizableColumns="true">
-                        <p:column headerText="Item" width="3%">
+                        <!--<p:column headerText="Item" width="3%">
                             <h:outputText value="#{alert.targetObject}" />
                         </p:column>
 
-                        <!--                                <p:column headerText="ID">
+                                                        <p:column headerText="ID">
                                                             <h:outputText value="#{alert.id}" />
                                                         </p:column>
                         
                                                         <p:column headerText="Rule ID">
                                                             <h:outputText value="#{alert.ruleID}" />
                                                         </p:column>-->
-
+                        <p:column>
+                        <p:graphicImage name="#{dashboard.getImage(alert)}"/>
+                        </p:column>
+                        
                         <p:column headerText="Severity" width="3%">
                             <h:outputText value="#{alert.severity}" />
                         </p:column>
@@ -276,9 +279,9 @@
                             <h:outputText value="#{alert.longMsg}" />
                         </p:column>
 
-                        <p:column headerText="Categories" width="5%" rendered="#{alert.longMsg ne ''}">
+                        <!--<p:column headerText="Categories" width="5%" rendered="#{alert.longMsg ne ''}">
                             <h:outputText value="#{alert.categories}" />
-                        </p:column>
+                        </p:column>-->
                     </p:dataTable>
                 </p:fieldset>
             </h:form>
