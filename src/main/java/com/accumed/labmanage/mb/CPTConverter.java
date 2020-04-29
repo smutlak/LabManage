@@ -50,13 +50,20 @@ public class CPTConverter implements Converter, Serializable {
 
     private List<com.accumed.pposervice.ws.FindCptResponse.Return> getCPts(String query) {
         try { // Call Web Service Operation
-            com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
-            java.lang.String code = query;
-            java.lang.String desc = "";
-            // TODO process result here
-            java.util.List<com.accumed.pposervice.ws.FindCptResponse.Return> result = port.findCpt(code, desc);
-            System.out.println("Result = " + result);
-            return result;
+            
+            
+            FacesContext context = FacesContext.getCurrentInstance();
+            Dashboard dashboardBean = context.getApplication().evaluateExpressionGet(context, "#{dashboard}", Dashboard.class);
+            if(dashboardBean != null){
+                return dashboardBean.getPartitialCptList();
+            }
+//            com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
+//            java.lang.String code = query;
+//            java.lang.String desc = "";
+//            // TODO process result here
+//            java.util.List<com.accumed.pposervice.ws.FindCptResponse.Return> result = port.findCpt(code, desc);
+//            System.out.println("Result = " + result);
+//            return result;
         } catch (Exception ex) {
             Logger.getLogger(CPTConverter.class.getName()).log(Level.SEVERE,
                     "exception caught", ex);

@@ -50,13 +50,19 @@ public class InsurerConverter implements Converter, Serializable {
 
     private List<com.accumed.pposervice.ws.FindInsurerResponse.Return> getInsurers(String query) {
         try { // Call Web Service Operation
-            com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
-            java.lang.String auth = query;
-            java.lang.String name = query;
-            // TODO process result here
-            java.util.List<com.accumed.pposervice.ws.FindInsurerResponse.Return> result = port.findInsurer(auth, name);
-            System.out.println("Result = " + result);
-            return result;
+            
+            FacesContext context = FacesContext.getCurrentInstance();
+            Dashboard dashboardBean = context.getApplication().evaluateExpressionGet(context, "#{dashboard}", Dashboard.class);
+            if(dashboardBean != null){
+                return dashboardBean.getPartitialInsurersList();
+            }
+//            com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
+//            java.lang.String auth = query;
+//            java.lang.String name = query;
+//            // TODO process result here
+//            java.util.List<com.accumed.pposervice.ws.FindInsurerResponse.Return> result = port.findInsurer(auth, name);
+//            System.out.println("Result = " + result);
+//            return result;
         } catch (Exception ex) {
             Logger.getLogger(InsurerConverter.class.getName()).log(Level.SEVERE,
                     "exception caught", ex);

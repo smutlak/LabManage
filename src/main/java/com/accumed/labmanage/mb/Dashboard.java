@@ -54,6 +54,15 @@ public class Dashboard implements Serializable {
 
     //validation
     List<RulesOutcome> rulesAlerts;
+    
+    //last options in list.
+    java.util.List<com.accumed.pposervice.ws.FindIcdResponse.Return> partitialIcdList;
+    java.util.List<com.accumed.pposervice.ws.FindCptResponse.Return> partitialCptList;
+    java.util.List<com.accumed.pposervice.ws.FindInsurerResponse.Return> partitialInsurersList;
+    
+    com.accumed.pposervice.ws.FindIcdResponse.Return selectedIcd;
+    com.accumed.pposervice.ws.FindCptResponse.Return selectedCpt;
+    
 
     /**
      * Creates a new instance of AccountInit
@@ -149,9 +158,10 @@ public class Dashboard implements Serializable {
             java.lang.String code = query;
             java.lang.String desc = "";
             // TODO process result here
-            java.util.List<com.accumed.pposervice.ws.FindCptResponse.Return> result = port.findCpt(code, desc);
-            System.out.println("Result = " + result);
-            return result;
+            //java.util.List<com.accumed.pposervice.ws.FindCptResponse.Return> result = port.findCpt(code, desc);
+            partitialCptList = port.findCpt(code, desc);
+            System.out.println("Result = " + partitialCptList);
+            return partitialCptList;
         } catch (Exception ex) {
             Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE,
                     "exception caught", ex);
@@ -163,9 +173,10 @@ public class Dashboard implements Serializable {
 
         try { // Call Web Service Operation
             com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
-            java.util.List<com.accumed.pposervice.ws.FindIcdResponse.Return> result = port.findIcd(query, query);
-            System.out.println("Result = " + result);
-            return result;
+            //java.util.List<com.accumed.pposervice.ws.FindIcdResponse.Return> result = port.findIcd(query, query);
+            partitialIcdList = port.findIcd(query, query);
+            System.out.println("Result = " + partitialIcdList);
+            return partitialIcdList;
         } catch (Exception ex) {
             Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE,
                     "exception caught", ex);
@@ -177,9 +188,10 @@ public class Dashboard implements Serializable {
 
         try { // Call Web Service Operation
             com.accumed.pposervice.ws.PPO port = getPPPService().getPPOPort();
-            java.util.List<com.accumed.pposervice.ws.FindInsurerResponse.Return> result = port.findInsurer(query, query);
-            System.out.println("Result = " + result +" For = "+query);
-            return result;
+            //java.util.List<com.accumed.pposervice.ws.FindInsurerResponse.Return> result = port.findInsurer(query, query);
+            partitialInsurersList = port.findInsurer(query, query);
+            System.out.println("Result = " + partitialInsurersList +" For = "+query);
+            return partitialInsurersList;
 
         } catch (Exception ex) {
             Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE,
@@ -326,6 +338,46 @@ public class Dashboard implements Serializable {
 
     public void setRulesAlerts(List<RulesOutcome> rulesAlerts) {
         this.rulesAlerts = rulesAlerts;
+    }
+
+    public List<FindIcdResponse.Return> getPartitialIcdList() {
+        return partitialIcdList;
+    }
+
+    public void setPartitialIcdList(List<FindIcdResponse.Return> partitialIcdList) {
+        this.partitialIcdList = partitialIcdList;
+    }
+
+    public List<FindCptResponse.Return> getPartitialCptList() {
+        return partitialCptList;
+    }
+
+    public void setPartitialCptList(List<FindCptResponse.Return> partitialCptList) {
+        this.partitialCptList = partitialCptList;
+    }
+
+    public List<FindInsurerResponse.Return> getPartitialInsurersList() {
+        return partitialInsurersList;
+    }
+
+    public void setPartitialInsurersList(List<FindInsurerResponse.Return> partitialInsurersList) {
+        this.partitialInsurersList = partitialInsurersList;
+    }
+
+    public FindIcdResponse.Return getSelectedIcd() {
+        return selectedIcd;
+    }
+
+    public void setSelectedIcd(FindIcdResponse.Return selectedIcd) {
+        this.selectedIcd = selectedIcd;
+    }
+
+    public FindCptResponse.Return getSelectedCpt() {
+        return selectedCpt;
+    }
+
+    public void setSelectedCpt(FindCptResponse.Return selectedCpt) {
+        this.selectedCpt = selectedCpt;
     }
     
     
