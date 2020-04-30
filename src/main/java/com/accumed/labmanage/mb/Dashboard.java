@@ -379,17 +379,28 @@ public class Dashboard implements Serializable {
         this.selectedCpt = selectedCpt;
     }
 
-    public String getImage(RulesOutcome alert) {
-        switch (alert.getSeverity()) {
-            case "Blocker":
-                return "images/Blocker.png";
-            case "Severe":
-                return "images/Severe.png";
-            case "warning":
-                return "images/warning.png";
-            case "Info":
-                return "images/Info.png";
+    public String getAlertImage(RulesOutcome alert) {
+        if (alert.getSeverity().equalsIgnoreCase("BLOCKER")) {
+            return "/resources/images/Blocker.png";
+        } else if (alert.getSeverity().equalsIgnoreCase("CRITICAL")) {
+            return "/resources/images/Blocker.png";
+        } else if (alert.getSeverity().equalsIgnoreCase("SEVERE")) {
+            return "/resources/images/Severe.png";
+        } else if (alert.getSeverity().equalsIgnoreCase("WARNING")) {
+            return "/resources/images/Warning.png";
+        } else if (alert.getSeverity().equalsIgnoreCase("INFO")) {
+            return "/resources/images/Info.png";
         }
-        return "Blocker.png"; 
+        return "/resources/images/Blocker.png";
+    }
+    
+    public Integer getAlertID(RulesOutcome alert) {
+        if(alert.getRuleName().startsWith("J")){
+            return Integer.parseInt(alert.getRuleName().substring(1, alert.getRuleName().indexOf('_')));
+        }else if(alert.getRuleName().startsWith("HAAD")){
+            return Integer.parseInt(alert.getRuleName().substring(4, alert.getRuleName().indexOf('_')));
+        }
+        else
+            return 0;
     }
 }

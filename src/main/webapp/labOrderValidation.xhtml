@@ -55,10 +55,12 @@
                 padding: 2px 2px !important;
             }
 
+            /*
             .layouting.ui-panelgrid>*>tr,
             .layouting.ui-panelgrid .ui-panelgrid-cell {
                 border: none;
-            }
+            }*/
+            
         </style>
     </h:head>
     <h:body>
@@ -134,7 +136,7 @@
 
                         <h:panelGrid columns="2" style="width:100%">
                             <p:fieldset styleClass="smallLegend">
-                                <p:panelGrid styleClass="layouting">
+                                <p:panelGrid styleClass="ui-noborder">
                                     <p:row>
                                         <p:column>
                                             <p:outputLabel value="ICD" for="icdAutoCompl" ></p:outputLabel>
@@ -159,7 +161,8 @@
                                                             size="60"
                                                             >
 
-                                                <f:ajax event="itemSelect" listener="#{dashboard.addICD}"  execute="icdAutoCompl" render="icdList icdAutoCompl"  onevent="doTheFocusICD" />
+                                                <!--onevent="doTheFocusICD"-->
+                                                <f:ajax event="itemSelect" listener="#{dashboard.addICD}"  execute="icdAutoCompl" render="icdList icdAutoCompl"/>
 
                                                 <p:column headerText="Code">
                                                     <h:outputText value="#{icdCode.code}" />
@@ -184,7 +187,7 @@
 
                             </p:fieldset>
                             <p:fieldset styleClass="smallLegend">
-                                <p:panelGrid styleClass="layouting">
+                                <p:panelGrid styleClass="ui-noborder" >
                                     <p:row>
                                         <p:column>
                                             <p:outputLabel value="CPT" for="cptAutoCompl" ></p:outputLabel>
@@ -209,7 +212,8 @@
                                                             size="60"
                                                             >
 
-                                                <f:ajax event="itemSelect" listener="#{dashboard.addCPT}"  execute="cptAutoCompl" render="cptList cptAutoCompl" onevent="doTheFocus"/>
+                                                <!--onevent="doTheFocus"-->
+                                                <f:ajax event="itemSelect" listener="#{dashboard.addCPT}"  execute="cptAutoCompl" render="cptList cptAutoCompl" />
 
                                                 <p:column style="width:50px">
                                                     <h:outputText value="#{cptCode.code}" />
@@ -245,43 +249,28 @@
                 </p:fieldset>
                 <p:fieldset legend="Validation Results" id="validationResults" style="height: 250px;">
                     <p:dataTable var="alert" value="#{dashboard.rulesAlerts}" 
-                                 rendered="#{dashboard.rulesAlerts ne null}"
+
                                  scrollable="true" scrollHeight="150"
                                  resizableColumns="true">
-                        <!--<p:column headerText="Item" width="3%">
-                            <h:outputText value="#{alert.targetObject}" />
-                        </p:column>
 
-                                                        <p:column headerText="ID">
-                                                            <h:outputText value="#{alert.id}" />
-                                                        </p:column>
-                        
-                                                        <p:column headerText="Rule ID">
-                                                            <h:outputText value="#{alert.ruleID}" />
-                                                        </p:column>-->
-                        <p:column>
-                        <p:graphicImage name="#{dashboard.getImage(alert)}"/>
-                        </p:column>
-                        
-                        <p:column headerText="Severity" width="3%">
+
+                        <p:column headerText="Severity" width="70">
+                            <h:graphicImage url="#{dashboard.getAlertImage(alert)}" width="16"/>
                             <h:outputText value="#{alert.severity}" />
                         </p:column>
 
-                        <p:column headerText="Rule Name" width="5%">
-                            <h:outputText value="#{alert.ruleName}" />
+                        <p:column headerText="ID" width="50">
+                            <h:outputText value="#{dashboard.getAlertID(alert)}" />
                         </p:column>
 
-                        <p:column headerText="Alert" width="10%">
+                        <p:column headerText="Alert" width="56%">
                             <h:outputText value="#{alert.shortMsg}" />
                         </p:column>
 
-                        <p:column headerText="Alert Description" width="10%" rendered="#{alert.longMsg ne 'E'}">
+                        <p:column headerText="Description" rendered="#{alert.longMsg ne 'E'}">
                             <h:outputText value="#{alert.longMsg}" />
                         </p:column>
 
-                        <!--<p:column headerText="Categories" width="5%" rendered="#{alert.longMsg ne ''}">
-                            <h:outputText value="#{alert.categories}" />
-                        </p:column>-->
                     </p:dataTable>
                 </p:fieldset>
             </h:form>
