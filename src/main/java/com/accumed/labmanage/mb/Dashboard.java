@@ -8,6 +8,7 @@ package com.accumed.labmanage.mb;
 import com.accumed.pposervice.ws.FindCptResponse;
 import com.accumed.pposervice.ws.FindIcdResponse;
 import com.accumed.pposervice.ws.FindInsurerResponse;
+import com.accumed.pposervice.ws.GetAccuntTotalsVSLabsResponse;
 import com.accumed.pposervice.ws.GetFacilityMonthTransactionResponse;
 import com.accumed.pposervice.ws.PPO_Service;
 import java.io.Serializable;
@@ -41,6 +42,7 @@ public class Dashboard implements Serializable {
     //@WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_9081/PPOService/PPO.wsdl")
     private PPO_Service service;
     private List<com.accumed.pposervice.ws.GetAccuntTotalsVSLabsResponse.Return> labs;
+    private List<com.accumed.pposervice.ws.GetAccuntTotalsVSLabsResponse.Return> curMonthlabs;
     private PieChartModel pieModel;
 
     //Claim Validation
@@ -62,6 +64,10 @@ public class Dashboard implements Serializable {
 
     com.accumed.pposervice.ws.FindIcdResponse.Return selectedIcd;
     com.accumed.pposervice.ws.FindCptResponse.Return selectedCpt;
+    
+    
+    private Integer selectedMonth;
+    private Integer selectedYear;
 
     /**
      * Creates a new instance of AccountInit
@@ -87,7 +93,30 @@ public class Dashboard implements Serializable {
         return service;
     }
 
-    public List<com.accumed.pposervice.ws.GetAccuntTotalsVSLabsResponse.Return> getLabs() {
+    public List<GetAccuntTotalsVSLabsResponse.Return> getCurMonthlabs() {
+        if(curMonthlabs != null && !curMonthlabs.isEmpty()){
+            if(curMonthlabs.get(0).getYear().equals(getSelectedYear()) && curMonthlabs.get(0).getMonth().equals(getSelectedMonth())){
+                return curMonthlabs;
+            }
+        }
+        
+        curMonthlabs = new ArrayList();
+        getLabs();
+        if (labs != null && !labs.isEmpty()) {
+            labs.stream().filter((lab) -> (lab.getYear().equals(getSelectedYear()) && lab.getMonth().equals(getSelectedMonth()))).forEachOrdered((lab) -> {
+                curMonthlabs.add(lab);
+            });
+        }
+        return curMonthlabs;
+    }
+
+    public void setCurMonthlabs(List<GetAccuntTotalsVSLabsResponse.Return> curMonthlabs) {
+        this.curMonthlabs = curMonthlabs;
+    }
+    
+  
+
+    private List<com.accumed.pposervice.ws.GetAccuntTotalsVSLabsResponse.Return> getLabs() {
 
         if (labs != null && !labs.isEmpty()) {
             return labs;
@@ -99,12 +128,17 @@ public class Dashboard implements Serializable {
             Main mainBean = context.getApplication().evaluateExpressionGet(context, "#{main}", Main.class);
             java.lang.Long accountId = mainBean.getAccountid();
             // TODO process result here
-            java.util.List<com.accumed.pposervice.ws.GetAccuntTotalsVSLabsResponse.Return> result = port.getAccuntTotalsVSLabs(accountId);
+            java.util.List<com.accumed.pposervice.ws.GetAccuntTotalsVSLabsResponse.Return> result = port.getAccuntTotalsVSLabs(accountId, false);
             labs = result;
             System.out.println("Result = " + result);
         } catch (Exception ex) {
             Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE,
                     "exception caught", ex);
+        }
+        
+        if (labs != null && !labs.isEmpty()) {
+            this.setSelectedYear(labs.get(labs.size()-1).getYear());
+            this.setSelectedMonth(labs.get(labs.size()-1).getMonth());
         }
         return labs;
     }
@@ -264,16 +298,13 @@ public class Dashboard implements Serializable {
     }
 
     public String getTitle() {
-        String sMonth = "";
+        String ret = "";
         getLabs();
         if (labs != null && !labs.isEmpty()) {
-            sMonth = new java.text.DateFormatSymbols().getMonths()[labs.get(0).getMonth() - 1];
-
+            ret = new java.text.DateFormatSymbols().getMonths()[getSelectedMonth() - 1];
+            ret += " - " + getSelectedYear();
         }
-        
-        int year = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
-        
-        return sMonth + " - " +year;
+        return ret;
     }
 
     private int getTotal() {
@@ -426,4 +457,22 @@ public class Dashboard implements Serializable {
         }
         return "";
     }
+
+    public Integer getSelectedMonth() {
+        return selectedMonth;
+    }
+
+    public void setSelectedMonth(Integer selectedMonth) {
+        this.selectedMonth = selectedMonth;
+    }
+
+    public Integer getSelectedYear() {
+        return selectedYear;
+    }
+
+    public void setSelectedYear(Integer selectedYear) {
+        this.selectedYear = selectedYear;
+    }
+    
+    
 }
