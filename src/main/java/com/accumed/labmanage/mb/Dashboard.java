@@ -64,8 +64,7 @@ public class Dashboard implements Serializable {
 
     com.accumed.pposervice.ws.FindIcdResponse.Return selectedIcd;
     com.accumed.pposervice.ws.FindCptResponse.Return selectedCpt;
-    
-    
+
     private Integer selectedMonth;
     private Integer selectedYear;
 
@@ -94,12 +93,12 @@ public class Dashboard implements Serializable {
     }
 
     public List<GetAccuntTotalsVSLabsResponse.Return> getCurMonthlabs() {
-        if(curMonthlabs != null && !curMonthlabs.isEmpty()){
-            if(curMonthlabs.get(0).getYear().equals(getSelectedYear()) && curMonthlabs.get(0).getMonth().equals(getSelectedMonth())){
+        if (curMonthlabs != null && !curMonthlabs.isEmpty()) {
+            if (curMonthlabs.get(0).getYear().equals(getSelectedYear()) && curMonthlabs.get(0).getMonth().equals(getSelectedMonth())) {
                 return curMonthlabs;
             }
         }
-        
+
         curMonthlabs = new ArrayList();
         getLabs();
         if (labs != null && !labs.isEmpty()) {
@@ -113,8 +112,6 @@ public class Dashboard implements Serializable {
     public void setCurMonthlabs(List<GetAccuntTotalsVSLabsResponse.Return> curMonthlabs) {
         this.curMonthlabs = curMonthlabs;
     }
-    
-  
 
     private List<com.accumed.pposervice.ws.GetAccuntTotalsVSLabsResponse.Return> getLabs() {
 
@@ -135,10 +132,10 @@ public class Dashboard implements Serializable {
             Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE,
                     "exception caught", ex);
         }
-        
+
         if (labs != null && !labs.isEmpty()) {
-            this.setSelectedYear(labs.get(labs.size()-1).getYear());
-            this.setSelectedMonth(labs.get(labs.size()-1).getMonth());
+            this.setSelectedYear(labs.get(labs.size() - 1).getYear());
+            this.setSelectedMonth(labs.get(labs.size() - 1).getMonth());
         }
         return labs;
     }
@@ -171,18 +168,18 @@ public class Dashboard implements Serializable {
         labels.add("Total claimed amount");
         //labels.add("Yellow");
         data.setLabels(labels);
-        
+
         PieChartOptions opt = new PieChartOptions();
         Legend legend = new Legend();
         legend.setDisplay(false);
         opt.setLegend(legend);
-        
+
         org.primefaces.model.charts.optionconfig.title.Title title = new org.primefaces.model.charts.optionconfig.title.Title();
         title.setDisplay(true);
         title.setText("Total Lab orders (AED)");
         title.setPosition("bottom");
         opt.setTitle(title);
-        
+
         pieModel.setOptions(opt);
         pieModel.setData(data);
     }
@@ -308,10 +305,10 @@ public class Dashboard implements Serializable {
     }
 
     private int getTotal() {
-        getLabs();
+        List<com.accumed.pposervice.ws.GetAccuntTotalsVSLabsResponse.Return> curLabs = getCurMonthlabs();
         double ret = 0;
-        if (labs != null && !labs.isEmpty()) {
-            for (com.accumed.pposervice.ws.GetAccuntTotalsVSLabsResponse.Return lab : labs) {
+        if (curLabs != null && !curLabs.isEmpty()) {
+            for (com.accumed.pposervice.ws.GetAccuntTotalsVSLabsResponse.Return lab : curLabs) {
                 ret += lab.getTotal();
             }
         }
@@ -319,10 +316,10 @@ public class Dashboard implements Serializable {
     }
 
     private int getLabTotal() {
-        getLabs();
+        List<com.accumed.pposervice.ws.GetAccuntTotalsVSLabsResponse.Return> curLabs = getCurMonthlabs();
         double ret = 0;
-        if (labs != null && !labs.isEmpty()) {
-            for (com.accumed.pposervice.ws.GetAccuntTotalsVSLabsResponse.Return lab : labs) {
+        if (curLabs != null && !curLabs.isEmpty()) {
+            for (com.accumed.pposervice.ws.GetAccuntTotalsVSLabsResponse.Return lab : curLabs) {
                 ret += lab.getTotalLab();
             }
         }
@@ -473,6 +470,5 @@ public class Dashboard implements Serializable {
     public void setSelectedYear(Integer selectedYear) {
         this.selectedYear = selectedYear;
     }
-    
-    
+
 }
