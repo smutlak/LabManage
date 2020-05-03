@@ -9,31 +9,31 @@
         <h:outputStylesheet library="css" name="style.css"/>
         <script type="text/javascript">
             /*function removeLegend()
-            {
-                this.cfg.legend = {
-                    show: false
-                };
-            }
-
-            function doTheFocus(data) {
-                if (data.status === 'success') {
-                    //PF('cptAutoComplVar').focus();
-                    setTimeout(function () {
-                        document.getElementById("dashBoardForm:accordionId:cptAutoCompl_input").focus();
-                    }, 300);
-
-                }
-            }
-
-            function doTheFocusICD(data) {
-                if (data.status === 'success') {
-                    //PF('cptAutoComplVar').focus();
-                    setTimeout(function () {
-                        document.getElementById("dashBoardForm:accordionId:icdAutoCompl_input").focus();
-                    }, 300);
-
-                }
-            }*/
+             {
+             this.cfg.legend = {
+             show: false
+             };
+             }
+             
+             function doTheFocus(data) {
+             if (data.status === 'success') {
+             //PF('cptAutoComplVar').focus();
+             setTimeout(function () {
+             document.getElementById("dashBoardForm:accordionId:cptAutoCompl_input").focus();
+             }, 300);
+             
+             }
+             }
+             
+             function doTheFocusICD(data) {
+             if (data.status === 'success') {
+             //PF('cptAutoComplVar').focus();
+             setTimeout(function () {
+             document.getElementById("dashBoardForm:accordionId:icdAutoCompl_input").focus();
+             }, 300);
+             
+             }
+             }*/
 
 
         </script>
@@ -76,37 +76,40 @@
                 </h:panelGrid>               
             </h:form>
             <h:form id="dashBoardForm">
-                        <p:outputLabel value="Transactions of " style=" font-size: large; color: darkblue;"></p:outputLabel>
-                        <p:outputLabel value="#{dashboard.title}" style=" font-size: large; color:#e83333 "></p:outputLabel>
-                        <h:panelGrid columns="2">
-                            <p:pieChart id="myPie" model="#{dashboard.pieModel}"/>
-                            <p:pieChart id="myPie2" model="#{dashboard.pieModel2}"/>
-                            <p:dataTable var="lab" value="#{dashboard.curMonthlabs}" style="margin-right: 50px"
-                                         scrollable="true" scrollHeight="550">
-                                <!--<p:column headerText="Month">
-                                    <h:outputText value="#{lab.month}" />
-                                </p:column>-->
+                <p:outputLabel value="Transactions of " style=" font-size: large; color: darkblue;"></p:outputLabel>
+                <p:outputLabel value="#{dashboard.title}" style=" font-size: large; color:#e83333 "></p:outputLabel>
+                <h:panelGrid columns="2">
+                    <h:panelGrid columns="1">
+                        <p:pieChart id="myPie" model="#{dashboard.pieModel}"/>
+                        <p:pieChart id="myPie2" model="#{dashboard.pieModel2}"/>
+                    </h:panelGrid>
+                    <p:dataTable var="lab" value="#{dashboard.curMonthlabs}" style="margin-right: 50px"
+                                 scrollable="true" scrollHeight="550">
+                        <!--<p:column headerText="Month">
+                            <h:outputText value="#{lab.month}" />
+                        </p:column>-->
 
-                                <p:column headerText="Receiver">
-                                    <h:outputText value="#{lab.receiverid}" />
-                                </p:column>
+                        <p:column headerText="Receiver">
+                            <h:outputText value="#{lab.receiverid}" />
+                        </p:column>
 
-                                <p:column headerText="Claims count">
-                                    <h:outputText value="#{lab.claimsCount}" />
-                                </p:column>
+                        <p:column headerText="Claims count">
+                            <h:outputText value="#{lab.claimsCount}" />
+                        </p:column>
 
-                                <p:column headerText="Total claimed amount">
-                                    <h:outputText value="#{lab.total}" />
-                                </p:column>
+                        <p:column headerText="Total claimed amount">
+                            <h:outputText value="#{lab.total}" />
+                        </p:column>
 
-                                <p:column headerText="Total Lab. amount">
-                                    <h:outputText value="#{lab.totalLab}" />
-                                </p:column>
-                                <p:column headerText="Percentage">
-                                    <h:outputText value="#{dashboard.calcPercentage(lab.total, lab.totalLab)}" />
-                                </p:column>-->
-                            </p:dataTable>
-                        </h:panelGrid>
+                        <p:column headerText="Total Lab. amount">
+                            <h:outputText value="#{lab.totalLab}" />
+                        </p:column>
+                        <p:column headerText="Percentage">
+                            <h:outputText value="#{dashboard.calcPercentage(lab.total, lab.totalLab)}" />
+                        </p:column>-->
+                    </p:dataTable>
+
+                </h:panelGrid>
             </h:form>
         </h:panelGrid>
     </h:body>

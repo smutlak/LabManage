@@ -208,8 +208,8 @@ public class Dashboard implements Serializable {
 
             data.addChartDataSet(dataSet);
             List<String> labels = new ArrayList<>();
-            labels.add("Total Lab. amount");
-            labels.add("Total claimed amount");
+            labels.add("Lab. %");
+            labels.add("claimed %");
             //labels.add("Yellow");
             data.setLabels(labels);
 
