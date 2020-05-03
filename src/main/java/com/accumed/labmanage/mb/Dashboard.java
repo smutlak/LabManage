@@ -44,6 +44,7 @@ public class Dashboard implements Serializable {
     private List<com.accumed.pposervice.ws.GetAccuntTotalsVSLabsResponse.Return> labs;
     private List<com.accumed.pposervice.ws.GetAccuntTotalsVSLabsResponse.Return> curMonthlabs;
     private PieChartModel pieModel;
+    private PieChartModel pieModel2;
 
     //Claim Validation
     private com.accumed.pposervice.ws.FindCptResponse.Return cptCode;
@@ -146,42 +147,86 @@ public class Dashboard implements Serializable {
 
     @PostConstruct
     public void init() {
-        pieModel = new PieChartModel();
-        ChartData data = new ChartData();
+        {
+            pieModel = new PieChartModel();
+            ChartData data = new ChartData();
 
-        PieChartDataSet dataSet = new PieChartDataSet();
-        List<Number> values = new ArrayList<>();
-        values.add(getLabTotal());
-        values.add(getTotal());
-        //values.add(100);
-        dataSet.setData(values);
+            PieChartDataSet dataSet = new PieChartDataSet();
+            List<Number> values = new ArrayList<>();
+            values.add(getLabTotal());
+            values.add(getTotal());
+            //values.add(100);
+            dataSet.setData(values);
 
-        List<String> bgColors = new ArrayList<>();
-        bgColors.add("rgb(255, 99, 132)");
-        bgColors.add("rgb(54, 162, 235)");
-        //bgColors.add("rgb(255, 205, 86)");
-        dataSet.setBackgroundColor(bgColors);
+            List<String> bgColors = new ArrayList<>();
+            bgColors.add("rgb(255, 99, 132)");
+            bgColors.add("rgb(54, 162, 235)");
+            //bgColors.add("rgb(255, 205, 86)");
+            dataSet.setBackgroundColor(bgColors);
 
-        data.addChartDataSet(dataSet);
-        List<String> labels = new ArrayList<>();
-        labels.add("Total Lab. amount");
-        labels.add("Total claimed amount");
-        //labels.add("Yellow");
-        data.setLabels(labels);
+            data.addChartDataSet(dataSet);
+            List<String> labels = new ArrayList<>();
+            labels.add("Total Lab. amount");
+            labels.add("Total claimed amount");
+            //labels.add("Yellow");
+            data.setLabels(labels);
 
-        PieChartOptions opt = new PieChartOptions();
-        Legend legend = new Legend();
-        legend.setDisplay(false);
-        opt.setLegend(legend);
+            PieChartOptions opt = new PieChartOptions();
+            Legend legend = new Legend();
+            legend.setDisplay(false);
+            opt.setLegend(legend);
 
-        org.primefaces.model.charts.optionconfig.title.Title title = new org.primefaces.model.charts.optionconfig.title.Title();
-        title.setDisplay(true);
-        title.setText("Total Lab orders (AED)");
-        title.setPosition("bottom");
-        opt.setTitle(title);
+            org.primefaces.model.charts.optionconfig.title.Title title = new org.primefaces.model.charts.optionconfig.title.Title();
+            title.setDisplay(true);
+            title.setText("Total Lab orders (AED)");
+            title.setPosition("bottom");
+            opt.setTitle(title);
 
-        pieModel.setOptions(opt);
-        pieModel.setData(data);
+            pieModel.setOptions(opt);
+            pieModel.setData(data);
+        }
+
+        {
+            pieModel2 = new PieChartModel();
+            ChartData data = new ChartData();
+
+            PieChartDataSet dataSet = new PieChartDataSet();
+            List<Number> values = new ArrayList<>();
+            String Percent = calcPercentage(getTotal(), getLabTotal());
+            double labsPercentage = Double.parseDouble(Percent.substring(0, Percent.indexOf("%")));
+            double otherPercentage  =  100-labsPercentage;
+            values.add(labsPercentage);
+            values.add(otherPercentage);
+            //values.add(100);
+            dataSet.setData(values);
+
+            List<String> bgColors = new ArrayList<>();
+            bgColors.add("rgb(255, 99, 132)");
+            bgColors.add("rgb(54, 162, 235)");
+            //bgColors.add("rgb(255, 205, 86)");
+            dataSet.setBackgroundColor(bgColors);
+
+            data.addChartDataSet(dataSet);
+            List<String> labels = new ArrayList<>();
+            labels.add("Total Lab. amount");
+            labels.add("Total claimed amount");
+            //labels.add("Yellow");
+            data.setLabels(labels);
+
+            PieChartOptions opt = new PieChartOptions();
+            Legend legend = new Legend();
+            legend.setDisplay(false);
+            opt.setLegend(legend);
+
+            org.primefaces.model.charts.optionconfig.title.Title title = new org.primefaces.model.charts.optionconfig.title.Title();
+            title.setDisplay(true);
+            title.setText("Total Lab orders (%)");
+            title.setPosition("bottom");
+            opt.setTitle(title);
+
+            pieModel2.setOptions(opt);
+            pieModel2.setData(data);
+        }
     }
 
     public PieChartModel getPieModel() {
@@ -471,4 +516,14 @@ public class Dashboard implements Serializable {
         this.selectedYear = selectedYear;
     }
 
+    public PieChartModel getPieModel2() {
+        return pieModel2;
+    }
+
+    public void setPieModel2(PieChartModel pieModel2) {
+        this.pieModel2 = pieModel2;
+    }
+
+    
+    
 }

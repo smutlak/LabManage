@@ -80,7 +80,9 @@
                         <p:outputLabel value="#{dashboard.title}" style=" font-size: large; color:#e83333 "></p:outputLabel>
                         <h:panelGrid columns="2">
                             <p:pieChart id="myPie" model="#{dashboard.pieModel}"/>
-                            <p:dataTable var="lab" value="#{dashboard.curMonthlabs}">
+                            <p:pieChart id="myPie2" model="#{dashboard.pieModel2}"/>
+                            <p:dataTable var="lab" value="#{dashboard.curMonthlabs}" style="margin-right: 50px"
+                                         scrollable="true" scrollHeight="550">
                                 <!--<p:column headerText="Month">
                                     <h:outputText value="#{lab.month}" />
                                 </p:column>-->
