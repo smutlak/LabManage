@@ -19,23 +19,11 @@
 <message name="endResponse">
 <part name="parameters" element="tns:endResponse"/>
 </message>
-<message name="login">
-<part name="parameters" element="tns:login"/>
+<message name="getAccountFacilityLicense">
+<part name="parameters" element="tns:getAccountFacilityLicense"/>
 </message>
-<message name="loginResponse">
-<part name="parameters" element="tns:loginResponse"/>
-</message>
-<message name="testRegConnection">
-<part name="parameters" element="tns:testRegConnection"/>
-</message>
-<message name="testRegConnectionResponse">
-<part name="parameters" element="tns:testRegConnectionResponse"/>
-</message>
-<message name="getAccountTransactionStatus">
-<part name="parameters" element="tns:getAccountTransactionStatus"/>
-</message>
-<message name="getAccountTransactionStatusResponse">
-<part name="parameters" element="tns:getAccountTransactionStatusResponse"/>
+<message name="getAccountFacilityLicenseResponse">
+<part name="parameters" element="tns:getAccountFacilityLicenseResponse"/>
 </message>
 <message name="getFacilityMonthTransaction">
 <part name="parameters" element="tns:getFacilityMonthTransaction"/>
@@ -43,11 +31,11 @@
 <message name="getFacilityMonthTransactionResponse">
 <part name="parameters" element="tns:getFacilityMonthTransactionResponse"/>
 </message>
-<message name="getAccountFacilityLicense">
-<part name="parameters" element="tns:getAccountFacilityLicense"/>
+<message name="testRegConnection">
+<part name="parameters" element="tns:testRegConnection"/>
 </message>
-<message name="getAccountFacilityLicenseResponse">
-<part name="parameters" element="tns:getAccountFacilityLicenseResponse"/>
+<message name="testRegConnectionResponse">
+<part name="parameters" element="tns:testRegConnectionResponse"/>
 </message>
 <message name="getAccuntTotalsVSLabs">
 <part name="parameters" element="tns:getAccuntTotalsVSLabs"/>
@@ -55,17 +43,17 @@
 <message name="getAccuntTotalsVSLabsResponse">
 <part name="parameters" element="tns:getAccuntTotalsVSLabsResponse"/>
 </message>
+<message name="getAccountTransactionStatus">
+<part name="parameters" element="tns:getAccountTransactionStatus"/>
+</message>
+<message name="getAccountTransactionStatusResponse">
+<part name="parameters" element="tns:getAccountTransactionStatusResponse"/>
+</message>
 <message name="ProcessPendingTransactions">
 <part name="parameters" element="tns:ProcessPendingTransactions"/>
 </message>
 <message name="ProcessPendingTransactionsResponse">
 <part name="parameters" element="tns:ProcessPendingTransactionsResponse"/>
-</message>
-<message name="readClaimSubmissionFile">
-<part name="parameters" element="tns:readClaimSubmissionFile"/>
-</message>
-<message name="readClaimSubmissionFileResponse">
-<part name="parameters" element="tns:readClaimSubmissionFileResponse"/>
 </message>
 <message name="downloadClaimSubmissionFile">
 <part name="parameters" element="tns:downloadClaimSubmissionFile"/>
@@ -73,11 +61,23 @@
 <message name="downloadClaimSubmissionFileResponse">
 <part name="parameters" element="tns:downloadClaimSubmissionFileResponse"/>
 </message>
+<message name="readClaimSubmissionFile">
+<part name="parameters" element="tns:readClaimSubmissionFile"/>
+</message>
+<message name="readClaimSubmissionFileResponse">
+<part name="parameters" element="tns:readClaimSubmissionFileResponse"/>
+</message>
 <message name="saveClaimSubmissionFile">
 <part name="parameters" element="tns:saveClaimSubmissionFile"/>
 </message>
 <message name="saveClaimSubmissionFileResponse">
 <part name="parameters" element="tns:saveClaimSubmissionFileResponse"/>
+</message>
+<message name="login">
+<part name="parameters" element="tns:login"/>
+</message>
+<message name="loginResponse">
+<part name="parameters" element="tns:loginResponse"/>
 </message>
 <message name="findCpt">
 <part name="parameters" element="tns:findCpt"/>
@@ -85,17 +85,17 @@
 <message name="findCptResponse">
 <part name="parameters" element="tns:findCptResponse"/>
 </message>
-<message name="signUp">
-<part name="parameters" element="tns:signUp"/>
-</message>
-<message name="signUpResponse">
-<part name="parameters" element="tns:signUpResponse"/>
-</message>
 <message name="findIcd">
 <part name="parameters" element="tns:findIcd"/>
 </message>
 <message name="findIcdResponse">
 <part name="parameters" element="tns:findIcdResponse"/>
+</message>
+<message name="signUp">
+<part name="parameters" element="tns:signUp"/>
+</message>
+<message name="signUpResponse">
+<part name="parameters" element="tns:signUpResponse"/>
 </message>
 <message name="findInsurer">
 <part name="parameters" element="tns:findInsurer"/>
@@ -103,17 +103,17 @@
 <message name="findInsurerResponse">
 <part name="parameters" element="tns:findInsurerResponse"/>
 </message>
-<message name="getRegulators">
-<part name="parameters" element="tns:getRegulators"/>
-</message>
-<message name="getRegulatorsResponse">
-<part name="parameters" element="tns:getRegulatorsResponse"/>
-</message>
 <message name="ValidateClaim">
 <part name="parameters" element="tns:ValidateClaim"/>
 </message>
 <message name="ValidateClaimResponse">
 <part name="parameters" element="tns:ValidateClaimResponse"/>
+</message>
+<message name="getRegulators">
+<part name="parameters" element="tns:getRegulators"/>
+</message>
+<message name="getRegulatorsResponse">
+<part name="parameters" element="tns:getRegulatorsResponse"/>
 </message>
 <portType name="PPO">
 <operation name="init">
@@ -124,69 +124,69 @@
 <input wsam:Action="http://ws.pposervice.accumed.com/PPO/endRequest" message="tns:end"/>
 <output wsam:Action="http://ws.pposervice.accumed.com/PPO/endResponse" message="tns:endResponse"/>
 </operation>
-<operation name="login">
-<input wsam:Action="http://ws.pposervice.accumed.com/PPO/loginRequest" message="tns:login"/>
-<output wsam:Action="http://ws.pposervice.accumed.com/PPO/loginResponse" message="tns:loginResponse"/>
-</operation>
-<operation name="testRegConnection">
-<input wsam:Action="http://ws.pposervice.accumed.com/PPO/testRegConnectionRequest" message="tns:testRegConnection"/>
-<output wsam:Action="http://ws.pposervice.accumed.com/PPO/testRegConnectionResponse" message="tns:testRegConnectionResponse"/>
-</operation>
-<operation name="getAccountTransactionStatus">
-<input wsam:Action="http://ws.pposervice.accumed.com/PPO/getAccountTransactionStatusRequest" message="tns:getAccountTransactionStatus"/>
-<output wsam:Action="http://ws.pposervice.accumed.com/PPO/getAccountTransactionStatusResponse" message="tns:getAccountTransactionStatusResponse"/>
+<operation name="getAccountFacilityLicense">
+<input wsam:Action="http://ws.pposervice.accumed.com/PPO/getAccountFacilityLicenseRequest" message="tns:getAccountFacilityLicense"/>
+<output wsam:Action="http://ws.pposervice.accumed.com/PPO/getAccountFacilityLicenseResponse" message="tns:getAccountFacilityLicenseResponse"/>
 </operation>
 <operation name="getFacilityMonthTransaction">
 <input wsam:Action="http://ws.pposervice.accumed.com/PPO/getFacilityMonthTransactionRequest" message="tns:getFacilityMonthTransaction"/>
 <output wsam:Action="http://ws.pposervice.accumed.com/PPO/getFacilityMonthTransactionResponse" message="tns:getFacilityMonthTransactionResponse"/>
 </operation>
-<operation name="getAccountFacilityLicense">
-<input wsam:Action="http://ws.pposervice.accumed.com/PPO/getAccountFacilityLicenseRequest" message="tns:getAccountFacilityLicense"/>
-<output wsam:Action="http://ws.pposervice.accumed.com/PPO/getAccountFacilityLicenseResponse" message="tns:getAccountFacilityLicenseResponse"/>
+<operation name="testRegConnection">
+<input wsam:Action="http://ws.pposervice.accumed.com/PPO/testRegConnectionRequest" message="tns:testRegConnection"/>
+<output wsam:Action="http://ws.pposervice.accumed.com/PPO/testRegConnectionResponse" message="tns:testRegConnectionResponse"/>
 </operation>
 <operation name="getAccuntTotalsVSLabs">
 <input wsam:Action="http://ws.pposervice.accumed.com/PPO/getAccuntTotalsVSLabsRequest" message="tns:getAccuntTotalsVSLabs"/>
 <output wsam:Action="http://ws.pposervice.accumed.com/PPO/getAccuntTotalsVSLabsResponse" message="tns:getAccuntTotalsVSLabsResponse"/>
 </operation>
+<operation name="getAccountTransactionStatus">
+<input wsam:Action="http://ws.pposervice.accumed.com/PPO/getAccountTransactionStatusRequest" message="tns:getAccountTransactionStatus"/>
+<output wsam:Action="http://ws.pposervice.accumed.com/PPO/getAccountTransactionStatusResponse" message="tns:getAccountTransactionStatusResponse"/>
+</operation>
 <operation name="ProcessPendingTransactions">
 <input wsam:Action="http://ws.pposervice.accumed.com/PPO/ProcessPendingTransactionsRequest" message="tns:ProcessPendingTransactions"/>
 <output wsam:Action="http://ws.pposervice.accumed.com/PPO/ProcessPendingTransactionsResponse" message="tns:ProcessPendingTransactionsResponse"/>
-</operation>
-<operation name="readClaimSubmissionFile">
-<input wsam:Action="http://ws.pposervice.accumed.com/PPO/readClaimSubmissionFileRequest" message="tns:readClaimSubmissionFile"/>
-<output wsam:Action="http://ws.pposervice.accumed.com/PPO/readClaimSubmissionFileResponse" message="tns:readClaimSubmissionFileResponse"/>
 </operation>
 <operation name="downloadClaimSubmissionFile">
 <input wsam:Action="http://ws.pposervice.accumed.com/PPO/downloadClaimSubmissionFileRequest" message="tns:downloadClaimSubmissionFile"/>
 <output wsam:Action="http://ws.pposervice.accumed.com/PPO/downloadClaimSubmissionFileResponse" message="tns:downloadClaimSubmissionFileResponse"/>
 </operation>
+<operation name="readClaimSubmissionFile">
+<input wsam:Action="http://ws.pposervice.accumed.com/PPO/readClaimSubmissionFileRequest" message="tns:readClaimSubmissionFile"/>
+<output wsam:Action="http://ws.pposervice.accumed.com/PPO/readClaimSubmissionFileResponse" message="tns:readClaimSubmissionFileResponse"/>
+</operation>
 <operation name="saveClaimSubmissionFile">
 <input wsam:Action="http://ws.pposervice.accumed.com/PPO/saveClaimSubmissionFileRequest" message="tns:saveClaimSubmissionFile"/>
 <output wsam:Action="http://ws.pposervice.accumed.com/PPO/saveClaimSubmissionFileResponse" message="tns:saveClaimSubmissionFileResponse"/>
+</operation>
+<operation name="login">
+<input wsam:Action="http://ws.pposervice.accumed.com/PPO/loginRequest" message="tns:login"/>
+<output wsam:Action="http://ws.pposervice.accumed.com/PPO/loginResponse" message="tns:loginResponse"/>
 </operation>
 <operation name="findCpt">
 <input wsam:Action="http://ws.pposervice.accumed.com/PPO/findCptRequest" message="tns:findCpt"/>
 <output wsam:Action="http://ws.pposervice.accumed.com/PPO/findCptResponse" message="tns:findCptResponse"/>
 </operation>
-<operation name="signUp">
-<input wsam:Action="http://ws.pposervice.accumed.com/PPO/signUpRequest" message="tns:signUp"/>
-<output wsam:Action="http://ws.pposervice.accumed.com/PPO/signUpResponse" message="tns:signUpResponse"/>
-</operation>
 <operation name="findIcd">
 <input wsam:Action="http://ws.pposervice.accumed.com/PPO/findIcdRequest" message="tns:findIcd"/>
 <output wsam:Action="http://ws.pposervice.accumed.com/PPO/findIcdResponse" message="tns:findIcdResponse"/>
+</operation>
+<operation name="signUp">
+<input wsam:Action="http://ws.pposervice.accumed.com/PPO/signUpRequest" message="tns:signUp"/>
+<output wsam:Action="http://ws.pposervice.accumed.com/PPO/signUpResponse" message="tns:signUpResponse"/>
 </operation>
 <operation name="findInsurer">
 <input wsam:Action="http://ws.pposervice.accumed.com/PPO/findInsurerRequest" message="tns:findInsurer"/>
 <output wsam:Action="http://ws.pposervice.accumed.com/PPO/findInsurerResponse" message="tns:findInsurerResponse"/>
 </operation>
-<operation name="getRegulators">
-<input wsam:Action="http://ws.pposervice.accumed.com/PPO/getRegulatorsRequest" message="tns:getRegulators"/>
-<output wsam:Action="http://ws.pposervice.accumed.com/PPO/getRegulatorsResponse" message="tns:getRegulatorsResponse"/>
-</operation>
 <operation name="ValidateClaim">
 <input wsam:Action="http://ws.pposervice.accumed.com/PPO/ValidateClaimRequest" message="tns:ValidateClaim"/>
 <output wsam:Action="http://ws.pposervice.accumed.com/PPO/ValidateClaimResponse" message="tns:ValidateClaimResponse"/>
+</operation>
+<operation name="getRegulators">
+<input wsam:Action="http://ws.pposervice.accumed.com/PPO/getRegulatorsRequest" message="tns:getRegulators"/>
+<output wsam:Action="http://ws.pposervice.accumed.com/PPO/getRegulatorsResponse" message="tns:getRegulatorsResponse"/>
 </operation>
 </portType>
 <binding name="PPOPortBinding" type="tns:PPO">
@@ -209,25 +209,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="login">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="testRegConnection">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getAccountTransactionStatus">
+<operation name="getAccountFacilityLicense">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -245,7 +227,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="getAccountFacilityLicense">
+<operation name="testRegConnection">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -263,7 +245,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="ProcessPendingTransactions">
+<operation name="getAccountTransactionStatus">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -272,7 +254,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="readClaimSubmissionFile">
+<operation name="ProcessPendingTransactions">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -290,7 +272,25 @@
 <soap:body use="literal"/>
 </output>
 </operation>
+<operation name="readClaimSubmissionFile">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="saveClaimSubmissionFile">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="login">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -308,7 +308,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="signUp">
+<operation name="findIcd">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -317,7 +317,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="findIcd">
+<operation name="signUp">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -335,7 +335,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="getRegulators">
+<operation name="ValidateClaim">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -344,7 +344,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="ValidateClaim">
+<operation name="getRegulators">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
