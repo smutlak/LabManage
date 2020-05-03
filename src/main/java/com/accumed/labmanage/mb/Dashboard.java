@@ -133,20 +133,28 @@ public class Dashboard implements Serializable {
 
         data.addChartDataSet(dataSet);
         List<String> labels = new ArrayList<>();
-        labels.add("Lab");
-        labels.add("Total");
+        labels.add("Total Lab. amount");
+        labels.add("Total claimed amount");
         //labels.add("Yellow");
         data.setLabels(labels);
+        
         PieChartOptions opt = new PieChartOptions();
         Legend legend = new Legend();
         legend.setDisplay(false);
         opt.setLegend(legend);
+        
+        org.primefaces.model.charts.optionconfig.title.Title title = new org.primefaces.model.charts.optionconfig.title.Title();
+        title.setDisplay(true);
+        title.setText("Total Lab orders (AED)");
+        title.setPosition("bottom");
+        opt.setTitle(title);
+        
         pieModel.setOptions(opt);
         pieModel.setData(data);
     }
 
     public PieChartModel getPieModel() {
-        pieModel.setExtender("removeLegend");
+        //pieModel.setExtender("removeLegend");
         return pieModel;
     }
 
@@ -260,8 +268,12 @@ public class Dashboard implements Serializable {
         getLabs();
         if (labs != null && !labs.isEmpty()) {
             sMonth = new java.text.DateFormatSymbols().getMonths()[labs.get(0).getMonth() - 1];
+
         }
-        return sMonth + " Details";
+        
+        int year = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
+        
+        return sMonth + " - " +year;
     }
 
     private int getTotal() {
@@ -393,14 +405,25 @@ public class Dashboard implements Serializable {
         }
         return "/resources/images/Blocker.png";
     }
-    
+
     public Integer getAlertID(RulesOutcome alert) {
-        if(alert.getRuleName().startsWith("J")){
+        if (alert.getRuleName().startsWith("J")) {
             return Integer.parseInt(alert.getRuleName().substring(1, alert.getRuleName().indexOf('_')));
-        }else if(alert.getRuleName().startsWith("HAAD")){
+        } else if (alert.getRuleName().startsWith("HAAD")) {
             return Integer.parseInt(alert.getRuleName().substring(4, alert.getRuleName().indexOf('_')));
-        }
-        else
+        } else {
             return 0;
+        }
+    }
+
+    public String getAlertDescription(RulesOutcome alert) {
+        if (alert.getLongMsg() != null) {
+            if (alert.getLongMsg().equalsIgnoreCase("E")) {
+                return "";
+            } else {
+                return alert.getLongMsg();
+            }
+        }
+        return "";
     }
 }

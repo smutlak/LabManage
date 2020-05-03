@@ -8,7 +8,7 @@
         <title>ACCUMED LAB MANAGEMENT DASHBOARD</title>
         <h:outputStylesheet library="css" name="style.css"/>
         <script type="text/javascript">
-            function removeLegend()
+            /*function removeLegend()
             {
                 this.cfg.legend = {
                     show: false
@@ -33,7 +33,7 @@
                     }, 300);
 
                 }
-            }
+            }*/
 
 
         </script>
@@ -76,9 +76,8 @@
                 </h:panelGrid>               
             </h:form>
             <h:form id="dashBoardForm">
-                
-                   
-                        <p:outputLabel value="#{dashboard.title}" style=" font-size: larger"></p:outputLabel>
+                        <p:outputLabel value="Transactions of " style=" font-size: large; color: darkblue;"></p:outputLabel>
+                        <p:outputLabel value="#{dashboard.title}" style=" font-size: large; color:#e83333 "></p:outputLabel>
                         <h:panelGrid columns="2">
                             <p:pieChart id="myPie" model="#{dashboard.pieModel}"/>
                             <p:dataTable var="lab" value="#{dashboard.labs}">
@@ -94,11 +93,11 @@
                                     <h:outputText value="#{lab.claimsCount}" />
                                 </p:column>
 
-                                <p:column headerText="Total">
+                                <p:column headerText="Total claimed amount">
                                     <h:outputText value="#{lab.total}" />
                                 </p:column>
 
-                                <p:column headerText="Lab Total">
+                                <p:column headerText="Total Lab. amount">
                                     <h:outputText value="#{lab.totalLab}" />
                                 </p:column>
                                 <p:column headerText="Percentage">

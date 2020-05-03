@@ -60,7 +60,7 @@
             .layouting.ui-panelgrid .ui-panelgrid-cell {
                 border: none;
             }*/
-            
+
         </style>
     </h:head>
     <h:body>
@@ -247,32 +247,39 @@
                         </h:panelGroup>
                     </h:panelGrid>
                 </p:fieldset>
-                <p:fieldset legend="Validation Results" id="validationResults" style="height: 250px;">
+                <p:fieldset legend="" id="validationResults" style="height: 250px;">
                     <p:dataTable var="alert" value="#{dashboard.rulesAlerts}" 
-
-                                 scrollable="true" scrollHeight="150"
+                                 scrollable="true" scrollHeight="250"
+                                 rendered="#{dashboard.rulesAlerts ne null}"
                                  resizableColumns="true">
 
 
-                        <p:column headerText="Severity" width="70">
+                        <p:column headerText="Severity">
                             <h:graphicImage url="#{dashboard.getAlertImage(alert)}" width="16"/>
                             <h:outputText value="#{alert.severity}" />
                         </p:column>
 
-                        <p:column headerText="ID" width="50">
+                        <p:column headerText="ID">
                             <h:outputText value="#{dashboard.getAlertID(alert)}" />
                         </p:column>
 
-                        <p:column headerText="Alert" width="56%">
+                        <p:column headerText="Alert">
                             <h:outputText value="#{alert.shortMsg}" />
                         </p:column>
 
-                        <p:column headerText="Description" rendered="#{alert.longMsg ne 'E'}">
-                            <h:outputText value="#{alert.longMsg}" />
+                        <p:column headerText="Description">
+                            <h:outputText value="#{dashboard.getAlertDescription(alert)}" />
                         </p:column>
-
                     </p:dataTable>
                 </p:fieldset>
+
+                <h:panelGrid columns="1" width="100%">
+                    <h:panelGroup style="display:block; text-align:center">
+                        <h:commandLink style="color: #1AA11A; font-size:large;" action="home" value="Home">
+                        </h:commandLink>
+                    </h:panelGroup>
+                </h:panelGrid>
+
             </h:form>
         </h:panelGrid>
     </h:body>
