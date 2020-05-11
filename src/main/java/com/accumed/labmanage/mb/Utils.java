@@ -94,7 +94,7 @@ public class Utils {
         try {
             com.accumed.pposervice.ws.ScrubScrubbingRequest request = buildRequest(userName,
                     senderID, receiverID, "Analyzing", gender,
-                    DOB!=null?dateFormatter.format(DOB) : (dateFormatter.format(new Date())), 
+                    DOB != null ? dateFormatter.format(DOB) : (dateFormatter.format(new Date())),
                     cpts, icds);
 
             java.lang.String user = "ACCUMED";
@@ -235,16 +235,18 @@ public class Utils {
         }
 
         //Build Diagnosis
-        int diagCnt = 0;
-        for (com.accumed.pposervice.ws.FindIcdResponse.Return icd : icds) {
-            ScrubScrubbingRequestClaimDiagnosis diag = new ScrubScrubbingRequestClaimDiagnosis();
-            diag.setCode(icd.getCode());
-            diag.setIdCaller(0);
-            diag.setProviderCode(null);
-            diag.setProviderType(null);
-            diag.setType(diagCnt == 0 ? "Principal" : "Secondary");
-            claim.getDiagnosis().add(diag);
-            diagCnt++;
+        if (icds != null) {
+            int diagCnt = 0;
+            for (com.accumed.pposervice.ws.FindIcdResponse.Return icd : icds) {
+                ScrubScrubbingRequestClaimDiagnosis diag = new ScrubScrubbingRequestClaimDiagnosis();
+                diag.setCode(icd.getCode());
+                diag.setIdCaller(0);
+                diag.setProviderCode(null);
+                diag.setProviderType(null);
+                diag.setType(diagCnt == 0 ? "Principal" : "Secondary");
+                claim.getDiagnosis().add(diag);
+                diagCnt++;
+            }
         }
 
         com.accumed.pposervice.ws.ScrubScrubbingRequest req = new com.accumed.pposervice.ws.ScrubScrubbingRequest();

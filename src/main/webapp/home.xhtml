@@ -61,16 +61,17 @@
             <h:form id="dashBoardForm">
 
                 <h:panelGrid columns="2" styleClass="centered" columnClasses="col1,col1">
+                    
+                    <h:commandLink action="labOrderValidation" style="text-align: center;">
+                        <p:graphicImage styleClass="nav" url="/resources/images/LabOrderValidaation.png" width="200px"></p:graphicImage>
+                    </h:commandLink>
+                    
                     <h:commandLink action="labDashboard" >
                         <p:graphicImage styleClass="nav" url="/resources/images/LabDashboard.png" width="200px"></p:graphicImage>
                     </h:commandLink>
 
-                    <h:commandLink action="labOrderValidation" style="text-align: center;">
-                        <p:graphicImage styleClass="nav" url="/resources/images/LabOrderValidaation.png" width="200px"></p:graphicImage>
-                    </h:commandLink>
-
-                    <p:outputLabel style="color:black;" value="Lab. Dashboard"></p:outputLabel>
-                    <p:outputLabel style="color:black;" value="Lab. Order Validation"></p:outputLabel>
+                    <p:outputLabel style="color:black; font-size: larger;" value="Lab Order Validation"></p:outputLabel>
+                    <p:outputLabel style="color:black; font-size: larger;" value="Dashboard"></p:outputLabel>
 
                 </h:panelGrid>
 

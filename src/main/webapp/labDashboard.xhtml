@@ -98,11 +98,15 @@
                         </p:column>
 
                         <p:column headerText="Total claimed amount">
-                            <h:outputText value="#{lab.total}" />
+                            <h:outputText value="#{lab.total}" >
+                                <f:convertNumber type="currency" currencySymbol=""/>
+                            </h:outputText>
                         </p:column>
 
                         <p:column headerText="Total Lab. amount">
-                            <h:outputText value="#{lab.totalLab}" />
+                            <h:outputText value="#{lab.totalLab}" >
+                                <f:convertNumber type="currency" currencySymbol=""/>
+                            </h:outputText>
                         </p:column>
                         <p:column headerText="Percentage">
                             <h:outputText value="#{dashboard.calcPercentage(lab.total, lab.totalLab)}" />
