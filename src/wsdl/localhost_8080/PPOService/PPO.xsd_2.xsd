@@ -145,6 +145,7 @@
 <xs:element name="year" type="xs:int" minOccurs="0"/>
 <xs:element name="month" type="xs:int" minOccurs="0"/>
 <xs:element name="receiverid" type="xs:string" minOccurs="0"/>
+<xs:element name="receivername" type="xs:string" minOccurs="0"/>
 <xs:element name="senderid" type="xs:string" minOccurs="0"/>
 <xs:element name="total" type="xs:double" minOccurs="0"/>
 <xs:element name="totalLab" type="xs:double" minOccurs="0"/>
@@ -425,6 +426,7 @@
 <xs:element name="year" type="xs:int" minOccurs="0"/>
 <xs:element name="month" type="xs:int" minOccurs="0"/>
 <xs:element name="receiverid" type="xs:string" minOccurs="0"/>
+<xs:element name="receivername" type="xs:string" minOccurs="0"/>
 <xs:element name="senderid" type="xs:string" minOccurs="0"/>
 <xs:element name="total" type="xs:double" minOccurs="0"/>
 <xs:element name="totalLab" type="xs:double" minOccurs="0"/>
@@ -2342,6 +2344,19 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="login">
+<xs:sequence>
+<xs:element name="username" type="xs:string" minOccurs="0"/>
+<xs:element name="pass" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="loginResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:long" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="getFacilityMonthTransaction">
 <xs:sequence>
 <xs:element name="accountId" type="xs:long" minOccurs="0"/>
@@ -2364,19 +2379,6 @@
 </xs:sequence>
 </xs:complexType>
 </xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="login">
-<xs:sequence>
-<xs:element name="username" type="xs:string" minOccurs="0"/>
-<xs:element name="pass" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="loginResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:long" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 </xs:schema>
