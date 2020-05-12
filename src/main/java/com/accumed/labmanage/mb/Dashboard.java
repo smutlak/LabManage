@@ -159,8 +159,8 @@ public class Dashboard implements Serializable {
             dataSet.setData(values);
 
             List<String> bgColors = new ArrayList<>();
-            bgColors.add("rgb(255, 99, 132)");
-            bgColors.add("rgb(54, 162, 235)");
+            bgColors.add("rgb(208, 223, 0)");
+            bgColors.add("rgb(74, 106, 107)");
             //bgColors.add("rgb(255, 205, 86)");
             dataSet.setBackgroundColor(bgColors);
 
@@ -201,8 +201,10 @@ public class Dashboard implements Serializable {
             dataSet.setData(values);
 
             List<String> bgColors = new ArrayList<>();
-            bgColors.add("rgb(255, 99, 132)");
-            bgColors.add("rgb(54, 162, 235)");
+//            bgColors.add("rgb(255, 99, 132)");
+//            bgColors.add("rgb(54, 162, 235)");
+            bgColors.add("rgb(208, 223, 0)");
+            bgColors.add("rgb(74, 106, 107)");
             //bgColors.add("rgb(255, 205, 86)");
             dataSet.setBackgroundColor(bgColors);
 
@@ -218,7 +220,8 @@ public class Dashboard implements Serializable {
             legend.setDisplay(false);
             opt.setLegend(legend);
 
-            org.primefaces.model.charts.optionconfig.title.Title title = new org.primefaces.model.charts.optionconfig.title.Title();
+            org.primefaces.model.charts.optionconfig.title.Title title = 
+                    new org.primefaces.model.charts.optionconfig.title.Title();
             title.setDisplay(true);
             title.setText("Total Lab orders (%)");
             title.setPosition("bottom");
