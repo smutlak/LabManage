@@ -83,14 +83,15 @@
                         <p:pieChart id="myPie" model="#{dashboard.pieModel}"/>
                         <p:pieChart id="myPie2" model="#{dashboard.pieModel2}"/>
                     </h:panelGrid>
-                    <p:dataTable var="lab" value="#{dashboard.curMonthlabs}" style="margin-right: 50px"
+                    <p:dataTable var="lab" value="#{dashboard.receiverTotalVsLab}"
                                  scrollable="true" scrollHeight="550">
                         <!--<p:column headerText="Month">
                             <h:outputText value="#{lab.month}" />
                         </p:column>-->
 
-                        <p:column headerText="Receiver">
-                            <h:outputText value="#{lab.receiverid}" />
+                        <p:column headerText="Receiver" width="50%">
+                            <h:outputText style="color: darkblue; font-weight: bold; " value="#{lab.receiverid}" />
+                            <h:outputText value="| #{lab.receivername}" />
                         </p:column>
 
                         <p:column headerText="Claims count">
@@ -110,7 +111,8 @@
                         </p:column>
                         <p:column headerText="Percentage">
                             <h:outputText value="#{dashboard.calcPercentage(lab.total, lab.totalLab)}" />
-                        </p:column>-->
+                        </p:column>
+
                     </p:dataTable>
 
                 </h:panelGrid>

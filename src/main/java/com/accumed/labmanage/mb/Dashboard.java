@@ -43,6 +43,7 @@ public class Dashboard implements Serializable {
     private PPO_Service service;
     private List<com.accumed.pposervice.ws.GetAccuntTotalsVSLabsResponse.Return> labs;
     private List<com.accumed.pposervice.ws.GetAccuntTotalsVSLabsResponse.Return> curMonthlabs;
+    private List<ReceiverTotalVsLab> receiverTotalVsLab;
     private PieChartModel pieModel;
     private PieChartModel pieModel2;
 
@@ -91,6 +92,45 @@ public class Dashboard implements Serializable {
             }
         }
         return service;
+    }
+
+    public List<ReceiverTotalVsLab> getReceiverTotalVsLab() {
+        if (receiverTotalVsLab != null && !receiverTotalVsLab.isEmpty()) {
+            if (receiverTotalVsLab.get(0).getYear().equals(getSelectedYear()) && receiverTotalVsLab.get(0).getMonth().equals(getSelectedMonth())) {
+                return receiverTotalVsLab;
+            }
+        }
+
+        receiverTotalVsLab = new ArrayList();
+
+        getLabs();
+        if (labs != null && !labs.isEmpty()) {
+            Integer totalClaimCount = 0;
+            Double totalTotal = 0d;
+            Double totalTotalLab = 0d;
+
+            for (com.accumed.pposervice.ws.GetAccuntTotalsVSLabsResponse.Return lab : labs) {
+                if (lab.getYear().equals(getSelectedYear()) && lab.getMonth().equals(getSelectedMonth())) {
+                    receiverTotalVsLab.add(new ReceiverTotalVsLab(lab));
+                    totalClaimCount += lab.getClaimsCount();
+                    totalTotal += lab.getTotal();
+                    totalTotalLab += lab.getTotalLab();
+                }
+            }
+
+            receiverTotalVsLab.add(new ReceiverTotalVsLab(totalClaimCount, totalTotal, totalTotalLab));
+
+//            Integer totalClaimCount = 0;
+//            labs.stream().filter((lab) -> (lab.getYear().equals(getSelectedYear()) && lab.getMonth().equals(getSelectedMonth()))).forEachOrdered((lab) -> {
+//                receiverTotalVsLab.add(new ReceiverTotalVsLab(lab));
+//                totalClaimCount+=lab.getClaimsCount();
+//            });
+        }
+        return receiverTotalVsLab;
+    }
+
+    public void setReceiverTotalVsLab(List<ReceiverTotalVsLab> receiverTotalVsLab) {
+        this.receiverTotalVsLab = receiverTotalVsLab;
     }
 
     public List<GetAccuntTotalsVSLabsResponse.Return> getCurMonthlabs() {
@@ -194,7 +234,7 @@ public class Dashboard implements Serializable {
             List<Number> values = new ArrayList<>();
             String Percent = calcPercentage(getTotal(), getLabTotal());
             double labsPercentage = Double.parseDouble(Percent.substring(0, Percent.indexOf("%")));
-            double otherPercentage  =  100-labsPercentage;
+            double otherPercentage = 100 - labsPercentage;
             values.add(labsPercentage);
             values.add(otherPercentage);
             //values.add(100);
@@ -220,8 +260,8 @@ public class Dashboard implements Serializable {
             legend.setDisplay(false);
             opt.setLegend(legend);
 
-            org.primefaces.model.charts.optionconfig.title.Title title = 
-                    new org.primefaces.model.charts.optionconfig.title.Title();
+            org.primefaces.model.charts.optionconfig.title.Title title
+                    = new org.primefaces.model.charts.optionconfig.title.Title();
             title.setDisplay(true);
             title.setText("Total Lab orders (%)");
             title.setPosition("bottom");
@@ -527,6 +567,32 @@ public class Dashboard implements Serializable {
         this.pieModel2 = pieModel2;
     }
 
+    /*
+    public Integer getFooterClaimCount() {
+        Integer ret = 0;
+        List<GetAccuntTotalsVSLabsResponse.Return> curLabs = getCurMonthlabs();
+        for (GetAccuntTotalsVSLabsResponse.Return obj : curLabs) {
+            ret += obj.getClaimsCount();
+        }
+        return ret;
+    }
+
+    public Double getFooterClaimTotal() {
+        Double ret = 0d;
+        List<GetAccuntTotalsVSLabsResponse.Return> curLabs = getCurMonthlabs();
+        for (GetAccuntTotalsVSLabsResponse.Return obj : curLabs) {
+            ret += obj.getTotal();
+        }
+        return ret;
+    }
     
-    
+    public Double getFooterClaimTotalLab() {
+        Double ret = 0d;
+        List<GetAccuntTotalsVSLabsResponse.Return> curLabs = getCurMonthlabs();
+        for (GetAccuntTotalsVSLabsResponse.Return obj : curLabs) {
+            ret += obj.getTotalLab();
+        }
+        return ret;
+    }
+     */
 }
