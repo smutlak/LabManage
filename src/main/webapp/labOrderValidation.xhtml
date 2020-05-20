@@ -83,7 +83,6 @@
                 </h:panelGrid>               
             </h:form>
             <h:form id="dashBoardForm">
-
                 <p:fieldset legend="Lab Order Details" style="margin:10px;">
                     <h:panelGrid columns="2" style="width:100%" columnClasses="c1,c2,c3">
                         <p:graphicImage  name="images/right-animated-arrows.gif" width="100" />
@@ -178,7 +177,7 @@
                                     </p:row>
                                     <p:row>
                                         <p:column colspan="2">
-                                            <p:selectOneListbox value="#{dashboard.selectedIcd}" id="icdList" style=" height: 150px; width: 100%;" >
+                                            <p:selectOneListbox value="#{dashboard.selectedIcd}" id="icdList" style=" height: 50px; width: 100%;" >
                                                 <f:selectItems value="#{dashboard.selectedIcds}" var="icd" itemLabel="#{icd.code} #{icd.longDescription}" itemValue="#{icd.code}" />
                                             </p:selectOneListbox>
                                         </p:column>
@@ -230,7 +229,7 @@
                                     </p:row>
                                     <p:row>
                                         <p:column colspan="2">
-                                            <p:selectOneListbox id="cptList" style=" height: 150px; width: 100%">
+                                            <p:selectOneListbox id="cptList" style=" height: 50px; width: 100%">
                                                 <f:selectItems value="#{dashboard.selectedCpts}" var="cpt" itemLabel="#{cpt.code} #{cpt.longDescription}" itemValue="#{cpt.code}" />
                                             </p:selectOneListbox>
                                         </p:column>
@@ -247,9 +246,9 @@
                         </h:panelGroup>
                     </h:panelGrid>
                 </p:fieldset>
-                <p:fieldset legend="" id="validationResults" style="height: 250px;">
+                <p:fieldset legend="" id="validationResults" style="height: 150px;">
                     <p:dataTable var="alert" value="#{dashboard.rulesAlerts}" 
-                                 scrollable="true" scrollHeight="250"
+                                 scrollable="true" scrollHeight="150"
                                  rendered="#{dashboard.rulesAlerts ne null}"
                                  resizableColumns="true">
 
@@ -275,8 +274,8 @@
 
                 <h:panelGrid columns="1" width="100%">
                     <h:panelGroup style="display:block; text-align:center">
-                        <h:commandLink style="color: #1AA11A; font-size:large;" action="home" value="Home">
-                        </h:commandLink>
+                        <h:commandLink style="color: #1AA11A; font-size: medium" action="home" value="&#8592; Home">
+                            </h:commandLink>
                     </h:panelGroup>
                 </h:panelGrid>
 

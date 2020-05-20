@@ -17,7 +17,7 @@
             .fCol3{
                 width:30%;
             }
-            
+
             .sCol1{
                 width:50%;
             }
@@ -43,48 +43,56 @@
                         <p style="font-size: larger; font-weight: bolder">ACCUMED LAB MANAGEMENT TOOL - SIGN UP</p>
                     </h:panelGroup>
                     <h:panelGrid style="float: right; margin-right: 20px;" columns="2">
-                        <p style="color: #ffffff;">Welcome #{main.username}</p>
-                        <h:commandLink action="#{main.logout}" value="Logout"></h:commandLink> 
+                        <p style="color: #ffffff;"></p>
                     </h:panelGrid>
                 </h:panelGrid>               
             </h:form>
             <h:panelGroup>
-                <p:fieldset legend="REGISTRATION DETAILS" id="login" styleClass="signUpFieldsetStyle"> 
-                    <h:form id="loginForm">
-                        <h:panelGrid columns="3" columnClasses="fCol1,fCol2,fCol3">
-                            <h:outputLabel for="signupEmail" value="E-Mail Id (Enter your personal or facility e-mail Id)"></h:outputLabel>
-                            <span></span>
-                            <h:outputLabel for="signupPass" value="Password"></h:outputLabel>
-                            <h:inputText id="signupEmail" value="#{main.signupEmail}"></h:inputText>
-                            <span style="width20px;"></span>
-                            <h:inputText id ="signupPass" value="#{main.signupPass}"></h:inputText>
-                        </h:panelGrid>
-                        <p:panel style="margin:20px;">
-                            <h4>REGULATORY DETAILS</h4>
-                            <p>Please provide your respective regulatory (Shafafiya/DHPO) credentials, then click on 'Test Connection' button to verify the details</p>
-                            <h:panelGrid columns="3" columnClasses="sCol1,sCol2,sCol3">
-                                <h:outputLabel value="Regulator"></h:outputLabel>
+                <h:panelGrid columnClasses="1" style="width: 100%;">
+                    <h:panelGroup layout="block" style="height:50px;"></h:panelGroup>
+                    <p:fieldset legend="REGISTRATION DETAILS" id="login" styleClass="signUpFieldsetStyle"> 
+                        <h:form id="loginForm">
+                            <h:panelGrid columns="3" columnClasses="fCol1,fCol2,fCol3">
+                                <h:outputLabel for="signupEmail" value="E-Mail Id (Enter your personal or facility e-mail Id)"></h:outputLabel>
                                 <span></span>
-                                <h:outputLabel value="Facility License Number"></h:outputLabel>
-                                <p:selectOneMenu id="signRegualtor" value="#{main.signRegualtor}">
-                                    <f:selectItem itemLabel="DOH" itemValue="1" />
-                                    <f:selectItem itemLabel="DHA" itemValue="2" />
-                                </p:selectOneMenu>
-                                <span></span>
-                                <h:inputText id="signupFacilityLicense" value="#{main.signupFacilityLicense}"></h:inputText>
-                                <h:outputLabel for="signupRegUsr" value="Postoffice Username"></h:outputLabel>
-                                <span></span>
-                                <h:outputLabel for="signupRegPass" value="Postoffice Password"></h:outputLabel>
-                                <h:inputText id="signupRegUsr" value="#{main.signupRegUsr}" ></h:inputText>
-                                <span></span>
-                                <h:inputText id="signupRegPass" value="#{main.signupRegPass}"></h:inputText>
+                                <h:outputLabel for="signupPass" value="Password"></h:outputLabel>
+                                <h:inputText id="signupEmail" value="#{main.signupEmail}"></h:inputText>
+                                <span style="width20px;"></span>
+                                <h:inputText id ="signupPass" value="#{main.signupPass}"></h:inputText>
                             </h:panelGrid>
-                        </p:panel>
-                        <p:commandButton value="Test Connection" actionListener="#{main.testRegConnection()}" update="status" />
-                        <p:commandButton value="Register" actionListener="#{main.signup()}" update="status"/>
-                        <p:outputLabel id="status" style="margin-left: 20px; color: red;" value="#{main.status}"></p:outputLabel>
-                    </h:form>
-                </p:fieldset>
+                            <p:panel style="margin:20px;">
+                                <h4>REGULATORY DETAILS</h4>
+                                <p>Please provide your respective regulatory (Shafafiya/DHPO) credentials, then click on 'Test Connection' button to verify the details</p>
+                                <h:panelGrid columns="3" columnClasses="sCol1,sCol2,sCol3">
+                                    <h:outputLabel value="Regulator"></h:outputLabel>
+                                    <span></span>
+                                    <h:outputLabel value="Facility License Number"></h:outputLabel>
+                                    <p:selectOneMenu id="signRegualtor" value="#{main.signRegualtor}">
+                                        <f:selectItem itemLabel="DOH" itemValue="1" />
+                                        <f:selectItem itemLabel="DHA" itemValue="2" />
+                                    </p:selectOneMenu>
+                                    <span></span>
+                                    <h:inputText id="signupFacilityLicense" value="#{main.signupFacilityLicense}"></h:inputText>
+                                    <h:outputLabel for="signupRegUsr" value="Postoffice Username"></h:outputLabel>
+                                    <span></span>
+                                    <h:outputLabel for="signupRegPass" value="Postoffice Password"></h:outputLabel>
+                                    <h:inputText id="signupRegUsr" value="#{main.signupRegUsr}" ></h:inputText>
+                                    <span></span>
+                                    <h:inputText id="signupRegPass" value="#{main.signupRegPass}"></h:inputText>
+                                </h:panelGrid>
+                            </p:panel>
+                            <p:commandButton value="Test Connection" actionListener="#{main.testRegConnection()}" update="status" />
+                            <p:commandButton value="Register" actionListener="#{main.signup()}" update="status" disabled="#{!main.PPOConnectionTest}"/>
+                            <p:outputLabel id="status" style="margin-left: 20px; color: red;" value="#{main.status}"></p:outputLabel>
+                        </h:form>
+                    </p:fieldset>
+                    <h:panelGroup layout='block' style=" text-align: center;">
+                        <h:form>
+                            <h:commandLink style="color: #1AA11A; font-size: medium" action="login" value="&#8592; BACK TO LOGIN">
+                            </h:commandLink>
+                        </h:form>
+                    </h:panelGroup>
+                </h:panelGrid>
             </h:panelGroup>
         </h:panelGrid>
     </h:body>

@@ -1248,9 +1248,10 @@ div.timeline-event-selected {
     border-top-right-radius: 5px !important; 
     border-top-left-radius: 5px !important; 
     margin-top: -12px !important; 
-    margin: 25%;
-    top: 150px;
-    position: absolute;
+    margin-left: 25%;
+    margin-right: 25%;
+    /*top: 150px;
+    position: absolute;*/
     /*background: #4A6A6B ;*/
 }
 
