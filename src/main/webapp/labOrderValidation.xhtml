@@ -115,8 +115,11 @@
                                     </p:autoComplete>
                                 </h:panelGroup>
                                 <h:panelGroup>
-                                    <h:outputLabel value="DOB" for="DOB"></h:outputLabel>
-                                    <p:datePicker id="DOB" showIcon="true" styleClass="inp" value="#{dashboard.DOB}"/>
+                                    <h:panelGrid columns="2">
+                                        <h:outputLabel value="DOB" for="DOB"></h:outputLabel>
+                                        <h:outputLabel style=" font-style: italic; font-size: smaller;" value="(DD/MM/YYYY)"></h:outputLabel>
+                                    </h:panelGrid>
+                                    <p:datePicker id="DOB" showIcon="true" styleClass="inp" value="#{dashboard.DOB}" pattern="dd/MM/yyyy"/>
                                 </h:panelGroup>
                                 <h:panelGroup>
                                     <h:panelGrid columns="2">
